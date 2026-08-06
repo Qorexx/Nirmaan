@@ -1,0 +1,29 @@
+{
+  "name": "brainwave",
+  "version": "1.0.0",
+  "description": "Nirmaan Protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Qorexx/Nirmaan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Qorexx/Nirmaan/issues"
+  },
+  "homepage": "https://github.com/Qorexx/Nirmaan#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^7.0.0",
+    "ethers": "^6.17.0",
+    "hardhat": "^3.12.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.6.1"
+  }
+}
