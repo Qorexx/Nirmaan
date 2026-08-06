@@ -25,6 +25,12 @@ export const MIN_TRUCK_PAYLOAD_KG = 0;
 export const MAX_TRUCK_PAYLOAD_KG = 25000;
 
 /**
+ * Vehicle loading & unloading transfer rates (in kg per tick).
+ */
+export const DEFAULT_DUMP_RATE_KG_PER_TICK = 5000;
+export const DEFAULT_LOAD_RATE_KG_PER_TICK = 5000;
+
+/**
  * Vehicle speed limits (in km/h).
  */
 export const MIN_TRUCK_SPEED_KMH = 0;
@@ -39,12 +45,15 @@ export const ASPHALT_MIN_TEMP_CELSIUS = 130;
 export const ASPHALT_MAX_TEMP_CELSIUS = 160;
 export const CONCRETE_MIN_TEMP_CELSIUS = 10;
 export const CONCRETE_MAX_TEMP_CELSIUS = 32;
+export const AMBIENT_TEMPERATURE_CELSIUS = 25;
+export const DEFAULT_MATERIAL_COOLING_RATE_CELSIUS_PER_TICK = 0.2;
 
 /**
  * Fuel telemetry constants (in percentage 0-100%).
  */
 export const INITIAL_FUEL_LEVEL_PERCENT = 100.0;
 export const DEFAULT_FUEL_BURN_PER_TICK_PERCENT = 0.05;
+export const MOTION_FUEL_BURN_MULTIPLIER = 1.5;
 
 /**
  * Probability of an automatic corruption/anomaly event injection per tick cycle (0.0 to 1.0).
