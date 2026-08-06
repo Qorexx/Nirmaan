@@ -1,0 +1,38 @@
+/* Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Theme Variables */
+
+:root{
+  --background:#0B1120;
+  --surface:#111827;
+  --primary:#2563EB;
+  --secondary:#06B6D4;
+  --text:#F8FAFC;
+  --radius:12px;
+}
+
+/* Base */
+
+html,
+body{
+  width:100%;
+  min-height:100vh;
+  background:var(--background);
+  color:var(--text);
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  cursor:pointer;
+}
