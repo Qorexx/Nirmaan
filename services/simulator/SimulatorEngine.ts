@@ -4,8 +4,12 @@
  */
 
 import { DEFAULT_TICK_INTERVAL_MS } from '../../constants/simulator/defaults';
+import { PRIMARY_SUPPLY_ROUTE } from '../../constants/simulator/routes';
 import { SimulationState, Truck } from '../../types/truck';
+import { AnomalyInjector } from './AnomalyInjector';
 import { FleetStateStore } from './FleetStateStore';
+import { RouteInterpolator } from './RouteInterpolator';
+import { SensorPhysicsEngine } from './SensorPhysicsEngine';
 
 /**
  * Singleton simulation engine orchestrating tick execution, timer lifecycle, and service coordination.
@@ -101,6 +105,7 @@ export class SimulatorEngine {
 
   /**
    * Executes a single simulation tick step, driving state updates for all trucks in the fleet.
+   * Follows strict pipeline: Retrieve -> Interpolate Route -> Compute Physics -> Inject Anomaly -> Store Update.
    */
   public tick(): void {
     if (this.state === SimulationState.STOPPED) {
@@ -110,12 +115,30 @@ export class SimulatorEngine {
     this.tickCount += 1;
     const store = FleetStateStore.getInstance();
     const trucks = store.getAllTrucks();
+    const deltaTimeSeconds = this.tickIntervalMs / 1000;
 
     for (const truck of trucks) {
-      const updatedPositionTruck = this.applyRouteInterpolation(truck);
-      const updatedPhysicsTruck = this.applyPhysicsEngine(updatedPositionTruck);
-      const finalTruckState = this.applyAnomalyInjector(updatedPhysicsTruck);
+      // 1. Compute next GPS position using RouteInterpolator
+      const nextLocation = RouteInterpolator.interpolatePosition(
+        truck,
+        PRIMARY_SUPPLY_ROUTE,
+        deltaTimeSeconds
+      );
+      const truckWithLocation: Truck = {
+        ...truck,
+        location: nextLocation,
+      };
 
+      // 2. Update physical sensor values using SensorPhysicsEngine
+      const physicsTruck = SensorPhysicsEngine.updateSensors(
+        truckWithLocation,
+        deltaTimeSeconds
+      );
+
+      // 3. Apply active anomaly using AnomalyInjector
+      const finalTruckState = AnomalyInjector.applyAnomaly(physicsTruck);
+
+      // 4. Save updated truck back into FleetStateStore
       store.updateTruck(finalTruckState);
     }
   }
@@ -139,32 +162,5 @@ export class SimulatorEngine {
    */
   public getTickCount(): number {
     return this.tickCount;
-  }
-
-  /**
-   * Placeholder hook for RouteInterpolator integration.
-   * TODO: Integrate with RouteInterpolator.interpolatePosition(truck)
-   */
-  private applyRouteInterpolation(truck: Truck): Truck {
-    // Pipeline Step 1: Calculate vehicle trajectory along active route segment.
-    return truck;
-  }
-
-  /**
-   * Placeholder hook for SensorPhysicsEngine integration.
-   * TODO: Integrate with SensorPhysicsEngine.computeSensors(truck)
-   */
-  private applyPhysicsEngine(truck: Truck): Truck {
-    // Pipeline Step 2: Calculate physics metrics (payload weight, fuel burn, engine RPM, material temperature).
-    return truck;
-  }
-
-  /**
-   * Placeholder hook for AnomalyInjector integration.
-   * TODO: Integrate with AnomalyInjector.injectAnomalies(truck)
-   */
-  private applyAnomalyInjector(truck: Truck): Truck {
-    // Pipeline Step 3: Mutate telemetry state if corruption/fraud scenario is active on truck.
-    return truck;
   }
 }
