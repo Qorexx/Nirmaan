@@ -61,6 +61,12 @@ export const MOTION_FUEL_BURN_MULTIPLIER = 1.5;
 export const DEFAULT_ANOMALY_PROBABILITY = 0.05;
 
 /**
+ * Anomaly simulation parameters.
+ */
+export const INFLATED_MILEAGE_SPEED_KMH = 150;
+export const ROUTE_DIVERSION_OFFSET_DEGREES = 0.05;
+
+/**
  * Telemetry log buffer retention limit in memory.
  */
 export const MAX_TELEMETRY_LOG_BUFFER_SIZE = 500;
