@@ -35,19 +35,19 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   };
 
   return (
-    <div className={`w-full space-y-2 font-mono text-[#1C1917] ${className}`}>
+    <div className={`w-full space-y-2 font-mono text-primary ${className}`}>
       {(label || showPercentage) && (
-        <div className="flex items-center justify-between text-xs sm:text-sm font-black text-[#1C1917] font-sans">
+        <div className="flex items-center justify-between text-xs sm:text-sm font-black text-primary font-heading">
           <span>{label}</span>
           <div className="flex items-center gap-2">
-            {subValue && <span className="text-[#57534E] text-xs font-bold font-mono">{subValue}</span>}
+            {subValue && <span className="text-secondary text-xs font-bold font-mono">{subValue}</span>}
             {showPercentage && <span className="text-indigo-700 font-mono font-extrabold">{boundedPercentage.toFixed(1)}%</span>}
           </div>
         </div>
       )}
 
       {/* Bar Container */}
-      <div className={`w-full ${heightClass} bg-[#EAE5DC] border border-[#D6D0C4] rounded-full overflow-hidden p-[2px] relative shadow-inner`}>
+      <div className={`w-full ${heightClass} bg-surface-secondary border border-subtle rounded-full overflow-hidden p-[2px] relative shadow-inner`}>
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${boundedPercentage}%` }}

@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
   const { setCurrentPage } = useEscrowStore();
 
   return (
-    <footer className="w-full bg-[#EAE5DC] border-t border-[#D6D0C4] text-[#57534E] font-mono text-xs py-12 px-6 mt-20">
+    <footer className="w-full bg-surface-secondary border-t border-subtle text-secondary font-mono text-xs py-12 px-6 mt-20">
       <div className="max-w-[1700px] mx-auto space-y-10">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -14,13 +14,13 @@ export const Footer: React.FC = () => {
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-700 to-blue-700 p-[2px] shadow-sm">
-                <div className="w-full h-full bg-[#F7F5F0] rounded-[6px] flex items-center justify-center">
+                <div className="w-full h-full bg-surface rounded-[6px] flex items-center justify-center">
                   <Globe2 className="w-4 h-4 text-indigo-700" />
                 </div>
               </div>
-              <span className="font-black text-[#1C1917] text-sm tracking-wide font-sans">AI ESCROW ORCHESTRATOR</span>
+              <span className="font-black text-primary text-sm tracking-wide font-heading">AI ESCROW ORCHESTRATOR</span>
             </div>
-            <p className="text-xs text-[#57534E] leading-relaxed font-mono font-medium">
+            <p className="text-xs text-secondary leading-relaxed font-mono font-medium">
               Autonomous Infrastructure Operating System v2.4. Engineered to decouple bureaucratic human custody from multi-million dollar public engineering releases using Vision AI and x402 micropayments.
             </p>
             <div className="flex items-center gap-2 pt-1">
@@ -31,8 +31,8 @@ export const Footer: React.FC = () => {
 
           {/* Col 2: Navigation Portals */}
           <div className="space-y-3">
-            <h4 className="text-[#1C1917] font-black text-xs uppercase tracking-widest font-sans">Sovereign Portals</h4>
-            <ul className="space-y-2 font-mono text-[#57534E] font-semibold">
+            <h4 className="text-primary font-black text-xs uppercase tracking-widest font-heading">Sovereign Portals</h4>
+            <ul className="space-y-2 font-mono text-secondary font-semibold">
               <li><button onClick={() => setCurrentPage('landing')} className="hover:text-indigo-700 transition-colors">▶ Overview Engine (Home)</button></li>
               <li><button onClick={() => setCurrentPage('architecture')} className="hover:text-indigo-700 font-extrabold text-indigo-700 transition-colors">◉ 4-Tab Architecture Showcase</button></li>
               <li><button onClick={() => setCurrentPage('command-center')} className="hover:text-indigo-700 transition-colors">🏛 Government Command Suite</button></li>
@@ -43,8 +43,8 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: Technology Stack & Hackathon Specs */}
           <div className="space-y-3">
-            <h4 className="text-[#1C1917] font-black text-xs uppercase tracking-widest font-sans">Hackathon Technologies</h4>
-            <ul className="space-y-2 font-mono text-[#57534E] font-semibold">
+            <h4 className="text-primary font-black text-xs uppercase tracking-widest font-heading">Hackathon Technologies</h4>
+            <ul className="space-y-2 font-mono text-secondary font-semibold">
               <li className="flex items-center gap-2"><span>• HTTP 402 / L402 Macaroon Wallets</span> <span className="text-[10px] text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded font-black border border-amber-300">84ms</span></li>
               <li className="flex items-center gap-2"><span>• Computer Vision Feature Extraction</span> <span className="text-[10px] text-purple-800 bg-purple-100 px-1.5 py-0.5 rounded font-black border border-purple-300">1.3s</span></li>
               <li className="flex items-center gap-2"><span>• Satellite GIS Boundary Cross-Sync</span> <span className="text-[10px] text-indigo-800 bg-indigo-100 px-1.5 py-0.5 rounded font-black border border-indigo-300">&gt;95%</span></li>
@@ -53,13 +53,13 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Col 4: Live Telemetry Verification Box */}
-          <div className="bg-[#F7F5F0] p-5 rounded-2xl border border-[#D6D0C4] space-y-3 flex flex-col justify-between shadow-xs">
+          <div className="bg-surface p-5 rounded-2xl border border-subtle space-y-3 flex flex-col justify-between shadow-xs">
             <div>
-              <span className="text-[10px] font-extrabold uppercase text-[#57534E] block font-sans">Sovereign Treasury Vault Status:</span>
-              <div className="text-2xl font-black text-[#1C1917] font-sans mt-1">₹52,400,000</div>
+              <span className="text-[10px] font-extrabold uppercase text-secondary block font-heading">Sovereign Treasury Vault Status:</span>
+              <div className="text-2xl font-black text-primary font-heading mt-1">₹52,400,000</div>
               <span className="text-emerald-800 text-xs font-mono font-extrabold block">100% Fully Collateralized & Protected</span>
             </div>
-            <div className="pt-3 border-t border-[#D6D0C4] flex items-center justify-between text-[10px] text-[#57534E] font-bold">
+            <div className="pt-3 border-t border-subtle flex items-center justify-between text-[10px] text-secondary font-bold">
               <span>SIH Enterprise Pitch Deck</span>
               <span className="text-indigo-700 font-extrabold">v2.4 LTS</span>
             </div>
@@ -67,12 +67,12 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-[#D6D0C4] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#78716C] font-semibold">
+        <div className="pt-6 border-t border-subtle flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-secondary font-semibold">
           <p>© 2026 AI Escrow Orchestrator // Built for Smart India Hackathon Enterprise Excellence.</p>
           <div className="flex items-center gap-6">
-            <span className="hover:text-[#1C1917] cursor-pointer transition-colors">Privacy & Security Audit</span>
-            <span className="hover:text-[#1C1917] cursor-pointer transition-colors">Regulatory Documentation</span>
-            <span className="hover:text-[#1C1917] cursor-pointer transition-colors">API Endpoint Reference</span>
+            <span className="hover:text-primary cursor-pointer transition-colors">Privacy & Security Audit</span>
+            <span className="hover:text-primary cursor-pointer transition-colors">Regulatory Documentation</span>
+            <span className="hover:text-primary cursor-pointer transition-colors">API Endpoint Reference</span>
           </div>
         </div>
 

@@ -99,7 +99,7 @@ export const LoginModal: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-[#EAE5DC]/40 backdrop-blur-md p-4 sm:p-6 font-mono"
+        className="fixed inset-0 z-[100] flex items-center justify-center bg-surface-secondary/40 backdrop-blur-md p-4 sm:p-6 font-mono"
         onClick={() => setLoginModalOpen(false)}
       >
         <motion.div
@@ -107,39 +107,39 @@ export const LoginModal: React.FC = () => {
           animate={{ scale: 1, y: 0, opacity: 1 }}
           exit={{ scale: 0.95, y: 20, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-[#F7F5F0] border border-[#D6D0C4] shadow-[0_25px_80px_rgba(28,25,23,0.18)] text-[#1C1917]"
+          className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-surface border border-subtle shadow-[0_25px_80px_rgba(28,25,23,0.18)] text-primary"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header Bar */}
-          <div className="p-6 bg-[#EAE5DC] border-b border-[#D6D0C4] flex items-center justify-between">
+          <div className="p-6 bg-surface-secondary border-b border-subtle flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-700 via-blue-700 to-indigo-800 p-[2px] shadow-md">
-                <div className="w-full h-full bg-[#F7F5F0] rounded-[14px] flex items-center justify-center">
+                <div className="w-full h-full bg-surface rounded-[14px] flex items-center justify-center">
                   <Fingerprint className="w-5 h-5 text-indigo-700 animate-pulse" />
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-black text-[#1C1917] font-sans tracking-tight flex items-center gap-2">
+                <h3 className="text-xl font-black text-primary font-heading tracking-tight flex items-center gap-2">
                   <span>Sovereign Enterprise Authentication</span>
                   <Badge variant="cyan" size="sm">L402 SSO</Badge>
                 </h3>
-                <p className="text-xs text-[#57534E] font-mono font-semibold">Sign in or switch evaluation personas to access specialized OS capabilities</p>
+                <p className="text-xs text-secondary font-mono font-semibold">Sign in or switch evaluation personas to access specialized OS capabilities</p>
               </div>
             </div>
 
             <button
               onClick={() => setLoginModalOpen(false)}
-              className="p-2 rounded-xl bg-[#F7F5F0] hover:bg-[#DCD5C7] border border-[#D6D0C4] text-[#57534E] hover:text-[#1C1917] transition-colors shadow-2xs"
+              className="p-2 rounded-xl bg-surface hover:bg-[#DCD5C7] border border-subtle text-secondary hover:text-primary transition-colors shadow-2xs"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Body Content */}
-          <div className="p-6 sm:p-8 space-y-6 bg-[#F7F5F0]">
+          <div className="p-6 sm:p-8 space-y-6 bg-surface">
             
             {/* Method Switcher Tabs */}
-            <div className="flex items-center gap-2 p-1.5 bg-[#EAE5DC] rounded-2xl border border-[#D6D0C4] text-xs font-sans">
+            <div className="flex items-center gap-2 p-1.5 bg-surface-secondary rounded-2xl border border-subtle text-xs font-sans">
               {[
                 { id: 'persona' as const, label: '🎭 SIH Evaluation Personas (Quick Login)' },
                 { id: 'web3' as const, label: '⛓️ Web3 L402 Passkey' },
@@ -150,8 +150,8 @@ export const LoginModal: React.FC = () => {
                   onClick={() => setSelectedMethod(m.id)}
                   className={`flex-1 py-2.5 px-3 rounded-xl font-bold transition-all text-center select-none ${
                     selectedMethod === m.id
-                      ? 'bg-[#F7F5F0] text-[#1C1917] shadow-sm border border-[#D6D0C4] font-black'
-                      : 'text-[#57534E] hover:text-[#1C1917]'
+                      ? 'bg-surface text-primary shadow-sm border border-subtle font-black'
+                      : 'text-secondary hover:text-primary'
                   }`}
                 >
                   {m.label}
@@ -163,8 +163,8 @@ export const LoginModal: React.FC = () => {
             {isAuthenticating ? (
               <div className="py-16 text-center space-y-4">
                 <Loader2 className="w-12 h-12 text-[#3730A3] animate-spin mx-auto" />
-                <div className="text-lg font-black text-[#1C1917] font-sans">{authStep}</div>
-                <p className="text-xs text-[#57534E] font-mono max-w-sm mx-auto font-semibold">
+                <div className="text-lg font-black text-primary font-heading">{authStep}</div>
+                <p className="text-xs text-secondary font-mono max-w-sm mx-auto font-semibold">
                   Establishing RSA-4096 handshake and mounting zero-latency smart contract allowances...
                 </p>
               </div>
@@ -173,7 +173,7 @@ export const LoginModal: React.FC = () => {
                 {/* METHOD A: EVALUATION PERSONAS */}
                 {selectedMethod === 'persona' && (
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between text-xs text-[#57534E] px-1 font-sans font-bold">
+                    <div className="flex items-center justify-between text-xs text-secondary px-1 font-sans font-bold">
                       <span>Select a persona to immediately inspect the platform under that role:</span>
                       <span className="text-[#3730A3] font-extrabold font-mono">4 Verified Personas Available</span>
                     </div>
@@ -183,34 +183,34 @@ export const LoginModal: React.FC = () => {
                         <div
                           key={i}
                           onClick={() => handlePersonaSelect(p)}
-                          className={`p-4 rounded-2xl bg-[#EAE5DC] hover:bg-[#E2DCCF] border border-[#D6D0C4] hover:border-[#4338CA] transition-all cursor-pointer shadow-2xs hover:shadow-md space-y-3 group ${
+                          className={`p-4 rounded-2xl bg-surface-secondary hover:bg-[#E2DCCF] border border-subtle hover:border-[#4338CA] transition-all cursor-pointer shadow-2xs hover:shadow-md space-y-3 group ${
                             currentUser.name === p.name ? 'ring-2 ring-[#4338CA] border-[#4338CA] bg-[#EFF0F8]' : ''
                           }`}
                         >
                           <div className="flex items-start justify-between gap-2">
                             <div className="flex items-center gap-2.5">
-                              <span className="p-2 rounded-xl bg-[#F7F5F0] border border-[#D6D0C4] group-hover:scale-110 transition-transform">
+                              <span className="p-2 rounded-xl bg-surface border border-subtle group-hover:scale-110 transition-transform">
                                 {p.icon}
                               </span>
                               <div>
-                                <h4 className="text-sm font-black text-[#1C1917] font-sans group-hover:text-[#3730A3] transition-colors">
+                                <h4 className="text-sm font-black text-primary font-heading group-hover:text-[#3730A3] transition-colors">
                                   {p.name}
                                 </h4>
-                                <span className="text-[10px] text-[#57534E] font-mono block font-bold">{p.role}</span>
+                                <span className="text-[10px] text-secondary font-mono block font-bold">{p.role}</span>
                               </div>
                             </div>
                             {currentUser.name === p.name && (
-                              <span className="px-2 py-0.5 rounded-full bg-[#4338CA] text-[#1C1917] font-black text-[9px] shadow-2xs">
+                              <span className="px-2 py-0.5 rounded-full bg-[#4338CA] text-primary font-black text-[9px] shadow-2xs">
                                 ACTIVE
                               </span>
                             )}
                           </div>
 
-                          <p className="text-[11px] text-[#57534E] font-mono leading-normal font-medium line-clamp-2">
+                          <p className="text-[11px] text-secondary font-mono leading-normal font-medium line-clamp-2">
                             {p.desc}
                           </p>
 
-                          <div className="pt-2 border-t border-[#D6D0C4] flex items-center justify-between text-[10px] font-mono text-[#78716C]">
+                          <div className="pt-2 border-t border-subtle flex items-center justify-between text-[10px] font-mono text-secondary">
                             <span>{p.department}</span>
                             <span className="text-[#3730A3] font-black group-hover:translate-x-1 transition-transform flex items-center gap-1">
                               Login <ArrowRight className="w-3 h-3" />
@@ -225,12 +225,12 @@ export const LoginModal: React.FC = () => {
                 {/* METHOD B: WEB3 PASSKEY */}
                 {selectedMethod === 'web3' && (
                   <div className="py-8 text-center max-w-md mx-auto space-y-6">
-                    <div className="w-20 h-20 rounded-3xl bg-[#EAE5DC] border border-[#D6D0C4] flex items-center justify-center mx-auto shadow-md">
+                    <div className="w-20 h-20 rounded-3xl bg-surface-secondary border border-subtle flex items-center justify-center mx-auto shadow-md">
                       <Wallet className="w-10 h-10 text-indigo-700" />
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-lg font-black text-[#1C1917] font-sans">Connect Web3 L402 Passkey</h4>
-                      <p className="text-xs text-[#57534E] font-mono leading-relaxed font-semibold">
+                      <h4 className="text-lg font-black text-primary font-heading">Connect Web3 L402 Passkey</h4>
+                      <p className="text-xs text-secondary font-mono leading-relaxed font-semibold">
                         Authenticate directly via MetaMask, Ledger Sovereign Vault, or HTTP 402 Lightning Macaroon without central passwords.
                       </p>
                     </div>
@@ -239,7 +239,7 @@ export const LoginModal: React.FC = () => {
                       size="lg"
                       onClick={handleWeb3Login}
                       icon={<Zap className="w-5 h-5 text-amber-300 animate-bounce" />}
-                      className="w-full font-sans font-black shadow-lg"
+                      className="w-full font-heading font-black shadow-lg"
                     >
                       Authenticate via L402 Wallet
                     </Button>
@@ -253,8 +253,8 @@ export const LoginModal: React.FC = () => {
                       <Building className="w-10 h-10 text-emerald-700" />
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-lg font-black text-[#1C1917] font-sans">National Government Identity (SSO)</h4>
-                      <p className="text-xs text-[#57534E] font-mono leading-relaxed font-semibold">
+                      <h4 className="text-lg font-black text-primary font-heading">National Government Identity (SSO)</h4>
+                      <p className="text-xs text-secondary font-mono leading-relaxed font-semibold">
                         Official gateway for National Highway Authority (NHAI) and MoRTH public service execution officers.
                       </p>
                     </div>
@@ -276,7 +276,7 @@ export const LoginModal: React.FC = () => {
                         }, 1200);
                       }}
                       icon={<ShieldCheck className="w-5 h-5 text-emerald-700" />}
-                      className="w-full font-sans font-black border-emerald-300 text-emerald-900 bg-emerald-100 hover:bg-emerald-200 shadow-sm"
+                      className="w-full font-heading font-black border-emerald-300 text-emerald-900 bg-emerald-100 hover:bg-emerald-200 shadow-sm"
                     >
                       Verify via DigiLocker Sovereign ID
                     </Button>
@@ -288,7 +288,7 @@ export const LoginModal: React.FC = () => {
           </div>
 
           {/* Footer bar */}
-          <div className="p-4 bg-[#EAE5DC] border-t border-[#D6D0C4] text-center text-[11px] font-mono text-[#57534E] font-bold flex flex-wrap items-center justify-between gap-2 px-6">
+          <div className="p-4 bg-surface-secondary border-t border-subtle text-center text-[11px] font-mono text-secondary font-bold flex flex-wrap items-center justify-between gap-2 px-6">
             <span>🔒 Cryptography: 256-bit ECDSA & L402 Macaroon Token</span>
             <span className="text-emerald-900 font-extrabold bg-emerald-100 px-2 py-0.5 rounded-full border border-emerald-300">● Zero Admin Backdoors</span>
           </div>

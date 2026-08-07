@@ -136,10 +136,10 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                 SOVEREIGN-402 PROTOCOL ONLINE
               </span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black text-[#1C1917] font-sans tracking-tight leading-none">
+            <h1 className="text-3xl sm:text-5xl font-black text-primary font-heading tracking-tight leading-none">
               Government Command Center
             </h1>
-            <p className="text-xs sm:text-sm text-[#44403C] font-mono leading-relaxed">
+            <p className="text-xs sm:text-sm text-primary font-mono leading-relaxed">
               Oversee multi-million dollar public infrastructure escrow vaults, analyze real-time Vision AI anomaly reports, inspect GPS digital twins, and execute emergency governance overrides.
             </p>
           </div>
@@ -221,7 +221,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
       </div>
 
       {/* 3. INTERACTIVE PORTAL TABS & CONTROL RIBBON */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#F7F5F0] p-3 rounded-2xl border border-[#D6D0C4]">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-surface p-3 rounded-2xl border border-subtle">
         <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto no-scrollbar pb-1 sm:pb-0">
           {[
             { id: 'projects' as const, label: '📁 Active Projects Deck', badge: projects.length },
@@ -235,12 +235,12 @@ export const GovernmentCommandCenterPage: React.FC = () => {
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all whitespace-nowrap select-none ${
                 activeTab === tab.id
                   ? 'bg-cyan-500/20 text-cyan-300 border-2 border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.4)] font-extrabold scale-102'
-                  : 'text-[#57534E] hover:text-[#1C1917] hover:bg-[#EAE5DC] border border-transparent'
+                  : 'text-secondary hover:text-primary hover:bg-surface-secondary border border-transparent'
               }`}
             >
               <span>{tab.label}</span>
               <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-mono ${
-                activeTab === tab.id ? 'bg-cyan-400 text-slate-950 font-black' : 'bg-[#EAE5DC] text-[#44403C]'
+                activeTab === tab.id ? 'bg-cyan-400 text-slate-950 font-black' : 'bg-surface-secondary text-primary'
               }`}>
                 {tab.badge}
               </span>
@@ -248,7 +248,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
           ))}
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-mono text-[#57534E] w-full sm:w-auto justify-end">
+        <div className="flex items-center gap-2 text-xs font-mono text-secondary w-full sm:w-auto justify-end">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <span>Governance Override Status: <strong className="text-emerald-400">UNRESTRICTED</strong></span>
         </div>
@@ -267,7 +267,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
             className="space-y-6"
           >
             {/* Filter & Search Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-4 bg-[#F7F5F0] p-4 rounded-2xl border border-[#D6D0C4] shadow-lg">
+            <div className="flex flex-wrap items-center justify-between gap-4 bg-surface p-4 rounded-2xl border border-subtle shadow-lg">
               <div className="flex-1 min-w-[280px] max-w-md">
                 <Input
                   value={searchQuery}
@@ -290,7 +290,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                     ]}
                   />
                 </div>
-                <Button variant="ghost" size="sm" icon={<Filter className="w-4 h-4 text-[#57534E]" />} onClick={() => { setSearchQuery(''); setFilterCategory('all'); }}>
+                <Button variant="ghost" size="sm" icon={<Filter className="w-4 h-4 text-secondary" />} onClick={() => { setSearchQuery(''); setFilterCategory('all'); }}>
                   Reset
                 </Button>
               </div>
@@ -309,8 +309,8 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                   >
                     {/* Top Status & Location Badge */}
                     <div>
-                      <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#D6D0C4]">
-                        <div className="flex items-center gap-1.5 text-[#57534E] text-xs truncate">
+                      <div className="flex items-center justify-between gap-2 pb-3 border-b border-subtle">
+                        <div className="flex items-center gap-1.5 text-secondary text-xs truncate">
                           <MapPin className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                           <span className="font-mono font-bold truncate">{p.location}</span>
                         </div>
@@ -322,24 +322,24 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                         </Badge>
                       </div>
 
-                      <h3 className="text-lg font-extrabold text-[#1C1917] font-sans tracking-tight mt-3 truncate">
+                      <h3 className="text-lg font-extrabold text-primary font-heading tracking-tight mt-3 truncate">
                         {p.name}
                       </h3>
-                      <p className="text-xs text-[#57534E] font-mono mt-1 truncate">
+                      <p className="text-xs text-secondary font-mono mt-1 truncate">
                         Category: <strong className="text-cyan-300">{p.category}</strong> • Updated {p.lastUpdated}
                       </p>
                     </div>
 
                     {/* Financial & AI Health Specs */}
-                    <div className="bg-[#F7F5F0] p-4 rounded-xl border border-[#D6D0C4] space-y-3">
+                    <div className="bg-surface p-4 rounded-xl border border-subtle space-y-3">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-[#57534E] font-mono">Contractor Lead:</span>
+                        <span className="text-secondary font-mono">Contractor Lead:</span>
                         <span className="text-cyan-300 font-bold truncate max-w-[150px]">{p.contractor}</span>
                       </div>
 
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-[#57534E] font-mono">Total Vault Escrow:</span>
-                        <span className="text-base font-black text-[#1C1917] font-sans">₹{p.budget.toLocaleString()}</span>
+                        <span className="text-secondary font-mono">Total Vault Escrow:</span>
+                        <span className="text-base font-black text-primary font-heading">₹{p.budget.toLocaleString()}</span>
                       </div>
 
                       <ProgressBar
@@ -352,10 +352,10 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                     </div>
 
                     {/* AI Vision Score Chip */}
-                    <div className="flex items-center justify-between gap-2 bg-[#F7F5F0] px-4 py-2.5 rounded-xl border border-[#D6D0C4]">
+                    <div className="flex items-center justify-between gap-2 bg-surface px-4 py-2.5 rounded-xl border border-subtle">
                       <div className="flex items-center gap-2">
                         <Cpu className="w-4 h-4 text-purple-400 animate-pulse" />
-                        <span className="text-xs font-bold text-[#44403C]">Vision AI Score:</span>
+                        <span className="text-xs font-bold text-primary">Vision AI Score:</span>
                       </div>
                       <span className={`font-extrabold font-mono text-sm px-2 py-0.5 rounded ${
                         score > 92 ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
@@ -365,7 +365,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                     </div>
 
                     {/* Action Button Controls */}
-                    <div className="pt-2 flex items-center justify-between gap-2 border-t border-[#D6D0C4]">
+                    <div className="pt-2 flex items-center justify-between gap-2 border-t border-subtle">
                       <Button
                         variant="outline"
                         size="sm"
@@ -394,13 +394,13 @@ export const GovernmentCommandCenterPage: React.FC = () => {
 
             {/* Enterprise Data Table View */}
             <Card className="p-0 overflow-hidden border border-cyan-500/30 shadow-2xl mt-8">
-              <div className="p-6 bg-[#F7F5F0] border-b border-[#D6D0C4] flex items-center justify-between flex-wrap gap-4">
+              <div className="p-6 bg-surface border-b border-subtle flex items-center justify-between flex-wrap gap-4">
                 <div>
-                  <h3 className="text-base sm:text-lg font-black text-[#1C1917] font-sans uppercase tracking-wider flex items-center gap-2">
+                  <h3 className="text-base sm:text-lg font-black text-primary font-heading uppercase tracking-wider flex items-center gap-2">
                     <Activity className="w-5 h-5 text-cyan-400" />
                     <span>Sovereign Ledger Execution Table</span>
                   </h3>
-                  <p className="text-xs text-[#57534E] font-mono mt-0.5">Live immutable feed of contractor proof evaluations and automated x402 bank disbursements.</p>
+                  <p className="text-xs text-secondary font-mono mt-0.5">Live immutable feed of contractor proof evaluations and automated x402 bank disbursements.</p>
                 </div>
                 <Badge variant="cyan">LIVE SOVEREIGN FEED // L402 MACAROON</Badge>
               </div>
@@ -408,7 +408,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
               <div className="overflow-x-auto font-mono text-xs">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="bg-[#F7F5F0] text-[#57534E] font-bold border-b border-[#D6D0C4] uppercase tracking-wider text-[11px]">
+                    <tr className="bg-surface text-secondary font-bold border-b border-subtle uppercase tracking-wider text-[11px]">
                       <th className="py-3.5 px-6">Project Name // Location</th>
                       <th className="py-3.5 px-6">Contractor Wallet</th>
                       <th className="py-3.5 px-6">Escrow Vault Size</th>
@@ -422,25 +422,25 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                       const isFrozen = proj.status === 'FROZEN';
                       const score = proj.aiScore || 96;
                       return (
-                        <tr key={proj.id} className="hover:bg-[#EAE5DC] transition-colors group">
-                          <td className="py-4 px-6 font-bold text-[#1C1917]">
+                        <tr key={proj.id} className="hover:bg-surface-secondary transition-colors group">
+                          <td className="py-4 px-6 font-bold text-primary">
                             <div className="flex flex-col">
                               <span className="text-sm font-extrabold group-hover:text-cyan-300 transition-colors">{proj.name}</span>
-                              <span className="text-[10px] text-[#57534E] font-normal">{proj.location} • {proj.category}</span>
+                              <span className="text-[10px] text-secondary font-normal">{proj.location} • {proj.category}</span>
                             </div>
                           </td>
-                          <td className="py-4 px-6 text-[#44403C] font-mono">
-                            <span className="bg-[#F7F5F0] px-2 py-1 rounded text-cyan-300 border border-[#D6D0C4] select-all">
+                          <td className="py-4 px-6 text-primary font-mono">
+                            <span className="bg-surface px-2 py-1 rounded text-cyan-300 border border-subtle select-all">
                               {proj.txHash || '0x402a...E819'}
                             </span>
                           </td>
-                          <td className="py-4 px-6 font-mono font-black text-[#1C1917]">
+                          <td className="py-4 px-6 font-mono font-black text-primary">
                             ₹{proj.budget.toLocaleString()}
                           </td>
                           <td className="py-4 px-6">
                             <div className="flex items-center gap-2">
                               <span className={`w-2 h-2 rounded-full ${score > 92 ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-                              <span className="font-bold text-[#44403C]">{score}% Precision</span>
+                              <span className="font-bold text-primary">{score}% Precision</span>
                             </div>
                           </td>
                           <td className="py-4 px-6">
@@ -460,7 +460,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                                 setTargetOverrideProject(proj);
                                 setOverrideModalOpen(true);
                               }}
-                              className="px-3 py-1.5 rounded-lg bg-[#EAE5DC] hover:bg-slate-700 text-[#44403C] font-bold border border-[#D6D0C4] transition-all"
+                              className="px-3 py-1.5 rounded-lg bg-surface-secondary hover:bg-slate-700 text-primary font-bold border border-subtle transition-all"
                             >
                               Override
                             </button>
@@ -489,14 +489,14 @@ export const GovernmentCommandCenterPage: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               
               {/* Chart 1: AI Stage Settlement Automation */}
-              <GlassCard intensity="medium" className="space-y-4 border border-[#D6D0C4]">
-                <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4">
+              <GlassCard intensity="medium" className="space-y-4 border border-subtle">
+                <div className="flex items-center justify-between border-b border-subtle pb-4">
                   <div>
-                    <h3 className="text-lg font-black text-[#1C1917] font-sans uppercase tracking-tight flex items-center gap-2">
+                    <h3 className="text-lg font-black text-primary font-heading uppercase tracking-tight flex items-center gap-2">
                       <Cpu className="w-5 h-5 text-cyan-400" />
                       <span>6-Stage Autonomous Settlement Volume</span>
                     </h3>
-                    <p className="text-xs text-[#57534E] font-mono">Zero bureaucratic latency across 128 active highway proofs.</p>
+                    <p className="text-xs text-secondary font-mono">Zero bureaucratic latency across 128 active highway proofs.</p>
                   </div>
                   <Badge variant="cyan">98.4% AUTO RATE</Badge>
                 </div>
@@ -520,14 +520,14 @@ export const GovernmentCommandCenterPage: React.FC = () => {
               </GlassCard>
 
               {/* Chart 2: Risk Analysis Radar Matrix */}
-              <GlassCard intensity="medium" className="space-y-4 border border-[#D6D0C4]">
-                <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4">
+              <GlassCard intensity="medium" className="space-y-4 border border-subtle">
+                <div className="flex items-center justify-between border-b border-subtle pb-4">
                   <div>
-                    <h3 className="text-lg font-black text-[#1C1917] font-sans uppercase tracking-tight flex items-center gap-2">
+                    <h3 className="text-lg font-black text-primary font-heading uppercase tracking-tight flex items-center gap-2">
                       <ShieldAlert className="w-5 h-5 text-amber-400" />
                       <span>Sovereign Risk Analysis Radar</span>
                     </h3>
-                    <p className="text-xs text-[#57534E] font-mono">6-dimensional anti-corruption structural threshold indexing.</p>
+                    <p className="text-xs text-secondary font-mono">6-dimensional anti-corruption structural threshold indexing.</p>
                   </div>
                   <Badge variant="amber">100% SECURED</Badge>
                 </div>
@@ -587,13 +587,13 @@ export const GovernmentCommandCenterPage: React.FC = () => {
             className="space-y-6"
           >
             <GlassCard className="space-y-6 border border-cyan-500/40">
-              <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[#D6D0C4] pb-4">
+              <div className="flex items-center justify-between flex-wrap gap-4 border-b border-subtle pb-4">
                 <div>
-                  <h3 className="text-xl font-black text-[#1C1917] font-sans uppercase tracking-tight flex items-center gap-2">
+                  <h3 className="text-xl font-black text-primary font-heading uppercase tracking-tight flex items-center gap-2">
                     <Wallet className="w-6 h-6 text-cyan-400" />
                     <span>Treasury Escrow Liquidity Velocity (₹ Millions)</span>
                   </h3>
-                  <p className="text-xs text-[#57534E] font-mono mt-1">Comparison of total locked government capital vs. automated L402 milestone disbursements.</p>
+                  <p className="text-xs text-secondary font-mono mt-1">Comparison of total locked government capital vs. automated L402 milestone disbursements.</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="flex items-center gap-2 text-xs font-mono text-cyan-300">
@@ -631,30 +631,30 @@ export const GovernmentCommandCenterPage: React.FC = () => {
 
             {/* Treasury Category Allocations */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="border border-[#D6D0C4] space-y-3">
+              <Card className="border border-subtle space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-[#57534E] font-bold uppercase">NHAI Highway Corridor</span>
+                  <span className="text-xs text-secondary font-bold uppercase">NHAI Highway Corridor</span>
                   <Badge variant="cyan">₹28.4M LOCKED</Badge>
                 </div>
-                <h4 className="text-lg font-black text-[#1C1917]">48 Expressways Online</h4>
+                <h4 className="text-lg font-black text-primary">48 Expressways Online</h4>
                 <ProgressBar percentage={88.2} label="Milestone Completion:" subValue="88.2% Auto-Paid" color="cyan" heightClass="h-2" />
               </Card>
 
-              <Card className="border border-[#D6D0C4] space-y-3">
+              <Card className="border border-subtle space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-[#57534E] font-bold uppercase">Smart City Bridges</span>
+                  <span className="text-xs text-secondary font-bold uppercase">Smart City Bridges</span>
                   <Badge variant="emerald">₹14.2M LOCKED</Badge>
                 </div>
-                <h4 className="text-lg font-black text-[#1C1917]">32 Bridges Audited</h4>
+                <h4 className="text-lg font-black text-primary">32 Bridges Audited</h4>
                 <ProgressBar percentage={94.5} label="Milestone Completion:" subValue="94.5% Auto-Paid" color="emerald" heightClass="h-2" />
               </Card>
 
-              <Card className="border border-[#D6D0C4] space-y-3">
+              <Card className="border border-subtle space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-[#57534E] font-bold uppercase">Metro Rail Tunnels</span>
+                  <span className="text-xs text-secondary font-bold uppercase">Metro Rail Tunnels</span>
                   <Badge variant="gold">₹9.8M LOCKED</Badge>
                 </div>
-                <h4 className="text-lg font-black text-[#1C1917]">42 Tunnel Sectors</h4>
+                <h4 className="text-lg font-black text-primary">42 Tunnel Sectors</h4>
                 <ProgressBar percentage={72.0} label="Milestone Completion:" subValue="72.0% Auto-Paid" color="gradient" heightClass="h-2" />
               </Card>
             </div>
@@ -674,13 +674,13 @@ export const GovernmentCommandCenterPage: React.FC = () => {
           >
             {/* Left 2 Cols: Recent Autonomous Activity Timeline */}
             <div className="lg:col-span-2 space-y-6">
-              <Card className="p-6 border border-[#D6D0C4] space-y-6">
-                <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4">
+              <Card className="p-6 border border-subtle space-y-6">
+                <div className="flex items-center justify-between border-b border-subtle pb-4">
                   <div>
-                    <h3 className="text-lg font-extrabold text-[#1C1917] font-sans uppercase tracking-tight">
+                    <h3 className="text-lg font-extrabold text-primary font-heading uppercase tracking-tight">
                       Chronological Autonomous Execution Trail
                     </h3>
-                    <p className="text-xs text-[#57534E] font-mono">Real-time immutable receipts generated by machine verification wallets.</p>
+                    <p className="text-xs text-secondary font-mono">Real-time immutable receipts generated by machine verification wallets.</p>
                   </div>
                   <Badge variant="pulse">SYNCED TO LEDGER</Badge>
                 </div>
@@ -691,7 +691,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
 
             {/* Right 1 Col: High Priority Alert Cards */}
             <div className="space-y-4">
-              <h3 className="text-sm font-black text-[#1C1917] uppercase tracking-widest px-1">
+              <h3 className="text-sm font-black text-primary uppercase tracking-widest px-1">
                 Active Anomaly Notifications
               </h3>
 
@@ -740,13 +740,13 @@ export const GovernmentCommandCenterPage: React.FC = () => {
         >
           <div className="space-y-6 font-mono">
             {/* Before / After Slider Component */}
-            <div className="p-4 rounded-2xl bg-[#F7F5F0] border border-cyan-500/30 space-y-3">
+            <div className="p-4 rounded-2xl bg-surface border border-cyan-500/30 space-y-3">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-cyan-400 font-bold uppercase flex items-center gap-2">
                   <Eye className="w-4 h-4 animate-pulse" />
                   <span>Interactive Surface Density Scan (Before vs. After Repair)</span>
                 </span>
-                <span className="text-[#57534E] text-[11px]">Resolution: 4K Sub-millimeter GIS</span>
+                <span className="text-secondary text-[11px]">Resolution: 4K Sub-millimeter GIS</span>
               </div>
               <BeforeAfterSlider
                 beforeImage={selectedProjectForModal.beforeImageUrl}
@@ -757,27 +757,27 @@ export const GovernmentCommandCenterPage: React.FC = () => {
 
             {/* AI Structural Telemetry Readout */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-              <div className="bg-[#F7F5F0] p-4 rounded-xl border border-[#D6D0C4] space-y-1">
-                <span className="text-[#57534E] block font-bold uppercase text-[10px]">Crack & Defect Index:</span>
+              <div className="bg-surface p-4 rounded-xl border border-subtle space-y-1">
+                <span className="text-secondary block font-bold uppercase text-[10px]">Crack & Defect Index:</span>
                 <span className="text-emerald-400 text-lg font-black block">0.02% (Passed)</span>
-                <span className="text-[10px] text-[#78716C] block">Threshold: &lt; 2.5%</span>
+                <span className="text-[10px] text-secondary block">Threshold: &lt; 2.5%</span>
               </div>
-              <div className="bg-[#F7F5F0] p-4 rounded-xl border border-[#D6D0C4] space-y-1">
-                <span className="text-[#57534E] block font-bold uppercase text-[10px]">GPS Geo-Fencing:</span>
+              <div className="bg-surface p-4 rounded-xl border border-subtle space-y-1">
+                <span className="text-secondary block font-bold uppercase text-[10px]">GPS Geo-Fencing:</span>
                 <span className="text-cyan-300 text-lg font-black block">100% Boundary Sync</span>
-                <span className="text-[10px] text-[#78716C] block">Lat: 18.5204° N, Long: 73.8567° E</span>
+                <span className="text-[10px] text-secondary block">Lat: 18.5204° N, Long: 73.8567° E</span>
               </div>
-              <div className="bg-[#F7F5F0] p-4 rounded-xl border border-[#D6D0C4] space-y-1">
-                <span className="text-[#57534E] block font-bold uppercase text-[10px]">x402 Micropayment Gas:</span>
+              <div className="bg-surface p-4 rounded-xl border border-subtle space-y-1">
+                <span className="text-secondary block font-bold uppercase text-[10px]">x402 Micropayment Gas:</span>
                 <span className="text-amber-400 text-lg font-black block">$0.05 USDC (84ms)</span>
-                <span className="text-[10px] text-[#78716C] block">HTTP 402 Challenge Cleared</span>
+                <span className="text-[10px] text-secondary block">HTTP 402 Challenge Cleared</span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#D6D0C4] flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs text-[#57534E]">
+            <div className="pt-4 border-t border-subtle flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs text-secondary">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Sovereign Smart Contract: <strong className="text-[#1C1917]">Approved for Automated Disbursement</strong></span>
+                <span>Sovereign Smart Contract: <strong className="text-primary">Approved for Automated Disbursement</strong></span>
               </div>
               <Button variant="primary" onClick={() => setSelectedProjectForModal(null)}>
                 Close Digital Twin Preview
@@ -800,10 +800,10 @@ export const GovernmentCommandCenterPage: React.FC = () => {
           headerBadge="EMERGENCY ARBITER CONTROL"
         >
           <div className="space-y-5 font-mono">
-            <div className="p-4 rounded-2xl bg-[#EAE5DC] border border-rose-500/50 text-rose-200 text-xs flex items-start gap-3">
+            <div className="p-4 rounded-2xl bg-surface-secondary border border-rose-500/50 text-rose-200 text-xs flex items-start gap-3">
               <ShieldAlert className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
               <div className="space-y-1">
-                <span className="font-extrabold block text-[#1C1917] text-sm">Caution: Overriding Autonomous Decisions</span>
+                <span className="font-extrabold block text-primary text-sm">Caution: Overriding Autonomous Decisions</span>
                 <p className="opacity-90 leading-relaxed">
                   Executing a manual arbitration override will record your sovereign government signature on the immutable ledger for audit compliance under Smart India Hackathon regulatory mandates.
                 </p>
@@ -811,14 +811,14 @@ export const GovernmentCommandCenterPage: React.FC = () => {
             </div>
 
             <div className="space-y-3">
-              <label className="block text-xs font-bold text-[#44403C] uppercase">Select Override Action:</label>
+              <label className="block text-xs font-bold text-primary uppercase">Select Override Action:</label>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={() => {
                     overrideDecision(targetOverrideProject.id, true);
                     setOverrideModalOpen(false);
                   }}
-                  className="p-4 rounded-xl bg-[#F7F5F0] hover:bg-[#EAE5DC] border border-emerald-500/50 text-emerald-300 font-extrabold text-xs text-center transition-all shadow-lg hover:scale-102"
+                  className="p-4 rounded-xl bg-surface hover:bg-surface-secondary border border-emerald-500/50 text-emerald-300 font-extrabold text-xs text-center transition-all shadow-lg hover:scale-102"
                 >
                   ✅ FORCE APPROVE & PAY OUT
                 </button>
@@ -827,14 +827,14 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                     overrideDecision(targetOverrideProject.id, false);
                     setOverrideModalOpen(false);
                   }}
-                  className="p-4 rounded-xl bg-[#EAE5DC] hover:bg-[#351420] border border-rose-500/50 text-rose-300 font-extrabold text-xs text-center transition-all shadow-lg hover:scale-102"
+                  className="p-4 rounded-xl bg-surface-secondary hover:bg-[#351420] border border-rose-500/50 text-rose-300 font-extrabold text-xs text-center transition-all shadow-lg hover:scale-102"
                 >
                   ⛔ REJECT EVIDENCE & HOLD
                 </button>
               </div>
             </div>
 
-            <div className="pt-3 border-t border-[#D6D0C4] flex justify-end">
+            <div className="pt-3 border-t border-subtle flex justify-end">
               <Button variant="ghost" onClick={() => setOverrideModalOpen(false)}>
                 Cancel
               </Button>

@@ -28,10 +28,10 @@ export const SettingsPage: React.FC = () => {
             <Badge variant="cyan" icon={<Settings className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />}>
               ⚙️ SOVEREIGN KERNEL CONFIGURATION // SIH ROOT ADMIN
             </Badge>
-            <h1 className="text-3xl sm:text-4xl font-black text-[#1C1917] font-sans tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-black text-primary font-heading tracking-tight">
               AI & Autonomous Escrow Policy Suite
             </h1>
-            <p className="text-xs sm:text-sm text-[#44403C] font-mono leading-relaxed">
+            <p className="text-xs sm:text-sm text-primary font-mono leading-relaxed">
               Adjust global computer vision confidence thresholds, configure zero-latency maximum payout ceilings, and manage HTTP 402 micro-gas limits.
             </p>
           </div>
@@ -39,27 +39,27 @@ export const SettingsPage: React.FC = () => {
       </GlassCard>
 
       {/* 2. MASTER SETTINGS FORMS */}
-      <Card className="p-8 bg-[#F7F5F0] border border-[#D6D0C4] shadow-2xl space-y-8">
+      <Card className="p-8 bg-surface border border-subtle shadow-2xl space-y-8">
         
         {/* Section A: AI Confidence Threshold */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+            <label className="text-sm font-extrabold text-primary font-heading uppercase flex items-center gap-2">
               <Cpu className="w-5 h-5 text-emerald-400" />
               <span>Vision AI Minimum Confidence Threshold</span>
             </label>
             <Badge variant="emerald" size="md">{threshold}% CONFIDENCE</Badge>
           </div>
-          <p className="text-xs text-[#57534E] font-mono leading-relaxed">
+          <p className="text-xs text-secondary font-mono leading-relaxed">
             If an autonomous computer vision inspection scores below this threshold, automatic bank transfers halt immediately and trigger an anomaly flag for human oversight.
           </p>
           <div className="pt-2">
             <input 
               type="range" min="80" max="99" step="0.5" value={threshold} 
               onChange={(e) => setThreshold(Number(e.target.value))}
-              className="w-full cursor-pointer accent-cyan-400 h-2 bg-[#EAE5DC] rounded-lg shadow-inner" 
+              className="w-full cursor-pointer accent-cyan-400 h-2 bg-surface-secondary rounded-lg shadow-inner" 
             />
-            <div className="flex justify-between text-[10px] text-[#78716C] font-bold mt-1">
+            <div className="flex justify-between text-[10px] text-secondary font-bold mt-1">
               <span>80.0% (Lenient)</span>
               <span>90.0% (SIH Target)</span>
               <span>95.0% (Strict Enterprise)</span>
@@ -69,15 +69,15 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* Section B: Automated Payout Ceiling */}
-        <div className="space-y-3 pt-6 border-t border-[#D6D0C4]">
+        <div className="space-y-3 pt-6 border-t border-subtle">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+            <label className="text-sm font-extrabold text-primary font-heading uppercase flex items-center gap-2">
               <Lock className="w-5 h-5 text-amber-400" />
               <span>Maximum Automated Zero-Latency Payout Ceiling</span>
             </label>
             <Badge variant="amber" size="md">₹{(maxPayout/100000).toFixed(2)} LAKHS</Badge>
           </div>
-          <p className="text-xs text-[#57534E] font-mono leading-relaxed">
+          <p className="text-xs text-secondary font-mono leading-relaxed">
             Any single tranche disbursement exceeding this ceiling will require multi-signature cryptographic authorization from the Ministry Governance Council before funds unlock.
           </p>
           <Input
@@ -89,15 +89,15 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* Section C: x402 Macaroon Gas Ceiling */}
-        <div className="space-y-3 pt-6 border-t border-[#D6D0C4]">
+        <div className="space-y-3 pt-6 border-t border-subtle">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+            <label className="text-sm font-extrabold text-primary font-heading uppercase flex items-center gap-2">
               <Zap className="w-5 h-5 text-cyan-400 animate-bounce" />
               <span>HTTP 402 Machine Validation Gas Cap (USDC)</span>
             </label>
             <Badge variant="cyan" size="md">${x402GasLimit} USDC / PROOF</Badge>
           </div>
-          <p className="text-xs text-[#57534E] font-mono leading-relaxed">
+          <p className="text-xs text-secondary font-mono leading-relaxed">
             Set the maximum micro-payment fee allowed per automated LiDAR or drone photographic validation challenge.
           </p>
           <Input
@@ -109,12 +109,12 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* Action Button Strip */}
-        <div className="pt-6 border-t border-[#D6D0C4] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="pt-6 border-t border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
           <Button
             variant="outline"
             size="md"
             onClick={() => resetSimulation()}
-            icon={<RefreshCw className="w-4 h-4 text-[#44403C]" />}
+            icon={<RefreshCw className="w-4 h-4 text-primary" />}
           >
             Reset All Simulation Telemetry to Default
           </Button>
@@ -124,7 +124,7 @@ export const SettingsPage: React.FC = () => {
             size="lg"
             onClick={handleSave}
             icon={isSaved ? <CheckCircle2 className="w-5 h-5 text-emerald-400" /> : <Save className="w-5 h-5 text-yellow-400" />}
-            className="w-full sm:w-auto font-sans font-black tracking-wider px-8"
+            className="w-full sm:w-auto font-heading font-black tracking-wider px-8"
           >
             {isSaved ? '✔ Policies Committed' : 'Commit Changes to OS Kernel'}
           </Button>

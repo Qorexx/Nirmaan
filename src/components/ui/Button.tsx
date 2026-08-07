@@ -28,17 +28,17 @@ export const Button: React.FC<ButtonProps> = ({
   const getVariantStyles = (): string => {
     switch (variant) {
       case 'primary':
-        return 'bg-gradient-to-r from-accent-indigo to-indigo-600 text-white font-sans font-black tracking-wider shadow-md hover:shadow-lg border border-accent-indigo/40';
+        return 'bg-gradient-to-r from-accent-indigo to-indigo-600 text-white font-heading font-black tracking-wider shadow-md hover:shadow-lg border border-accent-indigo/40';
       case 'secondary':
-        return 'bg-surface-secondary hover:bg-subtle text-primary font-sans font-extrabold border border-subtle hover:border-accent-indigo/40 shadow-sm hover:shadow-md';
+        return 'bg-surface-secondary hover:bg-subtle text-primary font-heading font-extrabold border border-subtle hover:border-accent-indigo/40 shadow-sm hover:shadow-md';
       case 'outline':
         return 'bg-transparent hover:bg-accent-indigo/10 text-accent-indigo font-sans font-bold border border-accent-indigo/50 hover:border-accent-indigo shadow-sm';
       case 'ghost':
         return 'bg-transparent hover:bg-surface-secondary text-secondary hover:text-primary font-sans font-semibold';
       case 'danger':
-        return 'bg-gradient-to-r from-rose-600 to-red-500 text-white font-sans font-black shadow-md border border-rose-400/40 hover:shadow-lg';
+        return 'bg-gradient-to-r from-rose-600 to-red-500 text-white font-heading font-black shadow-md border border-rose-400/40 hover:shadow-lg';
       case 'x402':
-        return 'bg-gradient-to-r from-accent-gold to-orange-500 text-white font-sans font-black shadow-md hover:shadow-lg border border-accent-gold/40';
+        return 'bg-gradient-to-r from-accent-gold to-orange-500 text-white font-heading font-black shadow-md hover:shadow-lg border border-accent-gold/40';
       case 'ledger':
         return 'bg-surface-secondary text-accent-gold font-mono font-black border border-accent-gold/40 hover:border-accent-gold shadow-sm hover:bg-subtle';
       default:

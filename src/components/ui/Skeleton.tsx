@@ -25,13 +25,13 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   return (
     <div
       style={{ width, height }}
-      className={`bg-gradient-to-r from-[#EAE5DC] via-[#DFD9CD] to-[#EAE5DC] bg-[length:200%_100%] animate-pulse border border-[#D6D0C4] ${getVariantClasses()} ${className}`}
+      className={`bg-gradient-to-r from-[#EAE5DC] via-[#DFD9CD] to-[#EAE5DC] bg-[length:200%_100%] animate-pulse border border-subtle ${getVariantClasses()} ${className}`}
     />
   );
 };
 
 export const SkeletonCard: React.FC<{ lines?: number }> = ({ lines = 3 }) => (
-  <div className="bg-[#F7F5F0] border border-[#D6D0C4] rounded-2xl p-6 space-y-4 shadow-xs">
+  <div className="bg-surface border border-subtle rounded-2xl p-6 space-y-4 shadow-xs">
     <div className="flex items-center gap-3">
       <Skeleton variant="circular" width={40} height={40} />
       <div className="space-y-2 flex-1">

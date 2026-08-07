@@ -44,7 +44,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   return (
     <div className={`relative inline-flex items-center gap-3 ${className}`}>
       <div className={`relative rounded-xl overflow-hidden bg-gradient-to-tr from-indigo-700 via-blue-700 to-amber-600 p-[2px] shadow-xs shrink-0 ${getSizeStyles()}`}>
-        <div className="w-full h-full bg-[#F7F5F0] rounded-[10px] overflow-hidden flex items-center justify-center font-mono font-black text-indigo-950 uppercase select-none">
+        <div className="w-full h-full bg-surface rounded-[10px] overflow-hidden flex items-center justify-center font-mono font-black text-indigo-950 uppercase select-none">
           {src ? (
             <img src={src} alt={alt} className="w-full h-full object-cover" />
           ) : (
@@ -58,8 +58,8 @@ export const Avatar: React.FC<AvatarProps> = ({
 
       {role && (
         <div className="flex flex-col">
-          <span className="text-xs font-black text-[#1C1917] leading-tight font-sans">{alt}</span>
-          <span className="text-[10px] font-mono font-bold uppercase text-[#57534E]">{role}</span>
+          <span className="text-xs font-black text-primary leading-tight font-heading">{alt}</span>
+          <span className="text-[10px] font-mono font-bold uppercase text-secondary">{role}</span>
         </div>
       )}
     </div>

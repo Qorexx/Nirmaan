@@ -12,7 +12,7 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({
   withGrid = true
 }) => {
   return (
-    <div className={`relative min-h-screen bg-[#F0EEE9] overflow-hidden text-[#1C1917] ${className}`}>
+    <div className={`relative min-h-screen bg-[#F0EEE9] overflow-hidden text-primary ${className}`}>
       {/* Ambient Warm Oat & Indigo Mesh Gradients */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />

@@ -43,19 +43,19 @@ export const LandingPage: React.FC = () => {
         <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/07 blur-[120px] rounded-full pointer-events-none" />
         
         {/* Top Tagline Badge */}
-        <div className="inline-flex items-center space-x-2.5 bg-[#F7F5F0] border border-slate-200/90 px-4 py-1.5 rounded-full text-xs font-mono font-extrabold text-indigo-700 mb-6 shadow-sm hover:shadow-md hover:scale-105 transition-all">
+        <div className="inline-flex items-center space-x-2.5 bg-surface border border-slate-200/90 px-4 py-1.5 rounded-full text-xs font-mono font-extrabold text-indigo-700 mb-6 shadow-sm hover:shadow-md hover:scale-105 transition-all">
           <Award className="w-4 h-4 text-amber-500" />
           <span className="tracking-tight">SMART INDIA HACKATHON (SIH) SOVEREIGN EXECUTIVE EDITION</span>
           <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse" />
         </div>
 
         {/* Main Title */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 font-sans tracking-tight max-w-5xl leading-[1.08]">
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 font-heading tracking-tight max-w-5xl leading-[1.08]">
           The <span className="text-gradient-cyan">Autonomous Infrastructure</span> Operating System
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-xl text-slate-600 font-sans font-normal max-w-3xl mt-6 leading-relaxed">
+        <p className="text-base sm:text-xl text-slate-600 font-heading font-normal max-w-3xl mt-6 leading-relaxed">
           AI-powered civil verification, zero-latency <strong className="text-indigo-600 font-mono font-bold bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100">x402 machine-to-machine payments</strong>, blockchain-backed trust escrow, and transparent sovereign infrastructure governance.
         </p>
 
@@ -66,39 +66,39 @@ export const LandingPage: React.FC = () => {
 
         {/* High-Impact SIH Stat Cascade (Apple Cupertino Grid) */}
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 w-full max-w-6xl mt-6">
-          <div className="glass-card p-6 rounded-3xl border border-slate-200/90 bg-[#F7F5F0] text-center hover:scale-105 transition-transform shadow-xs">
-            <div className="text-3xl sm:text-4xl font-black font-sans text-emerald-600">
+          <div className="glass-card p-6 rounded-3xl border border-slate-200/90 bg-surface text-center hover:scale-105 transition-transform shadow-xs">
+            <div className="text-3xl sm:text-4xl font-black font-heading text-emerald-600">
               ₹{(totalProtectedValue / 1000000).toFixed(1)}M
             </div>
-            <div className="text-xs font-mono text-[#78716C] mt-1 uppercase font-extrabold">Protected Escrow</div>
+            <div className="text-xs font-mono text-secondary mt-1 uppercase font-extrabold">Protected Escrow</div>
           </div>
 
-          <div className="glass-card p-6 rounded-3xl border border-slate-200/90 bg-[#F7F5F0] text-center hover:scale-105 transition-transform shadow-xs">
-            <div className="text-3xl sm:text-4xl font-black font-sans text-indigo-600">
+          <div className="glass-card p-6 rounded-3xl border border-slate-200/90 bg-surface text-center hover:scale-105 transition-transform shadow-xs">
+            <div className="text-3xl sm:text-4xl font-black font-heading text-indigo-600">
               {activeProjectsCount}
             </div>
-            <div className="text-xs font-mono text-[#78716C] mt-1 uppercase font-extrabold">Active Projects</div>
+            <div className="text-xs font-mono text-secondary mt-1 uppercase font-extrabold">Active Projects</div>
           </div>
 
-          <div className="glass-card p-6 rounded-3xl border border-slate-200/90 bg-[#F7F5F0] text-center hover:scale-105 transition-transform shadow-xs">
-            <div className="text-3xl sm:text-4xl font-black font-sans text-blue-600">
+          <div className="glass-card p-6 rounded-3xl border border-slate-200/90 bg-surface text-center hover:scale-105 transition-transform shadow-xs">
+            <div className="text-3xl sm:text-4xl font-black font-heading text-blue-600">
               {aiAccuracyRate}%
             </div>
-            <div className="text-xs font-mono text-[#78716C] mt-1 uppercase font-extrabold">AI Vision Accuracy</div>
+            <div className="text-xs font-mono text-secondary mt-1 uppercase font-extrabold">AI Vision Accuracy</div>
           </div>
 
-          <div className="glass-card p-6 rounded-3xl border border-slate-200/90 bg-[#F7F5F0] text-center hover:scale-105 transition-transform shadow-xs">
-            <div className="text-3xl sm:text-4xl font-black font-sans text-amber-600">
+          <div className="glass-card p-6 rounded-3xl border border-slate-200/90 bg-surface text-center hover:scale-105 transition-transform shadow-xs">
+            <div className="text-3xl sm:text-4xl font-black font-heading text-amber-600">
               {autonomousDecisionsCount.toLocaleString()}
             </div>
-            <div className="text-xs font-mono text-[#78716C] mt-1 uppercase font-extrabold">x402 Decisions</div>
+            <div className="text-xs font-mono text-secondary mt-1 uppercase font-extrabold">x402 Decisions</div>
           </div>
 
-          <div className="col-span-2 lg:col-span-1 glass-card p-6 rounded-3xl border border-slate-200/90 bg-[#F7F5F0] text-center hover:scale-105 transition-transform shadow-xs">
-            <div className="text-3xl sm:text-4xl font-black font-sans text-purple-600">
+          <div className="col-span-2 lg:col-span-1 glass-card p-6 rounded-3xl border border-slate-200/90 bg-surface text-center hover:scale-105 transition-transform shadow-xs">
+            <div className="text-3xl sm:text-4xl font-black font-heading text-purple-600">
               {manualInterventions}
             </div>
-            <div className="text-xs font-mono text-[#78716C] mt-1 uppercase font-extrabold">Manual Interventions</div>
+            <div className="text-xs font-mono text-secondary mt-1 uppercase font-extrabold">Manual Interventions</div>
           </div>
         </div>
 
@@ -106,10 +106,10 @@ export const LandingPage: React.FC = () => {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
           <button
             onClick={() => runLiveSimulation()}
-            className="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-700 text-white font-black font-sans text-lg sm:text-xl shadow-[0_10px_30px_rgba(79,70,229,0.35)] hover:shadow-[0_15px_40px_rgba(79,70,229,0.5)] transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-indigo-400/20"
+            className="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-700 text-white font-black font-heading text-lg sm:text-xl shadow-[0_10px_30px_rgba(79,70,229,0.35)] hover:shadow-[0_15px_40px_rgba(79,70,229,0.5)] transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-indigo-400/20"
           >
-            <span className="p-1.5 rounded-full bg-[#F7F5F0]/20 text-[#1C1917] group-hover:scale-125 transition-transform shadow-sm">
-              <Play className="w-5 h-5 fill-current text-[#1C1917] animate-pulse" />
+            <span className="p-1.5 rounded-full bg-surface/20 text-primary group-hover:scale-125 transition-transform shadow-sm">
+              <Play className="w-5 h-5 fill-current text-primary animate-pulse" />
             </span>
             <span className="tracking-wide uppercase">Run Live Simulation</span>
             <ChevronRight className="w-6 h-6 stroke-[3]" />
@@ -117,7 +117,7 @@ export const LandingPage: React.FC = () => {
 
           <button
             onClick={() => setCurrentPage('command-center')}
-            className="px-8 py-4 rounded-2xl bg-[#F7F5F0] border border-slate-200/90 hover:border-indigo-300 text-slate-800 font-extrabold font-sans text-base transition-all hover:bg-slate-50 flex items-center gap-2.5 shadow-sm hover:shadow-md"
+            className="px-8 py-4 rounded-2xl bg-surface border border-slate-200/90 hover:border-indigo-300 text-slate-800 font-extrabold font-heading text-base transition-all hover:bg-slate-50 flex items-center gap-2.5 shadow-sm hover:shadow-md"
           >
             <ShieldCheck className="w-5 h-5 text-indigo-600" />
             <span>Enter Command Center</span>
@@ -138,7 +138,7 @@ export const LandingPage: React.FC = () => {
               <Sparkles className="w-4 h-4 text-amber-500 animate-bounce" />
               <span>THE HACKATHON WINNING WOW-FEATURE</span>
             </h2>
-            <h3 className="text-3xl sm:text-4xl font-black font-sans text-slate-900 tracking-tight">
+            <h3 className="text-3xl sm:text-4xl font-black font-heading text-slate-900 tracking-tight">
               Interactive Digital Twin Inspection Suite
             </h3>
             <p className="text-sm sm:text-base text-slate-600 font-sans mt-2 max-w-2xl mx-auto">
@@ -146,7 +146,7 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-2 rounded-[32px] bg-[#F7F5F0] border border-slate-200 shadow-xl">
+          <div className="p-2 rounded-[32px] bg-surface border border-slate-200 shadow-xl">
             <BeforeAfterSlider 
               beforeImage={activeDemo.beforeImageUrl} 
               afterImage={activeDemo.afterImageUrl}
@@ -159,7 +159,7 @@ export const LandingPage: React.FC = () => {
           <div className="mt-8 flex justify-center">
             <button
               onClick={() => setCurrentPage('projects')}
-              className="text-sm font-sans font-extrabold text-indigo-600 hover:text-indigo-800 flex items-center gap-2 underline tracking-tight hover:scale-105 transition-transform"
+              className="text-sm font-heading font-extrabold text-indigo-600 hover:text-indigo-800 flex items-center gap-2 underline tracking-tight hover:scale-105 transition-transform"
             >
               <span>Explore all 128 active infrastructure projects in Digital Twin Grid</span>
               <ExternalLink className="w-4 h-4" />
@@ -175,7 +175,7 @@ export const LandingPage: React.FC = () => {
             <h2 className="text-xs font-mono uppercase tracking-widest text-indigo-600 font-extrabold">
               COMPLETE 10-PAGE ENTERPRISE OS SUITE
             </h2>
-            <h3 className="text-2xl sm:text-3xl font-black font-sans text-slate-900 mt-1">Select an application module to begin demonstration</h3>
+            <h3 className="text-2xl sm:text-3xl font-black font-heading text-slate-900 mt-1">Select an application module to begin demonstration</h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -190,16 +190,16 @@ export const LandingPage: React.FC = () => {
               <div 
                 key={idx}
                 onClick={() => setCurrentPage(app.id as any)}
-                className={`p-6 rounded-3xl bg-[#F7F5F0] border transition-all duration-300 cursor-pointer flex flex-col justify-between hover:scale-105 shadow-sm hover:shadow-xl group ${app.color}`}
+                className={`p-6 rounded-3xl bg-surface border transition-all duration-300 cursor-pointer flex flex-col justify-between hover:scale-105 shadow-sm hover:shadow-xl group ${app.color}`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs font-black px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-700">{app.badge}</span>
                   </div>
-                  <h4 className="font-black font-sans text-lg text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">{app.title}</h4>
-                  <p className="text-xs text-[#78716C] font-mono leading-relaxed">{app.desc}</p>
+                  <h4 className="font-black font-heading text-lg text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">{app.title}</h4>
+                  <p className="text-xs text-secondary font-mono leading-relaxed">{app.desc}</p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-sans font-extrabold text-slate-600 group-hover:text-indigo-600 transition-colors">
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-heading font-extrabold text-slate-600 group-hover:text-indigo-600 transition-colors">
                   <span>Open Application →</span>
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                 </div>

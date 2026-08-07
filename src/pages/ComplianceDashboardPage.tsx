@@ -37,26 +37,26 @@ export const ComplianceDashboardPage: React.FC = () => {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-[#1C1917] font-sans tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-black text-primary font-heading tracking-tight leading-tight">
               Sovereign Regulatory & Anti-Corruption Registry
             </h1>
 
-            <p className="text-xs sm:text-sm text-[#44403C] font-mono leading-relaxed">
+            <p className="text-xs sm:text-sm text-primary font-mono leading-relaxed">
               Tamper-proof cryptographic inspection dossiers, historical EXIF GPS binding signatures, and real-time oversight verification ensuring complete governmental transparency without human bureaucratic manipulation.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
-            <div className="px-5 py-3 rounded-2xl bg-[#F7F5F0] border-2 border-emerald-500/40 text-center sm:text-right shadow-2xl w-full sm:w-auto">
-              <span className="text-[10px] text-[#57534E] uppercase font-bold block">Archived Audit Records</span>
-              <span className="text-3xl font-black text-emerald-400 font-sans tracking-tight">{autonomousDecisionsCount.toLocaleString()} <span className="text-xs font-mono text-[#44403C]">Dossiers</span></span>
+            <div className="px-5 py-3 rounded-2xl bg-surface border-2 border-emerald-500/40 text-center sm:text-right shadow-2xl w-full sm:w-auto">
+              <span className="text-[10px] text-secondary uppercase font-bold block">Archived Audit Records</span>
+              <span className="text-3xl font-black text-emerald-400 font-heading tracking-tight">{autonomousDecisionsCount.toLocaleString()} <span className="text-xs font-mono text-primary">Dossiers</span></span>
             </div>
             <Button
               variant="outline"
               size="lg"
               onClick={() => alert('Downloading National SIH Regulatory Master Archive (GZIP Bundle)...')}
               icon={<Download className="w-5 h-5 text-emerald-400" />}
-              className="w-full sm:w-auto font-sans font-black px-6 py-4 border-emerald-500/50 text-emerald-300"
+              className="w-full sm:w-auto font-heading font-black px-6 py-4 border-emerald-500/50 text-emerald-300"
             >
               Export Master Archive
             </Button>
@@ -99,14 +99,14 @@ export const ComplianceDashboardPage: React.FC = () => {
       </div>
 
       {/* 3. MASTER REGULATORY DOSSIERS REGISTER */}
-      <Card className="p-6 bg-[#F7F5F0] border border-emerald-500/40 shadow-2xl space-y-6">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-[#D6D0C4] pb-5">
+      <Card className="p-6 bg-surface border border-emerald-500/40 shadow-2xl space-y-6">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-subtle pb-5">
           <div>
-            <h3 className="text-lg font-black text-[#1C1917] font-sans uppercase tracking-wider flex items-center gap-2">
+            <h3 className="text-lg font-black text-primary font-heading uppercase tracking-wider flex items-center gap-2">
               <Layers className="w-5 h-5 text-emerald-400" />
               <span>Signed Regulatory Audit Dossiers Register</span>
             </h3>
-            <span className="text-xs text-[#57534E] font-mono">Select any cryptographic record to download official state-verified PDF audit bundles</span>
+            <span className="text-xs text-secondary font-mono">Select any cryptographic record to download official state-verified PDF audit bundles</span>
           </div>
 
           <div className="w-full sm:w-80">
@@ -121,26 +121,26 @@ export const ComplianceDashboardPage: React.FC = () => {
 
         <div className="space-y-3 font-mono text-xs">
           {filteredDossiers.map((item, idx) => (
-            <div key={item.id} className="p-5 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] hover:border-emerald-500/40 transition-all shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group">
+            <div key={item.id} className="p-5 rounded-2xl bg-surface border border-subtle hover:border-emerald-500/40 transition-all shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group">
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2.5 flex-wrap">
                   <span className="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-400 font-extrabold border border-emerald-500/30 text-xs">
                     #{idx + 1} // {item.id}
                   </span>
-                  <span className="font-sans font-extrabold text-[#1C1917] text-base group-hover:text-emerald-300 transition-colors">
+                  <span className="font-heading font-extrabold text-primary text-base group-hover:text-emerald-300 transition-colors">
                     {item.project}
                   </span>
                 </div>
-                <div className="flex flex-wrap items-center gap-4 text-[#57534E] text-[11px]">
+                <div className="flex flex-wrap items-center gap-4 text-secondary text-[11px]">
                   <span>Cryptographic Hash: <strong className="text-cyan-300 select-all">{item.hash}</strong></span>
                   <span>•</span>
-                  <span>Inspector: <strong className="text-[#44403C]">{item.inspector}</strong> ({item.date})</span>
+                  <span>Inspector: <strong className="text-primary">{item.inspector}</strong> ({item.date})</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-3 w-full sm:w-auto justify-end shrink-0">
                 <div className="text-right hidden md:block mr-2">
-                  <span className="text-emerald-400 font-black text-sm block font-sans">{item.score}% Pass</span>
+                  <span className="text-emerald-400 font-black text-sm block font-heading">{item.score}% Pass</span>
                   <span className="text-[9px] text-emerald-400 font-bold uppercase">{item.status}</span>
                 </div>
 
@@ -149,7 +149,7 @@ export const ComplianceDashboardPage: React.FC = () => {
                   size="sm"
                   onClick={() => alert(`Downloading signed PDF dossier for ${item.id} (${item.project})...`)}
                   icon={<Download className="w-4 h-4 text-emerald-400" />}
-                  className="w-full sm:w-auto text-xs border-[#D6D0C4] hover:border-emerald-400 text-[#1C1917]"
+                  className="w-full sm:w-auto text-xs border-subtle hover:border-emerald-400 text-primary"
                 >
                   Download PDF Dossier
                 </Button>

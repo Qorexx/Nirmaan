@@ -33,10 +33,10 @@ export const NotificationCenter: React.FC = () => {
           setIsOpen(!isOpen);
           if (!isOpen) setUnreadCount(0);
         }}
-        className="relative p-2.5 rounded-xl bg-[#EAE5DC] hover:bg-[#DFD9CD] border border-[#C9C2B4] text-[#57534E] hover:text-[#1C1917] transition-all shadow-xs group"
+        className="relative p-2.5 rounded-xl bg-surface-secondary hover:bg-[#DFD9CD] border border-subtle text-secondary hover:text-primary transition-all shadow-xs group"
         title="View Real-Time System Telemetry & Alerts"
       >
-        <Bell className="w-4 h-4 group-hover:scale-110 transition-transform text-[#1C1917]" />
+        <Bell className="w-4 h-4 group-hover:scale-110 transition-transform text-primary" />
         {unreadCount > 0 && (
           <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-rose-600 to-amber-600 text-white text-[10px] font-extrabold rounded-full flex items-center justify-center border-2 border-[#F7F5F0] animate-pulse">
             {unreadCount}
@@ -52,19 +52,19 @@ export const NotificationCenter: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full mt-3 w-80 sm:w-96 bg-[#F7F5F0] border border-[#D6D0C4] rounded-2xl shadow-[0_20px_60px_rgba(28,25,23,0.18)] z-50 overflow-hidden divide-y divide-[#D6D0C4]"
+            className="absolute right-0 top-full mt-3 w-80 sm:w-96 bg-surface border border-subtle rounded-2xl shadow-[0_20px_60px_rgba(28,25,23,0.18)] z-50 overflow-hidden divide-y divide-[#D6D0C4]"
           >
             {/* Header */}
-            <div className="p-4 bg-[#EAE5DC] flex items-center justify-between">
+            <div className="p-4 bg-surface-secondary flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-black text-[#1C1917] uppercase tracking-wider font-sans">Mission Alerts</span>
+                <span className="text-sm font-black text-primary uppercase tracking-wider font-heading">Mission Alerts</span>
                 <span className="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-900 text-[10px] font-black border border-indigo-300">
                   LIVE FEED
                 </span>
               </div>
               <button 
                 onClick={() => setUnreadCount(0)}
-                className="text-xs text-[#57534E] hover:text-[#1C1917] flex items-center gap-1 transition-colors font-bold"
+                className="text-xs text-secondary hover:text-primary flex items-center gap-1 transition-colors font-bold"
               >
                 <Check className="w-3.5 h-3.5" />
                 <span>Clear All</span>
@@ -72,35 +72,35 @@ export const NotificationCenter: React.FC = () => {
             </div>
 
             {/* List */}
-            <div className="max-h-80 overflow-y-auto divide-y divide-[#D6D0C4] bg-[#F7F5F0]">
+            <div className="max-h-80 overflow-y-auto divide-y divide-[#D6D0C4] bg-surface">
               {defaultAlerts.map((alt) => (
-                <div key={alt.id} className="p-4 hover:bg-[#EAE5DC] transition-colors space-y-1.5 relative group">
+                <div key={alt.id} className="p-4 hover:bg-surface-secondary transition-colors space-y-1.5 relative group">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="flex items-center gap-2 font-extrabold text-[#1C1917]">
+                    <span className="flex items-center gap-2 font-extrabold text-primary">
                       {alt.type === 'x402' ? <Zap className="w-4 h-4 text-amber-700 fill-current" /> : <CheckCircle2 className="w-4 h-4 text-emerald-700" />}
-                      <span className="font-sans font-black">{alt.title}</span>
+                      <span className="font-heading font-black">{alt.title}</span>
                     </span>
-                    <span className="text-[#78716C] text-[10px] font-bold">{alt.time}</span>
+                    <span className="text-secondary text-[10px] font-bold">{alt.time}</span>
                   </div>
-                  <p className="text-xs text-[#57534E] font-mono leading-relaxed pl-6 font-semibold">{alt.msg}</p>
+                  <p className="text-xs text-secondary font-mono leading-relaxed pl-6 font-semibold">{alt.msg}</p>
                 </div>
               ))}
 
               {logs.slice(0, 4).map((lg, idx) => (
-                <div key={lg.id || idx} className="p-3 bg-[#F0EEE9] text-xs font-mono space-y-1 text-[#57534E] border-t border-[#D6D0C4]">
-                  <span className="text-indigo-700 font-extrabold uppercase">[{lg.stage}]</span> <span className="text-[#1C1917] font-semibold">{lg.message}</span>
+                <div key={lg.id || idx} className="p-3 bg-[#F0EEE9] text-xs font-mono space-y-1 text-secondary border-t border-subtle">
+                  <span className="text-indigo-700 font-extrabold uppercase">[{lg.stage}]</span> <span className="text-primary font-semibold">{lg.message}</span>
                 </div>
               ))}
             </div>
 
             {/* Footer */}
-            <div className="p-3 bg-[#EAE5DC] text-center border-t border-[#D6D0C4]">
+            <div className="p-3 bg-surface-secondary text-center border-t border-subtle">
               <button
                 onClick={() => {
                   setCurrentPage('mission-control');
                   setIsOpen(false);
                 }}
-                className="text-xs font-black text-indigo-700 hover:text-indigo-900 tracking-wider flex items-center justify-center gap-1 mx-auto uppercase font-sans"
+                className="text-xs font-black text-indigo-700 hover:text-indigo-900 tracking-wider flex items-center justify-center gap-1 mx-auto uppercase font-heading"
               >
                 <span>View Full Telemetry Dashboard</span>
                 <ExternalLink className="w-3.5 h-3.5" />

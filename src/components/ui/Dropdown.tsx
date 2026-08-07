@@ -46,7 +46,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   return (
     <div className={`w-full space-y-1.5 font-mono relative ${className}`} ref={dropdownRef}>
       {label && (
-        <label className="block text-xs uppercase tracking-wider font-extrabold text-[#44403C] font-sans">
+        <label className="block text-xs uppercase tracking-wider font-extrabold text-primary font-heading">
           {label}
         </label>
       )}
@@ -56,21 +56,21 @@ export const Dropdown: React.FC<DropdownProps> = ({
         type="button"
         disabled={disabled}
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full bg-[#EAE5DC] text-[#1C1917] text-left text-sm px-4 py-3 rounded-xl border transition-all duration-200 flex items-center justify-between focus:outline-none ${
-          isOpen ? 'border-[#4338CA] ring-2 ring-indigo-500/20 bg-[#F7F5F0]' : 'border-[#C9C2B4] hover:border-[#A8A193]'
+        className={`w-full bg-surface-secondary text-primary text-left text-sm px-4 py-3 rounded-xl border transition-all duration-200 flex items-center justify-between focus:outline-none ${
+          isOpen ? 'border-[#4338CA] ring-2 ring-indigo-500/20 bg-surface' : 'border-subtle hover:border-[#A8A193]'
         } ${disabled ? 'opacity-50 cursor-not-allowed bg-[#D6D0C4]' : 'cursor-pointer'}`}
       >
-        <span className="flex items-center gap-2 text-[#1C1917] truncate font-bold">
+        <span className="flex items-center gap-2 text-primary truncate font-bold">
           {selectedOption ? (
             <>
               {selectedOption.icon && <span className="text-indigo-700">{selectedOption.icon}</span>}
               <span>{selectedOption.label}</span>
             </>
           ) : (
-            <span className="text-[#78716C]">{placeholder}</span>
+            <span className="text-secondary">{placeholder}</span>
           )}
         </span>
-        <ChevronDown className={`w-4 h-4 text-[#78716C] transition-transform duration-200 ${isOpen ? 'rotate-180 text-indigo-700' : ''}`} />
+        <ChevronDown className={`w-4 h-4 text-secondary transition-transform duration-200 ${isOpen ? 'rotate-180 text-indigo-700' : ''}`} />
       </button>
 
       {/* Menu Overlay */}
@@ -81,7 +81,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -5, scale: 0.98 }}
             transition={{ duration: 0.15 }}
-            className="absolute left-0 right-0 top-full mt-2 bg-[#F7F5F0] border border-[#D6D0C4] rounded-xl shadow-[0_15px_40px_rgba(28,25,23,0.15)] z-50 overflow-hidden max-h-60 overflow-y-auto divide-y divide-[#D6D0C4]"
+            className="absolute left-0 right-0 top-full mt-2 bg-surface border border-subtle rounded-xl shadow-[0_15px_40px_rgba(28,25,23,0.15)] z-50 overflow-hidden max-h-60 overflow-y-auto divide-y divide-[#D6D0C4]"
           >
             {options.map((option) => {
               const isSelected = option.value === value;
@@ -94,11 +94,11 @@ export const Dropdown: React.FC<DropdownProps> = ({
                     setIsOpen(false);
                   }}
                   className={`w-full px-4 py-3 text-left text-xs sm:text-sm flex items-center justify-between transition-colors ${
-                    isSelected ? 'bg-indigo-100 text-indigo-950 font-black' : 'text-[#1C1917] hover:bg-[#EAE5DC] font-semibold'
+                    isSelected ? 'bg-indigo-100 text-indigo-950 font-black' : 'text-primary hover:bg-surface-secondary font-semibold'
                   }`}
                 >
                   <span className="flex items-center gap-2.5 truncate">
-                    {option.icon && <span className={isSelected ? 'text-indigo-700' : 'text-[#78716C]'}>{option.icon}</span>}
+                    {option.icon && <span className={isSelected ? 'text-indigo-700' : 'text-secondary'}>{option.icon}</span>}
                     <span className="font-sans">{option.label}</span>
                   </span>
                   <div className="flex items-center gap-2">

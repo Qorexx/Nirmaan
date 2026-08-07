@@ -26,22 +26,22 @@ export const Breadcrumbs: React.FC = () => {
   const info = getRouteInfo(currentPage);
 
   return (
-    <nav className="flex items-center gap-2 px-4 lg:px-6 py-2 bg-[#EAE5DC] border-b border-[#D6D0C4] text-xs font-mono text-[#57534E] overflow-x-auto no-scrollbar">
+    <nav className="flex items-center gap-2 px-4 lg:px-6 py-2 bg-surface-secondary border-b border-subtle text-xs font-mono text-secondary overflow-x-auto no-scrollbar">
       <button 
         onClick={() => setCurrentPage('landing')}
-        className="flex items-center gap-1.5 hover:text-[#1C1917] transition-colors shrink-0 font-extrabold text-[#1C1917] font-sans"
+        className="flex items-center gap-1.5 hover:text-primary transition-colors shrink-0 font-extrabold text-primary font-heading"
       >
         <Home className="w-3.5 h-3.5 text-indigo-700" />
         <span>OS v2.4</span>
       </button>
 
-      <ChevronRight className="w-3.5 h-3.5 text-[#78716C] shrink-0" />
+      <ChevronRight className="w-3.5 h-3.5 text-secondary shrink-0" />
 
-      <span className="text-[#57534E] hover:text-[#1C1917] cursor-default shrink-0 font-bold">
+      <span className="text-secondary hover:text-primary cursor-default shrink-0 font-bold">
         {info.parent}
       </span>
 
-      <ChevronRight className="w-3.5 h-3.5 text-[#78716C] shrink-0" />
+      <ChevronRight className="w-3.5 h-3.5 text-secondary shrink-0" />
 
       <span className="flex items-center gap-1.5 text-indigo-900 font-extrabold bg-indigo-100/90 px-2.5 py-0.5 rounded-md border border-indigo-300 shrink-0 shadow-2xs">
         {info.icon}

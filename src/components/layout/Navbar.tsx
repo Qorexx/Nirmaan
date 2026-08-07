@@ -27,7 +27,7 @@ export const Navbar: React.FC<LayoutNavbarProps> = ({ onOpenPalette }) => {
               <Globe2 className="w-4 h-4 text-accent-indigo animate-spin-slow" />
             </div>
           </div>
-          <span className="font-black text-primary text-sm font-sans tracking-tight">AI ESCROW OS</span>
+          <span className="font-black text-primary text-sm font-heading tracking-tight">AI ESCROW OS</span>
         </div>
 
         {/* Center: Command Palette Search Trigger */}
@@ -41,7 +41,7 @@ export const Navbar: React.FC<LayoutNavbarProps> = ({ onOpenPalette }) => {
           {/* Prominent Login / Switch Persona Trigger */}
           <button
             onClick={() => setLoginModalOpen(true)}
-            className="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface-secondary hover:bg-subtle border border-subtle text-accent-indigo font-sans font-black text-xs transition-all shadow-sm hover:scale-105 active:scale-95"
+            className="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface-secondary hover:bg-subtle border border-subtle text-accent-indigo font-heading font-black text-xs transition-all shadow-sm hover:scale-105 active:scale-95"
           >
             <Sparkles className="w-3.5 h-3.5 text-accent-orange animate-bounce" />
             <span>{currentUser.isAuthenticated ? 'Switch Persona' : '🔐 Sign In / Auth'}</span>
@@ -51,7 +51,7 @@ export const Navbar: React.FC<LayoutNavbarProps> = ({ onOpenPalette }) => {
           <button
             onClick={() => runLiveSimulation()}
             disabled={isSimulating}
-            className={`relative overflow-hidden px-5 sm:px-6 py-2 sm:py-2 rounded-xl font-black font-sans text-xs flex items-center gap-2 transition-all shadow-md select-none uppercase tracking-wider border ${
+            className={`relative overflow-hidden px-5 sm:px-6 py-2 sm:py-2 rounded-xl font-black font-heading text-xs flex items-center gap-2 transition-all shadow-md select-none uppercase tracking-wider border ${
               isSimulating
                 ? 'bg-accent-gold/20 text-accent-gold border-accent-gold cursor-not-allowed animate-pulse'
                 : 'bg-accent-indigo text-white hover:bg-accent-indigo/90 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 border-accent-indigo'

@@ -70,13 +70,13 @@ const ToastItem: React.FC<{ toast: ToastMessage; onDismiss: (id: string) => void
       <div className="flex items-start gap-3">
         {getIcon()}
         <div className="space-y-0.5">
-          <p className="text-sm font-black text-[#1C1917] font-sans">{toast.title}</p>
-          {toast.message && <p className="text-xs text-[#57534E] font-medium leading-snug font-mono">{toast.message}</p>}
+          <p className="text-sm font-black text-primary font-heading">{toast.title}</p>
+          {toast.message && <p className="text-xs text-secondary font-medium leading-snug font-mono">{toast.message}</p>}
         </div>
       </div>
       <button
         onClick={() => onDismiss(toast.id)}
-        className="p-1 rounded-lg hover:bg-slate-200 text-[#78716C] hover:text-[#1C1917] transition-colors shrink-0"
+        className="p-1 rounded-lg hover:bg-slate-200 text-secondary hover:text-primary transition-colors shrink-0"
       >
         <X className="w-4 h-4" />
       </button>

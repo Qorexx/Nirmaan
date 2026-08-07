@@ -25,7 +25,7 @@ export const GlassContainer: React.FC<GlassContainerProps> = ({
 
   return (
     <div className={`w-full mx-auto p-[1px] bg-gradient-to-br from-[#D6D0C4] via-[#C9C2B4] to-transparent rounded-3xl shadow-[0_15px_40px_rgba(28,25,23,0.06)] ${getMaxWidthClass()}`}>
-      <div className={`w-full h-full bg-[#F7F5F0]/90 backdrop-blur-2xl border border-[#D6D0C4] rounded-[23px] p-6 sm:p-10 text-[#1C1917] ${className}`}>
+      <div className={`w-full h-full bg-surface/90 backdrop-blur-2xl border border-subtle rounded-[23px] p-6 sm:p-10 text-primary ${className}`}>
         {children}
       </div>
     </div>

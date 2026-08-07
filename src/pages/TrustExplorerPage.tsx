@@ -55,7 +55,8 @@ import {
   Modal, 
   StatCard, 
   AnimatedBorder, 
-  NotificationCard 
+  NotificationCard,
+  Skeleton 
 } from '../components/ui';
 
 // ============================================================================
@@ -243,8 +244,14 @@ export const TrustExplorerPage: React.FC = () => {
   const [selectedTx, setSelectedTx] = useState<BlockchainTransaction | null>(null);
   const [copiedText, setCopiedText] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'registry' | 'timeline' | 'network' | 'audit'>('registry');
+  const [isLoading, setIsLoading] = useState(true);
 
   const itemsPerPage = 5;
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 700);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Handle Copy to Clipboard
   const handleCopy = (text: string, label: string) => {
@@ -328,26 +335,26 @@ export const TrustExplorerPage: React.FC = () => {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-[#1C1917] font-sans tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-black text-primary font-heading tracking-tight leading-tight">
               Sovereign Trust Ledger & x402 Macaroon Registry
             </h1>
 
-            <p className="text-xs sm:text-sm text-[#44403C] font-mono leading-relaxed">
+            <p className="text-xs sm:text-sm text-primary font-mono leading-relaxed">
               Real-time architectural proof engine displaying immutable Etherscan-grade cryptographic receipts, machine-to-machine HTTP 402 gas executions, and instantaneous zero-human-hold smart vault settlements.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
-            <div className="px-5 py-3 rounded-2xl bg-[#F7F5F0] border-2 border-yellow-500/40 text-center sm:text-right shadow-2xl w-full sm:w-auto">
-              <span className="text-[10px] text-[#57534E] uppercase font-bold block">On-Chain Settlement Latency</span>
-              <span className="text-3xl font-black text-yellow-400 font-sans tracking-tight">84 <span className="text-xs font-mono text-[#44403C]">ms</span></span>
+            <div className="px-5 py-3 rounded-2xl bg-surface border-2 border-yellow-500/40 text-center sm:text-right shadow-2xl w-full sm:w-auto">
+              <span className="text-[10px] text-secondary uppercase font-bold block">On-Chain Settlement Latency</span>
+              <span className="text-3xl font-black text-yellow-400 font-heading tracking-tight">84 <span className="text-xs font-mono text-primary">ms</span></span>
             </div>
             <Button
               variant="x402"
               size="lg"
               onClick={() => runLiveSimulation()}
               icon={<Zap className="w-5 h-5 fill-current animate-bounce" />}
-              className="w-full sm:w-auto shadow-2xl font-sans font-black tracking-wider px-6 py-4"
+              className="w-full sm:w-auto shadow-2xl font-heading font-black tracking-wider px-6 py-4"
             >
               ▶ Test On-Chain Payout
             </Button>
@@ -422,7 +429,7 @@ export const TrustExplorerPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 3. INTERACTIVE TAB SELECTOR */}
       {/* ========================================================================= */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-[#F7F5F0] p-2.5 rounded-2xl border border-[#D6D0C4] shadow-xl">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-surface p-2.5 rounded-2xl border border-subtle shadow-xl">
         <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto no-scrollbar">
           {[
             { id: 'registry' as const, label: '🔍 Transaction Registry Table', badge: '7 TXNS' },
@@ -436,12 +443,12 @@ export const TrustExplorerPage: React.FC = () => {
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono transition-all whitespace-nowrap select-none ${
                 activeTab === tab.id
                   ? 'bg-gradient-to-r from-yellow-500/20 to-amber-500/20 text-yellow-300 border-2 border-yellow-400 font-extrabold shadow-[0_0_25px_rgba(234,179,8,0.35)]'
-                  : 'text-[#57534E] hover:text-[#1C1917] hover:bg-[#EAE5DC] border border-transparent'
+                  : 'text-secondary hover:text-primary hover:bg-surface-secondary border border-transparent'
               }`}
             >
               <span>{tab.label}</span>
               <span className={`px-2 py-0.5 rounded text-[10px] uppercase ${
-                activeTab === tab.id ? 'bg-yellow-400 text-slate-950 font-black' : 'bg-[#EAE5DC] text-[#44403C] font-bold'
+                activeTab === tab.id ? 'bg-yellow-400 text-slate-950 font-black' : 'bg-surface-secondary text-primary font-bold'
               }`}>
                 {tab.badge}
               </span>
@@ -449,7 +456,7 @@ export const TrustExplorerPage: React.FC = () => {
           ))}
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-mono text-[#44403C] px-4 py-1.5 bg-[#EAE5DC] rounded-xl border border-[#D6D0C4]">
+        <div className="flex items-center gap-2 text-xs font-mono text-primary px-4 py-1.5 bg-surface-secondary rounded-xl border border-subtle">
           <span className="w-2 h-2 rounded-full bg-yellow-400 animate-ping" />
           <span>Latest Mined Block: <strong className="text-yellow-300">#{liveBlocks[0].blockNumber}</strong></span>
         </div>
@@ -469,10 +476,10 @@ export const TrustExplorerPage: React.FC = () => {
           >
             {/* LEFT 2 COLS: SEARCH, FILTER, AND MASTER TABLE */}
             <div className="xl:col-span-2 space-y-4">
-              <Card className="p-6 border border-yellow-500/40 bg-[#F7F5F0] shadow-2xl space-y-6">
+              <Card className="p-6 border border-yellow-500/40 bg-surface shadow-2xl space-y-6">
                 
                 {/* Search and Filters Bar */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-[#D6D0C4] pb-5">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-subtle pb-5">
                   <div className="w-full sm:max-w-md relative">
                     <Input
                       placeholder="Search Txn Hash, Project, Contractor Wallet..."
@@ -483,7 +490,7 @@ export const TrustExplorerPage: React.FC = () => {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
-                    <div className="flex items-center gap-1.5 bg-[#EAE5DC] p-1 rounded-xl border border-[#D6D0C4] text-xs">
+                    <div className="flex items-center gap-1.5 bg-surface-secondary p-1 rounded-xl border border-subtle text-xs">
                       {['ALL', 'SETTLED', 'CONFIRMED', 'PROCESSING'].map((status) => (
                         <button
                           key={status}
@@ -491,7 +498,7 @@ export const TrustExplorerPage: React.FC = () => {
                           className={`px-3 py-1 rounded-lg font-bold transition-all ${
                             statusFilter === status
                               ? 'bg-yellow-400 text-slate-950 font-black'
-                              : 'text-[#57534E] hover:text-[#1C1917]'
+                              : 'text-secondary hover:text-primary'
                           }`}
                         >
                           {status}
@@ -499,16 +506,16 @@ export const TrustExplorerPage: React.FC = () => {
                       ))}
                     </div>
 
-                    <div className="flex items-center gap-1 bg-[#EAE5DC] px-3 py-1.5 rounded-xl border border-[#D6D0C4] text-xs text-[#44403C]">
+                    <div className="flex items-center gap-1 bg-surface-secondary px-3 py-1.5 rounded-xl border border-subtle text-xs text-primary">
                       <ArrowUpDown className="w-3.5 h-3.5 text-yellow-400" />
                       <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value as 'latest' | 'amount' | 'confirmations')}
-                        className="bg-transparent text-[#1C1917] font-bold focus:outline-none cursor-pointer"
+                        className="bg-transparent text-primary font-bold focus:outline-none cursor-pointer"
                       >
-                        <option value="latest" className="bg-[#EAE5DC] text-[#1C1917]">Sort: Latest Timestamp</option>
-                        <option value="amount" className="bg-[#EAE5DC] text-[#1C1917]">Sort: Highest Escrow Payout</option>
-                        <option value="confirmations" className="bg-[#EAE5DC] text-[#1C1917]">Sort: Most Confirmations</option>
+                        <option value="latest" className="bg-surface-secondary text-primary">Sort: Latest Timestamp</option>
+                        <option value="amount" className="bg-surface-secondary text-primary">Sort: Highest Escrow Payout</option>
+                        <option value="confirmations" className="bg-surface-secondary text-primary">Sort: Most Confirmations</option>
                       </select>
                     </div>
                   </div>
@@ -518,7 +525,7 @@ export const TrustExplorerPage: React.FC = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left font-mono text-xs">
                     <thead>
-                      <tr className="border-b border-[#D6D0C4] text-[#57534E] uppercase text-[10px]">
+                      <tr className="border-b border-subtle text-secondary uppercase text-[10px]">
                         <th className="py-3 px-3 font-bold">Transaction Hash & Method</th>
                         <th className="py-3 px-3 font-bold">Project // Contractor Wallet</th>
                         <th className="py-3 px-3 font-bold">Escrow Amount // Gas</th>
@@ -529,7 +536,7 @@ export const TrustExplorerPage: React.FC = () => {
                     <tbody className="divide-y divide-[#D6D0C4]">
                       {paginatedTransactions.length === 0 ? (
                         <tr>
-                          <td colSpan={5} className="py-12 text-center text-[#78716C] font-mono">
+                          <td colSpan={5} className="py-12 text-center text-secondary font-mono">
                             No blockchain transactions matched your search query "{searchQuery}".
                           </td>
                         </tr>
@@ -549,7 +556,7 @@ export const TrustExplorerPage: React.FC = () => {
                                   <span className="text-yellow-400 font-bold hover:underline select-all block truncate max-w-[150px] sm:max-w-[180px]">
                                     {tx.hash}
                                   </span>
-                                  <span className="text-[10px] text-[#57534E] bg-[#EAE5DC] px-1.5 py-0.5 rounded border border-[#D6D0C4] mt-0.5 inline-block truncate max-w-[170px]">
+                                  <span className="text-[10px] text-secondary bg-surface-secondary px-1.5 py-0.5 rounded border border-subtle mt-0.5 inline-block truncate max-w-[170px]">
                                     {tx.method}
                                   </span>
                                 </div>
@@ -557,7 +564,7 @@ export const TrustExplorerPage: React.FC = () => {
                             </td>
 
                             <td className="py-4 px-3">
-                              <div className="font-sans font-extrabold text-[#1C1917] text-sm max-w-[200px] truncate">
+                              <div className="font-heading font-extrabold text-primary text-sm max-w-[200px] truncate">
                                 {tx.project}
                               </div>
                               <div className="text-[11px] text-emerald-400 font-mono flex items-center gap-1 mt-0.5">
@@ -566,7 +573,7 @@ export const TrustExplorerPage: React.FC = () => {
                             </td>
 
                             <td className="py-4 px-3">
-                              <div className="text-base font-black text-[#1C1917] font-sans">
+                              <div className="text-base font-black text-primary font-heading">
                                 ₹{(tx.amount / 100000).toFixed(2)} Lakhs
                               </div>
                               <div className="text-[10px] text-amber-400 font-mono flex items-center gap-1">
@@ -579,7 +586,7 @@ export const TrustExplorerPage: React.FC = () => {
                               <div className="text-cyan-300 font-extrabold text-xs">
                                 #{tx.blockNumber}
                               </div>
-                              <div className="text-[10px] text-[#57534E]">
+                              <div className="text-[10px] text-secondary">
                                 {tx.confirmations} confs • {tx.timestamp}
                               </div>
                             </td>
@@ -592,7 +599,7 @@ export const TrustExplorerPage: React.FC = () => {
                                 >
                                   {tx.status === 'SETTLED' ? '✔ SETTLED' : tx.status === 'CONFIRMED' ? '✔ CONFIRMED' : '⚙ PROCESSING'}
                                 </Badge>
-                                <span className="text-[10px] text-[#57534E] group-hover:text-yellow-300 flex items-center gap-1 underline transition-colors">
+                                <span className="text-[10px] text-secondary group-hover:text-yellow-300 flex items-center gap-1 underline transition-colors">
                                   Inspect Receipt <Eye className="w-3 h-3" />
                                 </span>
                               </div>
@@ -605,9 +612,9 @@ export const TrustExplorerPage: React.FC = () => {
                 </div>
 
                 {/* Pagination Controls */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#D6D0C4] text-xs">
-                  <span className="text-[#57534E]">
-                    Showing <strong className="text-[#1C1917]">{paginatedTransactions.length}</strong> of <strong className="text-[#1C1917]">{filteredTransactions.length}</strong> cryptographic executions
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-subtle text-xs">
+                  <span className="text-secondary">
+                    Showing <strong className="text-primary">{paginatedTransactions.length}</strong> of <strong className="text-primary">{filteredTransactions.length}</strong> cryptographic executions
                   </span>
 
                   <div className="flex items-center gap-2">
@@ -620,7 +627,7 @@ export const TrustExplorerPage: React.FC = () => {
                     >
                       Previous
                     </Button>
-                    <span className="px-4 py-1.5 bg-[#EAE5DC] rounded-xl border border-[#D6D0C4] font-bold text-yellow-400">
+                    <span className="px-4 py-1.5 bg-surface-secondary rounded-xl border border-subtle font-bold text-yellow-400">
                       Page {currentPage} of {totalPages}
                     </span>
                     <Button
@@ -641,22 +648,22 @@ export const TrustExplorerPage: React.FC = () => {
             <div className="space-y-6">
               
               {/* Palantir Inspector Box */}
-              <Card className="p-6 bg-[#F7F5F0] border border-yellow-500/40 shadow-xl space-y-6">
-                <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4">
+              <Card className="p-6 bg-surface border border-yellow-500/40 shadow-xl space-y-6">
+                <div className="flex items-center justify-between border-b border-subtle pb-4">
                   <div>
-                    <h3 className="text-base font-extrabold text-[#1C1917] font-sans uppercase tracking-wider flex items-center gap-2">
+                    <h3 className="text-base font-extrabold text-primary font-heading uppercase tracking-wider flex items-center gap-2">
                       <Terminal className="w-5 h-5 text-yellow-400" />
                       <span>Smart Contract Inspector</span>
                     </h3>
-                    <span className="text-xs text-[#57534E] font-mono">Sovereign Escrow Vault Spec</span>
+                    <span className="text-xs text-secondary font-mono">Sovereign Escrow Vault Spec</span>
                   </div>
                   <Badge variant="amber" size="sm">SIH LAYER-1</Badge>
                 </div>
 
                 <div className="space-y-4 font-mono text-xs">
                   {/* Contract Address */}
-                  <div className="p-3 rounded-xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-1">
-                    <div className="flex items-center justify-between text-[10px] text-[#57534E] uppercase font-bold">
+                  <div className="p-3 rounded-xl bg-surface border border-subtle space-y-1">
+                    <div className="flex items-center justify-between text-[10px] text-secondary uppercase font-bold">
                       <span>Contract Address:</span>
                       <button
                         onClick={() => handleCopy('0x7a892b1029384c5021e902b3c4f928e391aa8920', 'contract')}
@@ -672,16 +679,16 @@ export const TrustExplorerPage: React.FC = () => {
 
                   {/* Network Details Grid */}
                   <div className="grid grid-cols-2 gap-3 pt-1">
-                    <div className="p-3 rounded-xl bg-[#EAE5DC] border border-[#D6D0C4] space-y-1">
-                      <span className="text-[10px] text-[#57534E] uppercase font-bold block">Network Architecture:</span>
-                      <strong className="text-[#1C1917] text-xs block font-sans">Sovereign SIH Layer-1</strong>
+                    <div className="p-3 rounded-xl bg-surface-secondary border border-subtle space-y-1">
+                      <span className="text-[10px] text-secondary uppercase font-bold block">Network Architecture:</span>
+                      <strong className="text-primary text-xs block font-sans">Sovereign SIH Layer-1</strong>
                       <span className="text-[9px] text-yellow-400 block">Chain ID: #402 (L402)</span>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-[#EAE5DC] border border-[#D6D0C4] space-y-1">
-                      <span className="text-[10px] text-[#57534E] uppercase font-bold block">Gas Consumed:</span>
+                    <div className="p-3 rounded-xl bg-surface-secondary border border-subtle space-y-1">
+                      <span className="text-[10px] text-secondary uppercase font-bold block">Gas Consumed:</span>
                       <strong className="text-amber-400 font-black text-xs font-mono block">42,109 Gwei</strong>
-                      <span className="text-[9px] text-[#57534E] block">$0.05 USDC Avg Fee</span>
+                      <span className="text-[9px] text-secondary block">$0.05 USDC Avg Fee</span>
                     </div>
                   </div>
 
@@ -689,7 +696,7 @@ export const TrustExplorerPage: React.FC = () => {
                   <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/40 to-slate-900 border border-emerald-500/40 flex items-center gap-3">
                     <ShieldCheck className="w-7 h-7 text-emerald-400 shrink-0 animate-pulse" />
                     <div className="space-y-0.5">
-                      <span className="text-xs font-black text-[#1C1917] font-sans block uppercase">
+                      <span className="text-xs font-black text-primary font-heading block uppercase">
                         ✔ ACTIVE & AUDIT VERIFIED
                       </span>
                       <p className="text-[10px] text-emerald-300/90 leading-tight">
@@ -698,18 +705,18 @@ export const TrustExplorerPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-2 pt-2 border-t border-[#D6D0C4] text-[11px]">
+                  <div className="space-y-2 pt-2 border-t border-subtle text-[11px]">
                     <div className="flex items-center justify-between">
-                      <span className="text-[#57534E]">Execution Latency:</span>
+                      <span className="text-secondary">Execution Latency:</span>
                       <strong className="text-yellow-400 font-bold">84 milliseconds</strong>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-[#57534E]">Governance Owner:</span>
+                      <span className="text-secondary">Governance Owner:</span>
                       <span className="text-cyan-300 font-bold">NHAI Council (0xGOV...9901)</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-[#57534E]">Security Compiler:</span>
-                      <span className="text-[#44403C]">Solidity v0.8.26 + Zk-SNARKs</span>
+                      <span className="text-secondary">Security Compiler:</span>
+                      <span className="text-primary">Solidity v0.8.26 + Zk-SNARKs</span>
                     </div>
                   </div>
 
@@ -726,34 +733,40 @@ export const TrustExplorerPage: React.FC = () => {
               </Card>
 
               {/* Live Etherscan Block Feed Stream */}
-              <Card className="p-5 bg-[#F7F5F0] border border-[#D6D0C4] space-y-4">
-                <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-3">
-                  <h4 className="text-xs font-black text-[#1C1917] uppercase tracking-wider flex items-center gap-2">
+              <Card className="p-5 bg-surface border border-subtle space-y-4">
+                <div className="flex items-center justify-between border-b border-subtle pb-3">
+                  <h4 className="text-xs font-black text-primary uppercase tracking-wider flex items-center gap-2">
                     <Server className="w-4 h-4 text-emerald-400 animate-pulse" />
                     <span>Live Consensus Blocks Feed</span>
                   </h4>
-                  <span className="text-[10px] text-[#57534E] font-mono">UPDATES EVERY 6S</span>
+                  <span className="text-[10px] text-secondary font-mono">UPDATES EVERY 6S</span>
                 </div>
 
                 <div className="space-y-2.5 font-mono text-xs">
-                  {liveBlocks.map((blk) => (
-                    <div key={blk.blockNumber} className="p-3 rounded-xl bg-[#EAE5DC] border border-[#D6D0C4] flex items-center justify-between hover:border-yellow-500/30 transition-all">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-[#EAE5DC] text-yellow-400 flex items-center justify-center font-black text-xs border border-[#D6D0C4]">
-                          Bk
-                        </div>
-                        <div>
-                          <span className="text-yellow-400 font-bold text-xs block">#{blk.blockNumber}</span>
-                          <span className="text-[9px] text-[#57534E] block">Miner: {blk.miner}</span>
-                        </div>
-                      </div>
-
-                      <div className="text-right">
-                        <span className="text-[#1C1917] font-bold text-[11px] block">{blk.txCount} txns</span>
-                        <span className="text-[9px] text-emerald-400 block">{blk.timeAgo} ({blk.reward})</span>
-                      </div>
+                  {isLoading ? (
+                    <div className="space-y-2">
+                      {[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-16 w-full rounded-xl" />)}
                     </div>
-                  ))}
+                  ) : (
+                    liveBlocks.map((blk) => (
+                      <div key={blk.blockNumber} className="p-3 rounded-xl bg-surface-secondary border border-subtle flex items-center justify-between hover:border-yellow-500/30 transition-all">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-surface-secondary text-yellow-400 flex items-center justify-center font-black text-xs border border-subtle">
+                            Bk
+                          </div>
+                          <div>
+                            <span className="text-yellow-400 font-bold text-xs block">#{blk.blockNumber}</span>
+                            <span className="text-[9px] text-secondary block">Miner: {blk.miner}</span>
+                          </div>
+                        </div>
+
+                        <div className="text-right">
+                          <span className="text-primary font-bold text-[11px] block">{blk.txCount} txns</span>
+                          <span className="text-[9px] text-emerald-400 block">{blk.timeAgo} ({blk.reward})</span>
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
               </Card>
 
@@ -772,14 +785,14 @@ export const TrustExplorerPage: React.FC = () => {
             exit={{ opacity: 0, y: -15 }}
             className="max-w-4xl mx-auto space-y-6"
           >
-            <Card className="p-8 border border-yellow-500/40 bg-[#F7F5F0] shadow-2xl space-y-8">
-              <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-5 flex-wrap gap-4">
+            <Card className="p-8 border border-yellow-500/40 bg-surface shadow-2xl space-y-8">
+              <div className="flex items-center justify-between border-b border-subtle pb-5 flex-wrap gap-4">
                 <div>
-                  <h3 className="text-xl font-black text-[#1C1917] font-sans uppercase tracking-tight flex items-center gap-2.5">
+                  <h3 className="text-xl font-black text-primary font-heading uppercase tracking-tight flex items-center gap-2.5">
                     <Clock className="w-6 h-6 text-yellow-400" />
                     <span>7-Stage Autonomous Blockchain Execution Trail</span>
                   </h3>
-                  <p className="text-xs text-[#57534E] font-mono mt-1">
+                  <p className="text-xs text-secondary font-mono mt-1">
                     Step-by-step audit verification proving how multi-modal field proofs trigger 84ms zero-human-hold bank payouts.
                   </p>
                 </div>
@@ -791,10 +804,10 @@ export const TrustExplorerPage: React.FC = () => {
                 <Timeline items={blockchainTimelineSteps} />
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#F7F5F0] border border-yellow-500/30 flex items-center justify-between flex-wrap gap-4">
-                <div className="flex items-center gap-3 text-xs text-[#44403C]">
+              <div className="p-5 rounded-2xl bg-surface border border-yellow-500/30 flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center gap-3 text-xs text-primary">
                   <span className="w-3 h-3 rounded-full bg-yellow-400 animate-pulse" />
-                  <span>Next Block Consensus Cycle: <strong className="text-[#1C1917]">2.0s Heartbeat Active</strong></span>
+                  <span>Next Block Consensus Cycle: <strong className="text-primary">2.0s Heartbeat Active</strong></span>
                 </div>
                 <Button
                   variant="x402"
@@ -822,14 +835,14 @@ export const TrustExplorerPage: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               
               {/* Chart 1: Sub-100ms Latency & Real-time Throughput */}
-              <Card className="p-6 bg-[#F7F5F0] border border-yellow-500/40 shadow-xl space-y-6">
-                <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4">
+              <Card className="p-6 bg-surface border border-yellow-500/40 shadow-xl space-y-6">
+                <div className="flex items-center justify-between border-b border-subtle pb-4">
                   <div>
-                    <h3 className="text-base font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+                    <h3 className="text-base font-extrabold text-primary font-heading uppercase flex items-center gap-2">
                       <BarChart2 className="w-5 h-5 text-yellow-400" />
                       <span>On-Chain Settlement Latency vs. TPS</span>
                     </h3>
-                    <span className="text-xs text-[#57534E] font-mono">Consistently sub-100ms across all active tranches</span>
+                    <span className="text-xs text-secondary font-mono">Consistently sub-100ms across all active tranches</span>
                   </div>
                   <Badge variant="amber">84ms AVG</Badge>
                 </div>
@@ -858,14 +871,14 @@ export const TrustExplorerPage: React.FC = () => {
               </Card>
 
               {/* Chart 2: Cumulative Settled Volume vs Throughput */}
-              <Card className="p-6 bg-[#F7F5F0] border border-cyan-500/40 shadow-xl space-y-6">
-                <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4">
+              <Card className="p-6 bg-surface border border-cyan-500/40 shadow-xl space-y-6">
+                <div className="flex items-center justify-between border-b border-subtle pb-4">
                   <div>
-                    <h3 className="text-base font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+                    <h3 className="text-base font-extrabold text-primary font-heading uppercase flex items-center gap-2">
                       <TrendingUp className="w-5 h-5 text-cyan-400" />
                       <span>Cumulative Settled Escrow Volume</span>
                     </h3>
-                    <span className="text-xs text-[#57534E] font-mono">₹44.18 Crores unlocked directly to bank wallets</span>
+                    <span className="text-xs text-secondary font-mono">₹44.18 Crores unlocked directly to bank wallets</span>
                   </div>
                   <Badge variant="cyan">₹2.4M TODAY</Badge>
                 </div>
@@ -900,14 +913,14 @@ export const TrustExplorerPage: React.FC = () => {
             exit={{ opacity: 0, y: -15 }}
             className="max-w-4xl mx-auto space-y-6"
           >
-            <Card className="p-8 bg-[#F7F5F0] border border-yellow-500/40 shadow-2xl space-y-6">
-              <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4 flex-wrap gap-4">
+            <Card className="p-8 bg-surface border border-yellow-500/40 shadow-2xl space-y-6">
+              <div className="flex items-center justify-between border-b border-subtle pb-4 flex-wrap gap-4">
                 <div>
-                  <h3 className="text-xl font-black text-[#1C1917] font-sans uppercase flex items-center gap-2.5">
+                  <h3 className="text-xl font-black text-primary font-heading uppercase flex items-center gap-2.5">
                     <FileCheck2 className="w-6 h-6 text-yellow-400" />
                     <span>Ministry Compliance & Immutable Audit Export Hub</span>
                   </h3>
-                  <p className="text-xs text-[#57534E] font-mono mt-1">
+                  <p className="text-xs text-secondary font-mono mt-1">
                     Generate digitally verified SIH inspection logs and cryptographic compliance certificates for national auditing.
                   </p>
                 </div>
@@ -915,13 +928,13 @@ export const TrustExplorerPage: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
-                <div className="p-6 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-4 flex flex-col justify-between">
+                <div className="p-6 rounded-2xl bg-surface border border-subtle space-y-4 flex flex-col justify-between">
                   <div className="space-y-2">
                     <div className="w-12 h-12 rounded-2xl bg-yellow-500/15 border border-yellow-500/30 flex items-center justify-center text-yellow-400">
                       <Download className="w-6 h-6" />
                     </div>
-                    <h4 className="text-base font-extrabold text-[#1C1917] font-sans">Full SIH Ledger JSON / CSV Export</h4>
-                    <p className="text-xs text-[#57534E] font-mono leading-relaxed">
+                    <h4 className="text-base font-extrabold text-primary font-heading">Full SIH Ledger JSON / CSV Export</h4>
+                    <p className="text-xs text-secondary font-mono leading-relaxed">
                       Includes all 1,482 timestamped transaction hashes, EXIF GPS binding anchors, and computer vision crack confidence logs.
                     </p>
                   </div>
@@ -935,13 +948,13 @@ export const TrustExplorerPage: React.FC = () => {
                   </Button>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-4 flex flex-col justify-between">
+                <div className="p-6 rounded-2xl bg-surface border border-subtle space-y-4 flex flex-col justify-between">
                   <div className="space-y-2">
                     <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
                       <ShieldCheck className="w-6 h-6" />
                     </div>
-                    <h4 className="text-base font-extrabold text-[#1C1917] font-sans">Cryptographic Proof Certificate PDF</h4>
-                    <p className="text-xs text-[#57534E] font-mono leading-relaxed">
+                    <h4 className="text-base font-extrabold text-primary font-heading">Cryptographic Proof Certificate PDF</h4>
+                    <p className="text-xs text-secondary font-mono leading-relaxed">
                       Official government oversight compliance certificate verifying zero human holds and automated x402 financial finality.
                     </p>
                   </div>
@@ -977,72 +990,72 @@ export const TrustExplorerPage: React.FC = () => {
             
             {/* Top overview stats */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="p-3.5 rounded-xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-1">
-                <span className="text-[10px] text-[#57534E] uppercase font-bold block">Status:</span>
+              <div className="p-3.5 rounded-xl bg-surface border border-subtle space-y-1">
+                <span className="text-[10px] text-secondary uppercase font-bold block">Status:</span>
                 <Badge variant={selectedTx.status === 'SETTLED' ? 'emerald' : 'blue'}>✔ {selectedTx.status}</Badge>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-1">
-                <span className="text-[10px] text-[#57534E] uppercase font-bold block">Mined Block:</span>
+              <div className="p-3.5 rounded-xl bg-surface border border-subtle space-y-1">
+                <span className="text-[10px] text-secondary uppercase font-bold block">Mined Block:</span>
                 <strong className="text-cyan-300 font-bold text-sm block font-sans">#{selectedTx.blockNumber}</strong>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-1">
-                <span className="text-[10px] text-[#57534E] uppercase font-bold block">Confirmations:</span>
-                <strong className="text-[#1C1917] font-bold text-sm block font-sans">{selectedTx.confirmations} Confs</strong>
+              <div className="p-3.5 rounded-xl bg-surface border border-subtle space-y-1">
+                <span className="text-[10px] text-secondary uppercase font-bold block">Confirmations:</span>
+                <strong className="text-primary font-bold text-sm block font-sans">{selectedTx.confirmations} Confs</strong>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-1">
-                <span className="text-[10px] text-[#57534E] uppercase font-bold block">Gas Fee:</span>
+              <div className="p-3.5 rounded-xl bg-surface border border-subtle space-y-1">
+                <span className="text-[10px] text-secondary uppercase font-bold block">Gas Fee:</span>
                 <strong className="text-yellow-400 font-bold text-xs block">{selectedTx.gasFee}</strong>
               </div>
             </div>
 
             {/* Comprehensive Technical Field Specifications */}
-            <div className="p-5 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-4">
-              <div className="flex items-center justify-between pb-2 border-b border-[#D6D0C4]">
-                <span className="font-bold text-[#1C1917] uppercase tracking-wider">Cryptographic Execution Payload</span>
+            <div className="p-5 rounded-2xl bg-surface border border-subtle space-y-4">
+              <div className="flex items-center justify-between pb-2 border-b border-subtle">
+                <span className="font-bold text-primary uppercase tracking-wider">Cryptographic Execution Payload</span>
                 <span className="text-emerald-400 font-bold text-[10px]">VERIFIED BY VISION AI</span>
               </div>
 
               <div className="space-y-3">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <span className="text-[#57534E] font-bold">Target Mega-Project:</span>
-                  <strong className="sm:col-span-2 text-[#1C1917] font-sans font-black">{selectedTx.project}</strong>
+                  <span className="text-secondary font-bold">Target Mega-Project:</span>
+                  <strong className="sm:col-span-2 text-primary font-heading font-black">{selectedTx.project}</strong>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <span className="text-[#57534E] font-bold">Contractor Recipient:</span>
+                  <span className="text-secondary font-bold">Contractor Recipient:</span>
                   <strong className="sm:col-span-2 text-cyan-300">{selectedTx.contractor} ({selectedTx.contractorWallet})</strong>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <span className="text-[#57534E] font-bold">Disbursement Amount:</span>
-                  <strong className="sm:col-span-2 text-emerald-400 text-base font-sans font-black">₹{(selectedTx.amount / 100000).toFixed(2)} Lakhs USDC</strong>
+                  <span className="text-secondary font-bold">Disbursement Amount:</span>
+                  <strong className="sm:col-span-2 text-emerald-400 text-base font-heading font-black">₹{(selectedTx.amount / 100000).toFixed(2)} Lakhs USDC</strong>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <span className="text-[#57534E] font-bold">Smart Method Invoked:</span>
-                  <span className="sm:col-span-2 text-yellow-300 bg-[#EAE5DC] p-2 rounded border border-yellow-500/20 select-all font-bold">
+                  <span className="text-secondary font-bold">Smart Method Invoked:</span>
+                  <span className="sm:col-span-2 text-yellow-300 bg-surface-secondary p-2 rounded border border-yellow-500/20 select-all font-bold">
                     {selectedTx.method}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <span className="text-[#57534E] font-bold">x402 Macaroon Receipt:</span>
-                  <span className="sm:col-span-2 text-[#44403C] bg-[#EAE5DC] p-2 rounded border border-[#D6D0C4] select-all text-[11px] truncate">
+                  <span className="text-secondary font-bold">x402 Macaroon Receipt:</span>
+                  <span className="sm:col-span-2 text-primary bg-surface-secondary p-2 rounded border border-subtle select-all text-[11px] truncate">
                     {selectedTx.receiptSig}
                   </span>
                 </div>
 
-                <div className="space-y-1.5 pt-2 border-t border-[#D6D0C4]">
-                  <span className="text-[#57534E] font-bold block">On-Chain Event Logs (Solidity Emit):</span>
-                  <div className="p-3 rounded-xl bg-[#EAE5DC] border border-emerald-500/30 text-emerald-300 font-mono text-[11px]">
+                <div className="space-y-1.5 pt-2 border-t border-subtle">
+                  <span className="text-secondary font-bold block">On-Chain Event Logs (Solidity Emit):</span>
+                  <div className="p-3 rounded-xl bg-surface-secondary border border-emerald-500/30 text-emerald-300 font-mono text-[11px]">
                     <code>{selectedTx.eventLog}</code>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="pt-3 border-t border-[#D6D0C4] flex items-center justify-between gap-4">
-              <span className="text-[11px] text-[#57534E]">Timestamp: {selectedTx.timestamp} // Zero admin pause applied</span>
+            <div className="pt-3 border-t border-subtle flex items-center justify-between gap-4">
+              <span className="text-[11px] text-secondary">Timestamp: {selectedTx.timestamp} // Zero admin pause applied</span>
               <Button variant="primary" onClick={() => setSelectedTx(null)}>
                 Close Etherscan Inspector
               </Button>

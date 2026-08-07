@@ -3,37 +3,55 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  :root,
+  :root[data-theme="light"] {
     /* LIGHT THEME */
-    --bg-main: #F5F3EE;
-    --bg-surface: #FFFFFF;
-    --bg-surface-secondary: #EFEEE9;
-    --text-primary: #17191C;
-    --text-secondary: #687078;
-    --border-subtle: #E2DFD7;
-    --accent-cyan: #06B6D4;
-    --accent-indigo: #4F46E5;
-    --accent-emerald: #10B981;
-    --accent-orange: #F97316;
-    --accent-gold: #EAB308;
+    --color-bg-main: #F5F3EE;
+    --color-bg-surface: #FFFFFF;
+    --color-bg-surface-secondary: #EFEEE9;
+    --color-text-primary: #17191C;
+    --color-text-secondary: #687078;
+    --color-border-subtle: #E2DFD7;
+    --color-accent-cyan: #06B6D4;
+    --color-accent-indigo: #4F46E5;
+    --color-accent-emerald: #10B981;
+    --color-accent-orange: #F97316;
+    --color-accent-gold: #EAB308;
     
     --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
     --font-sans: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
   }
 
-  .dark {
-    /* DARK THEME */
-    --bg-main: #080B10;
-    --bg-surface: #10151D;
-    --bg-surface-secondary: #151C25;
-    --text-primary: #F1F4F7;
-    --text-secondary: #9BA6B2;
-    --border-subtle: #232D3B;
-    --accent-cyan: #06B6D4; /* kept vibrant for dark mode */
-    --accent-indigo: #818CF8;
-    --accent-emerald: #34D399;
-    --accent-orange: #FB923C;
-    --accent-gold: #FACC15;
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      /* DARK THEME (System Default) */
+      --color-bg-main: #080B10;
+      --color-bg-surface: #10151D;
+      --color-bg-surface-secondary: #151C25;
+      --color-text-primary: #F1F4F7;
+      --color-text-secondary: #9BA6B2;
+      --color-border-subtle: #232D3B;
+      --color-accent-cyan: #06B6D4;
+      --color-accent-indigo: #818CF8;
+      --color-accent-emerald: #34D399;
+      --color-accent-orange: #FB923C;
+      --color-accent-gold: #FACC15;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    /* DARK THEME (Forced) */
+    --color-bg-main: #080B10;
+    --color-bg-surface: #10151D;
+    --color-bg-surface-secondary: #151C25;
+    --color-text-primary: #F1F4F7;
+    --color-text-secondary: #9BA6B2;
+    --color-border-subtle: #232D3B;
+    --color-accent-cyan: #06B6D4;
+    --color-accent-indigo: #818CF8;
+    --color-accent-emerald: #34D399;
+    --color-accent-orange: #FB923C;
+    --color-accent-gold: #FACC15;
   }
 
   html {
@@ -42,15 +60,15 @@
 
   body {
     @apply font-mono antialiased selection:bg-indigo-600/15 selection:text-indigo-950 transition-colors duration-300;
-    background-color: var(--bg-main);
-    color: var(--text-primary);
+    background-color: var(--color-bg-main);
+    color: var(--color-text-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
   
-  body:not(.dark) {
+  :root:not([data-theme="dark"]) body {
     background-image: 
       radial-gradient(at 0% 0%, rgba(67, 56, 202, 0.08) 0px, transparent 65%),
       radial-gradient(at 100% 0%, rgba(4, 120, 87, 0.06) 0px, transparent 60%),
@@ -59,7 +77,16 @@
     background-attachment: fixed;
   }
   
-  body.dark {
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body {
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(67, 56, 202, 0.06) 0px, transparent 65%),
+        radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.04) 0px, transparent 60%),
+        radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.03) 0px, transparent 70%);
+    }
+  }
+
+  :root[data-theme="dark"] body {
     background-image: 
       radial-gradient(at 0% 0%, rgba(67, 56, 202, 0.06) 0px, transparent 65%),
       radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.04) 0px, transparent 60%),
@@ -68,7 +95,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-black tracking-tight text-[color:var(--text-primary)];
+    @apply font-sans font-black tracking-tight text-[color:var(--color-text-primary)];
   }
 
   button {

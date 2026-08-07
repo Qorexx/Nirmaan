@@ -65,7 +65,7 @@ export const AnimatedSidebar: React.FC = () => {
         </div>
         {!isCollapsed && (
           <div className="overflow-hidden">
-            <span className="font-black text-primary text-sm tracking-tight block truncate font-sans">AI ESCROW OS</span>
+            <span className="font-black text-primary text-sm tracking-tight block truncate font-heading">AI ESCROW OS</span>
             <span className="text-[10px] font-mono font-extrabold text-accent-indigo block uppercase">Sovereign Deck v2.4</span>
           </div>
         )}
@@ -73,7 +73,7 @@ export const AnimatedSidebar: React.FC = () => {
 
       {/* Navigation List */}
       <nav className="flex-1 p-3 overflow-y-auto space-y-1.5 no-scrollbar font-mono">
-        {!isCollapsed && <span className="text-[10px] uppercase font-extrabold text-secondary px-3 py-1.5 block tracking-wider font-sans">Sovereign Portals:</span>}
+        {!isCollapsed && <span className="text-[10px] uppercase font-extrabold text-secondary px-3 py-1.5 block tracking-wider font-heading">Sovereign Portals:</span>}
 
         {navItems.map((item) => {
           const isActive = currentPage === item.id;
@@ -125,7 +125,7 @@ export const AnimatedSidebar: React.FC = () => {
             <span>Vault Liquidity:</span>
             <span className="text-accent-emerald font-extrabold bg-accent-emerald/10 px-1.5 py-0.5 rounded border border-accent-emerald/30">100% Secured</span>
           </div>
-          <div className="text-sm font-black text-primary font-sans">₹{(totalProtectedValue / 1000000).toFixed(1)}M USDC</div>
+          <div className="text-sm font-black text-primary font-heading">₹{(totalProtectedValue / 1000000).toFixed(1)}M USDC</div>
           <div className="h-2 w-full rounded-full bg-subtle overflow-hidden">
             <div className="h-full bg-accent-emerald w-full shadow-xs" />
           </div>

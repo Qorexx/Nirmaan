@@ -30,7 +30,7 @@ export const ProfileMenu: React.FC = () => {
             setIsOpen(!isOpen);
           }
         }}
-        className="flex items-center gap-2.5 p-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-[#F7F5F0] hover:bg-[#EAE5DC] border border-[#D6D0C4] hover:border-[#C9C2B4] transition-all text-left group shadow-xs"
+        className="flex items-center gap-2.5 p-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-surface hover:bg-surface-secondary border border-subtle hover:border-subtle transition-all text-left group shadow-xs"
       >
         <Avatar
           initials={currentUser.avatarInitials}
@@ -40,18 +40,18 @@ export const ProfileMenu: React.FC = () => {
         />
         <div className="hidden xl:flex flex-col">
           <div className="flex items-center gap-1.5">
-            <span className="text-xs font-sans font-black text-[#1C1917] group-hover:text-[#3730A3] transition-colors leading-snug">
+            <span className="text-xs font-heading font-black text-primary group-hover:text-[#3730A3] transition-colors leading-snug">
               {currentUser.name}
             </span>
             {currentUser.isAuthenticated && (
               <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
             )}
           </div>
-          <span className="text-[10px] font-mono text-[#57534E] truncate max-w-[150px]">
+          <span className="text-[10px] font-mono text-secondary truncate max-w-[150px]">
             {currentUser.role}
           </span>
         </div>
-        <ChevronDown className={`w-4 h-4 text-[#78716C] transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#3730A3]' : ''}`} />
+        <ChevronDown className={`w-4 h-4 text-secondary transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#3730A3]' : ''}`} />
       </button>
 
       {/* Profile Switcher & Auth Dropdown Overlay */}
@@ -62,41 +62,41 @@ export const ProfileMenu: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="absolute right-0 top-full mt-3 w-80 bg-[#F7F5F0] border border-[#D6D0C4] rounded-2xl shadow-[0_20px_60px_rgba(28,25,23,0.16)] z-50 overflow-hidden divide-y divide-[#D6D0C4]"
+            className="absolute right-0 top-full mt-3 w-80 bg-surface border border-subtle rounded-2xl shadow-[0_20px_60px_rgba(28,25,23,0.16)] z-50 overflow-hidden divide-y divide-[#D6D0C4]"
           >
             {/* Active Wallet Header */}
-            <div className="p-4 bg-[#EAE5DC] space-y-2.5">
+            <div className="p-4 bg-surface-secondary space-y-2.5">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3730A3] font-sans">Active Session</span>
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3730A3] font-heading">Active Session</span>
                 <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[9px] font-black border border-emerald-300">
                   {currentUser.isAuthenticated ? 'L402 AUTHENTICATED' : 'GUEST MODE'}
                 </span>
               </div>
               <div className="space-y-0.5">
-                <div className="text-sm font-black font-sans text-[#1C1917]">{currentUser.name}</div>
-                <div className="text-xs text-[#44403C] font-mono font-black">{currentUser.role}</div>
-                <div className="text-[10px] text-[#57534E] font-mono italic">{currentUser.department}</div>
+                <div className="text-sm font-black font-heading text-primary">{currentUser.name}</div>
+                <div className="text-xs text-primary font-mono font-black">{currentUser.role}</div>
+                <div className="text-[10px] text-secondary font-mono italic">{currentUser.department}</div>
               </div>
-              <div className="flex items-center justify-between gap-2 bg-[#F7F5F0] px-3 py-2 rounded-xl border border-[#D6D0C4] text-xs mt-2 shadow-xs">
-                <span className="text-[#57534E]">Wallet:</span>
+              <div className="flex items-center justify-between gap-2 bg-surface px-3 py-2 rounded-xl border border-subtle text-xs mt-2 shadow-xs">
+                <span className="text-secondary">Wallet:</span>
                 <span className="text-[#3730A3] font-black select-all font-mono">{currentUser.address}</span>
               </div>
             </div>
 
             {/* Switch Role Section */}
-            <div className="p-2 space-y-1 bg-[#F7F5F0]">
+            <div className="p-2 space-y-1 bg-surface">
               <button
                 onClick={() => {
                   setIsOpen(false);
                   setLoginModalOpen(true);
                 }}
-                className="w-full p-3 rounded-xl text-left flex items-center justify-between transition-colors bg-[#EAE5DC] hover:bg-[#DCD5C7] text-[#1C1917] border border-[#D6D0C4] font-black font-sans text-xs group shadow-2xs"
+                className="w-full p-3 rounded-xl text-left flex items-center justify-between transition-colors bg-surface-secondary hover:bg-[#DCD5C7] text-primary border border-subtle font-black font-heading text-xs group shadow-2xs"
               >
                 <div className="flex items-center gap-2.5">
                   <LogIn className="w-4 h-4 text-[#3730A3] group-hover:scale-110 transition-transform" />
                   <span>Switch Persona / Login Portal</span>
                 </div>
-                <span className="text-[10px] font-mono bg-[#F7F5F0] text-[#3730A3] font-black px-2 py-0.5 rounded-full border border-[#D6D0C4]">
+                <span className="text-[10px] font-mono bg-surface text-[#3730A3] font-black px-2 py-0.5 rounded-full border border-subtle">
                   4 ROLES
                 </span>
               </button>
@@ -127,7 +127,7 @@ export const ProfileMenu: React.FC = () => {
             </div>
 
             {/* Footer Notice */}
-            <div className="p-2.5 bg-[#EAE5DC] border-t border-[#D6D0C4] text-center text-[10px] font-mono text-[#57534E] flex items-center justify-center gap-1.5 font-bold">
+            <div className="p-2.5 bg-surface-secondary border-t border-subtle text-center text-[10px] font-mono text-secondary flex items-center justify-center gap-1.5 font-bold">
               <ShieldCheck className="w-3.5 h-3.5 text-[#3730A3]" />
               <span>MoRTH Infrastructure Governance Tier</span>
             </div>

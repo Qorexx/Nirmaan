@@ -20,10 +20,10 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   const [viewMode, setViewMode] = useState<'twin' | 'satellite' | 'heatmap'>('twin');
 
   return (
-    <div className="rounded-3xl border border-[#D6D0C4] bg-[#F7F5F0] p-5 shadow-[0_10px_35px_rgba(28,25,23,0.07)] relative overflow-hidden group text-[#1C1917]">
+    <div className="rounded-3xl border border-subtle bg-surface p-5 shadow-[0_10px_35px_rgba(28,25,23,0.07)] relative overflow-hidden group text-primary">
       
       {/* Top Bar / Metadata */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-4 pb-4 border-b border-[#D6D0C4]">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-4 pb-4 border-b border-subtle">
         <div>
           <div className="flex items-center space-x-2">
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black bg-indigo-100 text-indigo-950 border border-indigo-300 uppercase tracking-widest">
@@ -33,47 +33,47 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" /> GPS Geo-Synced
             </span>
           </div>
-          <h3 className="text-base sm:text-lg font-black font-sans text-[#1C1917] mt-1.5">{title}</h3>
-          <p className="text-xs font-mono text-[#57534E] font-semibold">{location}</p>
+          <h3 className="text-base sm:text-lg font-black font-heading text-primary mt-1.5">{title}</h3>
+          <p className="text-xs font-mono text-secondary font-semibold">{location}</p>
         </div>
 
         {/* AI Confidence Badge & Mode Switcher */}
         <div className="flex items-center space-x-3">
-          <div className="bg-[#EAE5DC] px-4 py-2 rounded-xl border border-[#C9C2B4] text-right shadow-2xs">
-            <div className="text-[10px] font-mono uppercase text-[#57534E] font-extrabold">Vision AI Confidence</div>
-            <div className="text-lg sm:text-xl font-black text-emerald-800 font-sans">{confidence}% MATCH</div>
+          <div className="bg-surface-secondary px-4 py-2 rounded-xl border border-subtle text-right shadow-2xs">
+            <div className="text-[10px] font-mono uppercase text-secondary font-extrabold">Vision AI Confidence</div>
+            <div className="text-lg sm:text-xl font-black text-emerald-800 font-heading">{confidence}% MATCH</div>
           </div>
         </div>
       </div>
 
       {/* Mode Switches */}
       <div className="flex items-center justify-between mb-3 text-xs font-mono">
-        <div className="flex bg-[#EAE5DC] rounded-xl p-1 border border-[#D6D0C4]">
+        <div className="flex bg-surface-secondary rounded-xl p-1 border border-subtle">
           <button 
             onClick={() => setViewMode('twin')}
-            className={`px-3 py-1.5 rounded-lg transition-all font-bold ${viewMode === 'twin' ? 'bg-[#F7F5F0] text-[#1C1917] font-black shadow-sm border border-[#C9C2B4]' : 'text-[#57534E] hover:text-[#1C1917]'}`}
+            className={`px-3 py-1.5 rounded-lg transition-all font-bold ${viewMode === 'twin' ? 'bg-surface text-primary font-black shadow-sm border border-subtle' : 'text-secondary hover:text-primary'}`}
           >
             ⚖️ Before / After Slider
           </button>
           <button 
             onClick={() => setViewMode('satellite')}
-            className={`px-3 py-1.5 rounded-lg transition-all font-bold ${viewMode === 'satellite' ? 'bg-indigo-700 text-white font-black shadow-sm' : 'text-[#57534E] hover:text-[#1C1917]'}`}
+            className={`px-3 py-1.5 rounded-lg transition-all font-bold ${viewMode === 'satellite' ? 'bg-indigo-700 text-white font-black shadow-sm' : 'text-secondary hover:text-primary'}`}
           >
             🌐 Satellite GIS View
           </button>
           <button 
             onClick={() => setViewMode('heatmap')}
-            className={`px-3 py-1.5 rounded-lg transition-all font-bold ${viewMode === 'heatmap' ? 'bg-purple-700 text-white font-black shadow-sm' : 'text-[#57534E] hover:text-[#1C1917]'}`}
+            className={`px-3 py-1.5 rounded-lg transition-all font-bold ${viewMode === 'heatmap' ? 'bg-purple-700 text-white font-black shadow-sm' : 'text-secondary hover:text-primary'}`}
           >
             🟣 Material Quality Heatmap
           </button>
         </div>
 
-        <span className="hidden sm:inline text-[#57534E] italic font-semibold">💡 Drag slider across to inspect structural transformation</span>
+        <span className="hidden sm:inline text-secondary italic font-semibold">💡 Drag slider across to inspect structural transformation</span>
       </div>
 
       {/* Slider View Box */}
-      <div className="relative w-full h-[360px] sm:h-[420px] rounded-2xl overflow-hidden border border-[#D6D0C4] select-none shadow-inner bg-[#EAE5DC]">
+      <div className="relative w-full h-[360px] sm:h-[420px] rounded-2xl overflow-hidden border border-subtle select-none shadow-inner bg-surface-secondary">
         
         {/* AFTER IMAGE (Background) */}
         <img
@@ -131,11 +131,11 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         />
 
         {/* Bottom AI Overlay Diagnostic Banner */}
-        <div className="absolute bottom-4 left-4 right-4 z-20 bg-[#F7F5F0]/95 backdrop-blur-md border border-[#D6D0C4] rounded-xl p-3 flex flex-wrap items-center justify-between gap-2 text-xs font-mono shadow-md text-[#1C1917]">
+        <div className="absolute bottom-4 left-4 right-4 z-20 bg-surface/95 backdrop-blur-md border border-subtle rounded-xl p-3 flex flex-wrap items-center justify-between gap-2 text-xs font-mono shadow-md text-primary">
           <div className="flex items-center space-x-4">
-            <div><span className="text-[#57534E]">Surface Density:</span> <span className="text-[#1C1917] font-black">98.4 kN/m²</span></div>
-            <div><span className="text-[#57534E]">Perspective Alignment:</span> <span className="text-indigo-700 font-black">Normalized (0.02 err)</span></div>
-            <div><span className="text-[#57534E]">Material Quality:</span> <span className="text-emerald-800 font-black">Bitumen Grade-A</span></div>
+            <div><span className="text-secondary">Surface Density:</span> <span className="text-primary font-black">98.4 kN/m²</span></div>
+            <div><span className="text-secondary">Perspective Alignment:</span> <span className="text-indigo-700 font-black">Normalized (0.02 err)</span></div>
+            <div><span className="text-secondary">Material Quality:</span> <span className="text-emerald-800 font-black">Bitumen Grade-A</span></div>
           </div>
           <div className="text-amber-800 font-black flex items-center gap-1 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">
             <span>⚡ x402 Micropayment Attested</span>

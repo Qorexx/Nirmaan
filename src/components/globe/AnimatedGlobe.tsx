@@ -109,7 +109,7 @@ export const AnimatedGlobe: React.FC = () => {
       <canvas ref={canvasRef} width="400" height="400" className="w-[400px] h-[400px]" />
       <div className="absolute bottom-4 bg-slatenavy/90 border border-cyan-500/40 px-4 py-1.5 rounded-full shadow-xl flex items-center gap-2 font-mono text-xs">
         <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-        <span className="text-[#1C1917] font-bold tracking-widest">GLOBAL AI ESCROW GRID: ONLINE</span>
+        <span className="text-primary font-bold tracking-widest">GLOBAL AI ESCROW GRID: ONLINE</span>
       </div>
     </div>
   );

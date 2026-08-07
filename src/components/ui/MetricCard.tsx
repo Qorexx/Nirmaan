@@ -30,24 +30,24 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   };
 
   return (
-    <div className={`bg-[#F7F5F0] border border-[#D6D0C4] rounded-2xl p-5 shadow-[0_6px_20px_rgba(28,25,23,0.05)] hover:border-[#818CF8] transition-all duration-200 font-mono space-y-3 text-[#1C1917] ${className}`}>
-      <div className="flex items-center justify-between text-xs text-[#57534E] font-extrabold uppercase font-sans">
+    <div className={`bg-surface border border-subtle rounded-2xl p-5 shadow-[0_6px_20px_rgba(28,25,23,0.05)] hover:border-[#818CF8] transition-all duration-200 font-mono space-y-3 text-primary ${className}`}>
+      <div className="flex items-center justify-between text-xs text-secondary font-extrabold uppercase font-heading">
         <span>{label}</span>
         {statusText && (
-          <span className="flex items-center gap-1.5 text-[#1C1917] font-bold">
+          <span className="flex items-center gap-1.5 text-primary font-bold">
             <span className={`w-2 h-2 rounded-full ${getStatusBg()}`} />
             <span>{statusText}</span>
           </span>
         )}
       </div>
 
-      <div className="text-xl sm:text-2xl font-black text-[#1C1917] tracking-tight font-sans">
+      <div className="text-xl sm:text-2xl font-black text-primary tracking-tight font-heading">
         {primaryValue}
       </div>
 
       {(secondaryLabel || secondaryValue) && (
-        <div className="pt-2 border-t border-[#D6D0C4] flex items-center justify-between text-xs text-[#57534E]">
-          {secondaryLabel && <span className="text-[#78716C] font-semibold">{secondaryLabel}</span>}
+        <div className="pt-2 border-t border-subtle flex items-center justify-between text-xs text-secondary">
+          {secondaryLabel && <span className="text-secondary font-semibold">{secondaryLabel}</span>}
           {secondaryValue && <span className="font-extrabold text-indigo-700">{secondaryValue}</span>}
         </div>
       )}

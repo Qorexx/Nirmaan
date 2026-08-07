@@ -42,21 +42,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
         <Navbar onOpenPalette={() => setIsPaletteOpen(true)} />
         {!isPresentationMode && <Breadcrumbs />}
         
-        {/* Presentation Mode Active Indicator */}
-        {isPresentationMode && (
-          <div className="w-full bg-accent-indigo/10 border-b border-accent-indigo/30 px-6 py-2 flex items-center justify-between text-xs font-mono text-accent-indigo">
-            <span className="flex items-center gap-2 font-bold animate-pulse">
-              <span className="w-2 h-2 rounded-full bg-accent-indigo" /> PRESENTATION MODE ACTIVE
-            </span>
-            <button 
-              onClick={() => setPresentationMode(false)}
-              className="px-3 py-1 bg-accent-indigo text-white rounded-md hover:bg-accent-indigo/80 transition-colors font-bold shadow-sm"
-            >
-              Exit Presentation
-            </button>
-          </div>
-        )}
-
         {/* Animated Page Renderer */}
         <main className={`flex-1 w-full mx-auto px-4 sm:px-6 py-6 transition-all duration-500 ${isPresentationMode ? 'max-w-full px-8' : 'max-w-[1700px]'}`}>
           <AnimatedRouteTransition>

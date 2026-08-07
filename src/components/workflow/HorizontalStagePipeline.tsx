@@ -64,7 +64,7 @@ export const HorizontalStagePipeline: React.FC = () => {
               <ShieldCheck className="w-8 h-8 text-accent-indigo" />
             </div>
             <div>
-              <h4 className="text-lg md:text-xl font-black text-primary tracking-wide flex items-center gap-2 font-sans">
+              <h4 className="text-lg md:text-xl font-black text-primary tracking-wide flex items-center gap-2 font-heading">
                 🏛 Government Command Suite
               </h4>
               <p className="text-xs font-mono text-secondary font-bold">
@@ -73,7 +73,7 @@ export const HorizontalStagePipeline: React.FC = () => {
             </div>
           </div>
           
-          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-sm font-sans font-black text-primary z-10">
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-sm font-heading font-black text-primary z-10">
             <span className="px-3 py-1 bg-surface hover:bg-accent-indigo/10 rounded-lg border border-subtle transition-colors shadow-sm">📁 Projects</span>
             <span className="text-accent-indigo">•</span>
             <span className="px-3 py-1 bg-surface hover:bg-accent-indigo/10 rounded-lg border border-subtle transition-colors shadow-sm">💰 Escrow</span>
@@ -118,7 +118,7 @@ export const HorizontalStagePipeline: React.FC = () => {
                       </span>
                     </div>
 
-                    <h4 className="font-black text-base text-primary font-sans tracking-tight flex items-center justify-between line-clamp-2">
+                    <h4 className="font-black text-base text-primary font-heading tracking-tight flex items-center justify-between line-clamp-2">
                       <span className="leading-tight">{stage.name}</span>
                       {isCompleted && (
                         <span className="shrink-0 w-5 h-5 rounded-full bg-accent-emerald/20 text-accent-emerald flex items-center justify-center border border-accent-emerald/50 ml-2">

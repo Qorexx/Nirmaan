@@ -169,15 +169,11 @@ export const useEscrowStore = create<EscrowState>((set, get) => ({
     localStorage.setItem('theme-preference', newTheme);
     set({ theme: newTheme });
     
-    // Apply class to documentElement
-    const isDark = 
-      newTheme === 'dark' || 
-      (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      
-    if (isDark) {
-      document.documentElement.classList.add('dark');
+    // Apply attribute to documentElement
+    if (newTheme === 'system') {
+      document.documentElement.removeAttribute('data-theme');
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', newTheme);
     }
   },
   

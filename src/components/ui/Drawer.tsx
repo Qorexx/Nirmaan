@@ -41,7 +41,7 @@ export const Drawer: React.FC<DrawerProps> = ({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 bg-[#EAE5DC]/40 backdrop-blur-sm"
+            className="fixed inset-0 bg-surface-secondary/40 backdrop-blur-sm"
           />
 
           {/* Drawer Slide Panel */}
@@ -51,30 +51,30 @@ export const Drawer: React.FC<DrawerProps> = ({
               animate={{ x: 0, y: 0 }}
               exit={getInitialPosition()}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className={`relative ${widthClass} bg-[#F7F5F0] border-l border-[#D6D0C4] text-[#1C1917] shadow-[0_0_60px_rgba(28,25,23,0.15)] flex flex-col h-full z-10 font-mono`}
+              className={`relative ${widthClass} bg-surface border-l border-subtle text-primary shadow-[0_0_60px_rgba(28,25,23,0.15)] flex flex-col h-full z-10 font-mono`}
             >
               {/* Header Bar */}
-              <div className="p-6 bg-[#EAE5DC] border-b border-[#D6D0C4] flex items-center justify-between gap-4 shrink-0">
+              <div className="p-6 bg-surface-secondary border-b border-subtle flex items-center justify-between gap-4 shrink-0">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-[#F7F5F0] border border-[#D6D0C4] text-indigo-700">
+                  <div className="p-2 rounded-xl bg-surface border border-subtle text-indigo-700">
                     <Layers className="w-5 h-5 text-indigo-700" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-black text-[#1C1917] font-sans">{title}</h3>
-                    {subtitle && <p className="text-xs text-[#57534E] font-semibold mt-0.5">{subtitle}</p>}
+                    <h3 className="text-lg font-black text-primary font-heading">{title}</h3>
+                    {subtitle && <p className="text-xs text-secondary font-semibold mt-0.5">{subtitle}</p>}
                   </div>
                 </div>
 
                 <button
                   onClick={onClose}
-                  className="p-2 rounded-xl bg-[#F7F5F0] hover:bg-[#DCD5C7] text-[#57534E] hover:text-[#1C1917] transition-colors border border-[#D6D0C4]"
+                  className="p-2 rounded-xl bg-surface hover:bg-[#DCD5C7] text-secondary hover:text-primary transition-colors border border-subtle"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Drawer Scrollable Content */}
-              <div className="p-6 overflow-y-auto space-y-6 flex-1 text-sm text-[#1C1917] bg-[#F7F5F0]">
+              <div className="p-6 overflow-y-auto space-y-6 flex-1 text-sm text-primary bg-surface">
                 {children}
               </div>
             </motion.div>

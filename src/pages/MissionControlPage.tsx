@@ -97,11 +97,11 @@ export const MissionControlPage: React.FC = () => {
               </Badge>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl xl:text-6xl font-black text-[#1C1917] font-sans tracking-tight leading-none uppercase drop-shadow-[0_2px_15px_rgba(0,242,255,0.3)]">
+            <h1 className="text-3xl sm:text-5xl xl:text-6xl font-black text-primary font-heading tracking-tight leading-none uppercase drop-shadow-[0_2px_15px_rgba(0,242,255,0.3)]">
               Live Mission Control
             </h1>
 
-            <p className="text-xs sm:text-sm text-[#44403C] font-mono leading-relaxed max-w-2xl">
+            <p className="text-xs sm:text-sm text-primary font-mono leading-relaxed max-w-2xl">
               Real-time surveillance over AI computer vision extraction, automated HTTP 402 machine-to-machine gas payments ($0.05 USDC), and tamper-proof smart contract escrow vault disbursements. Zero manual bureaucracy.
             </p>
           </div>
@@ -162,7 +162,7 @@ export const MissionControlPage: React.FC = () => {
         <div className="flex flex-wrap items-center justify-between gap-4 px-2">
           <div className="flex items-center gap-3">
             <Cpu className="w-6 h-6 text-cyan-400 animate-pulse" />
-            <h2 className="text-xl sm:text-2xl font-black text-primary font-sans tracking-tight uppercase">
+            <h2 className="text-xl sm:text-2xl font-black text-primary font-heading tracking-tight uppercase">
               Autonomous Escrow Workflow Pipeline
             </h2>
           </div>
@@ -263,7 +263,7 @@ export const MissionControlPage: React.FC = () => {
                   <Zap className="w-5 h-5 fill-current animate-bounce" />
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-primary font-sans uppercase tracking-tight">HTTP 402 Machine Wallet</h3>
+                  <h3 className="text-base font-black text-primary font-heading uppercase tracking-tight">HTTP 402 Machine Wallet</h3>
                   <span className="text-[10px] font-mono text-secondary block">L402 Macaroon Micro-gas protocol</span>
                 </div>
               </div>
@@ -278,7 +278,7 @@ export const MissionControlPage: React.FC = () => {
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="text-secondary font-mono">Available Gas Pool:</span>
-                <span className="text-xl font-black text-primary font-sans">500.00 USDC</span>
+                <span className="text-xl font-black text-primary font-heading">500.00 USDC</span>
               </div>
               <ProgressBar
                 percentage={96.4}
@@ -326,7 +326,7 @@ export const MissionControlPage: React.FC = () => {
                   <ShieldCheck className="w-5 h-5 animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-primary font-sans uppercase tracking-tight">Sovereign Vault Status</h3>
+                  <h3 className="text-base font-black text-primary font-heading uppercase tracking-tight">Sovereign Vault Status</h3>
                   <span className="text-[10px] font-mono text-secondary block">Immutable Blockchain Settlement</span>
                 </div>
               </div>
@@ -359,7 +359,7 @@ export const MissionControlPage: React.FC = () => {
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-secondary block">
                   {isComplete || currentStageIdx >= 9 ? 'MILESTONE PAYOUT RELEASED:' : 'FUNDS LOCKED IN TRANSIT:'}
                 </span>
-                <div className="text-3xl font-black text-primary font-sans mt-1 tracking-tight">
+                <div className="text-3xl font-black text-primary font-heading mt-1 tracking-tight">
                   ₹{activeProject.budget.toLocaleString()}
                 </div>
                 <span className={`text-xs font-mono font-bold mt-1 block ${isComplete || currentStageIdx >= 9 ? 'text-accent-emerald' : 'text-accent-gold'}`}>

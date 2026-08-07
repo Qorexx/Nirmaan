@@ -21,9 +21,9 @@ export const TabletNav: React.FC = () => {
   ];
 
   return (
-    <aside className="hidden md:flex lg:hidden flex-col items-center bg-[#F7F5F0] border-r border-[#D6D0C4] w-20 py-4 space-y-3 shrink-0 z-40 shadow-[2px_0_20px_rgba(28,25,23,0.03)]">
+    <aside className="hidden md:flex lg:hidden flex-col items-center bg-surface border-r border-subtle w-20 py-4 space-y-3 shrink-0 z-40 shadow-[2px_0_20px_rgba(28,25,23,0.03)]">
       <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-700 via-blue-700 to-indigo-800 p-[2px] mb-4 shadow-sm">
-        <div className="w-full h-full bg-[#F7F5F0] rounded-[10px] flex items-center justify-center font-black text-[#1C1917] font-sans text-xs">
+        <div className="w-full h-full bg-surface rounded-[10px] flex items-center justify-center font-black text-primary font-heading text-xs">
           OS
         </div>
       </div>
@@ -37,7 +37,7 @@ export const TabletNav: React.FC = () => {
               onClick={() => setCurrentPage(item.id)}
               title={item.label}
               className={`w-full py-3 rounded-2xl flex flex-col items-center justify-center gap-1 transition-all group relative ${
-                isActive ? 'bg-[#EAE5DC] text-indigo-950 border border-[#C9C2B4] shadow-xs font-black' : 'text-[#78716C] hover:text-[#1C1917] hover:bg-[#EAE5DC]/50'
+                isActive ? 'bg-surface-secondary text-indigo-950 border border-subtle shadow-xs font-black' : 'text-secondary hover:text-primary hover:bg-surface-secondary/50'
               }`}
             >
               {isActive && <span className="absolute left-1 top-1/2 -translate-y-1/2 w-1.5 h-6 rounded-full bg-indigo-700 shadow-xs" />}

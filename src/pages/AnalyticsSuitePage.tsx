@@ -61,7 +61,8 @@ import {
   Input, 
   StatCard, 
   AnimatedBorder, 
-  NotificationCard 
+  NotificationCard,
+  Skeleton
 } from '../components/ui';
 
 // ============================================================================
@@ -154,6 +155,12 @@ export const AnalyticsSuitePage: React.FC = () => {
   const [selectedConfidence, setSelectedConfidence] = useState('ALL');
   const [activeTab, setActiveTab] = useState<'ai' | 'escrow' | 'blockchain' | 'contractors' | 'heatmap' | 'predictive' | 'reports'>('ai');
   const [isExporting, setIsExporting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 900);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Handle Export Report Simulation
   const handleExport = (type: string) => {
@@ -189,26 +196,26 @@ export const AnalyticsSuitePage: React.FC = () => {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-[#1C1917] font-sans tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-black text-primary font-heading tracking-tight leading-tight">
               National AI Efficiency & Predictive Analytics Center
             </h1>
 
-            <p className="text-xs sm:text-sm text-[#44403C] font-mono leading-relaxed">
+            <p className="text-xs sm:text-sm text-primary font-mono leading-relaxed">
               Real-time telemetry and macroeconomic visualization engine demonstrating 4.2-second autonomous automated settlements versus legacy 30-to-90 day bureaucratic red tape.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
-            <div className="px-5 py-3 rounded-2xl bg-[#F7F5F0] border-2 border-cyan-500/40 text-center sm:text-right shadow-2xl w-full sm:w-auto">
-              <span className="text-[10px] text-[#57534E] uppercase font-bold block">Autonomous Clearance Rate</span>
-              <span className="text-3xl font-black text-cyan-400 font-sans tracking-tight">90.8 <span className="text-xs font-mono text-[#44403C]">%</span></span>
+            <div className="px-5 py-3 rounded-2xl bg-surface border-2 border-cyan-500/40 text-center sm:text-right shadow-2xl w-full sm:w-auto">
+              <span className="text-[10px] text-secondary uppercase font-bold block">Autonomous Clearance Rate</span>
+              <span className="text-3xl font-black text-cyan-400 font-heading tracking-tight">90.8 <span className="text-xs font-mono text-primary">%</span></span>
             </div>
             <Button
               variant="x402"
               size="lg"
               onClick={() => runLiveSimulation()}
               icon={<RefreshCw className="w-5 h-5 fill-current animate-spin-slow" />}
-              className="w-full sm:w-auto shadow-2xl font-sans font-black tracking-wider px-6 py-4"
+              className="w-full sm:w-auto shadow-2xl font-heading font-black tracking-wider px-6 py-4"
             >
               ▶ Refresh Live Telemetry
             </Button>
@@ -223,93 +230,106 @@ export const AnalyticsSuitePage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 2. TOP KPI METRIC MATRIX (8 PREDICTIVE CARDS) */}
       {/* ========================================================================= */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-        <KPICard
-          title="Total Infrastructure Projects"
-          value="240 Projects"
-          change="+18 this month"
-          isPositive={true}
-          subValue="Across 5 Indian States"
-          icon={<Layers className="w-4 h-4 text-cyan-400" />}
-          glowColor="cyan"
-        />
-        <KPICard
-          title="Autonomous AI Verified"
-          value="218 Verified"
-          change="90.8% Auto-Clearance"
-          isPositive={true}
-          subValue="Zero human bureaucracy hold"
-          icon={<CheckCircle2 className="w-4 h-4 text-emerald-400" />}
-          glowColor="emerald"
-        />
-        <KPICard
-          title="Gaussian AI Precision"
-          value="99.4% Accuracy"
-          change="LiDAR + Thermal Vision"
-          isPositive={true}
-          subValue="0.6% false anomaly rate"
-          icon={<Cpu className="w-4 h-4 text-purple-400" />}
-          glowColor="purple"
-        />
-        <KPICard
-          title="Average Verification Time"
-          value="1.4 Seconds"
-          change="vs 30 Days Legacy"
-          isPositive={true}
-          subValue="99.9% acceleration in payouts"
-          icon={<Zap className="w-4 h-4 text-amber-400" />}
-          glowColor="amber"
-        />
-        <KPICard
-          title="Escrow Liquidity Released"
-          value="₹44.18 Cr"
-          change="84.3% Cleared Pool"
-          isPositive={true}
-          subValue="Instant Bank Account Transfer"
-          icon={<Unlock className="w-4 h-4 text-emerald-400" />}
-          glowColor="emerald"
-        />
-        <KPICard
-          title="Locked Escrow Treasury"
-          value="₹52.40 Cr"
-          change="In Sovereign Vaults"
-          isPositive={true}
-          subValue="Zero admin pause backdoors"
-          icon={<Lock className="w-4 h-4 text-cyan-400" />}
-          glowColor="cyan"
-        />
-        <KPICard
-          title="Active Onboarded Contractors"
-          value="48 Active Firms"
-          change="100% L402 Compliant"
-          isPositive={true}
-          subValue="Machine-to-machine enabled"
-          icon={<Award className="w-4 h-4 text-purple-400" />}
-          glowColor="purple"
-        />
-        <KPICard
-          title="Avg Model Confidence Score"
-          value="96.8% Score"
-          change="Threshold > 90% Spec"
-          isPositive={true}
-          subValue="High confidence across feeds"
-          icon={<Activity className="w-4 h-4 text-amber-400" />}
-          glowColor="amber"
-        />
-      </div>
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+            <Card key={i} className="p-6 h-[160px] flex flex-col justify-between">
+              <Skeleton className="w-3/4 h-4 rounded" />
+              <Skeleton className="w-1/2 h-10 rounded-lg mt-2" />
+              <Skeleton className="w-full h-3 rounded mt-auto" />
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+          <KPICard
+            title="Total Infrastructure Projects"
+            value="240 Projects"
+            change="+18 this month"
+            isPositive={true}
+            subValue="Across 5 Indian States"
+            icon={<Layers className="w-4 h-4 text-cyan-400" />}
+            glowColor="cyan"
+          />
+          <KPICard
+            title="Autonomous AI Verified"
+            value="218 Verified"
+            change="90.8% Auto-Clearance"
+            isPositive={true}
+            subValue="Zero human bureaucracy hold"
+            icon={<CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+            glowColor="emerald"
+          />
+          <KPICard
+            title="Gaussian AI Precision"
+            value="99.4% Accuracy"
+            change="LiDAR + Thermal Vision"
+            isPositive={true}
+            subValue="0.6% false anomaly rate"
+            icon={<Cpu className="w-4 h-4 text-purple-400" />}
+            glowColor="purple"
+          />
+          <KPICard
+            title="Average Verification Time"
+            value="1.4 Seconds"
+            change="vs 30 Days Legacy"
+            isPositive={true}
+            subValue="99.9% acceleration in payouts"
+            icon={<Zap className="w-4 h-4 text-amber-400" />}
+            glowColor="amber"
+          />
+          <KPICard
+            title="Escrow Liquidity Released"
+            value="₹44.18 Cr"
+            change="84.3% Cleared Pool"
+            isPositive={true}
+            subValue="Instant Bank Account Transfer"
+            icon={<Unlock className="w-4 h-4 text-emerald-400" />}
+            glowColor="emerald"
+          />
+          <KPICard
+            title="Locked Escrow Treasury"
+            value="₹52.40 Cr"
+            change="In Sovereign Vaults"
+            isPositive={true}
+            subValue="Zero admin pause backdoors"
+            icon={<Lock className="w-4 h-4 text-cyan-400" />}
+            glowColor="cyan"
+          />
+          <KPICard
+            title="Active Onboarded Contractors"
+            value="48 Active Firms"
+            change="100% L402 Compliant"
+            isPositive={true}
+            subValue="Machine-to-machine enabled"
+            icon={<Award className="w-4 h-4 text-purple-400" />}
+            glowColor="purple"
+          />
+          <KPICard
+            title="Avg Model Confidence Score"
+            value="96.8% Score"
+            change="Threshold > 90% Spec"
+            isPositive={true}
+            subValue="High confidence across feeds"
+            icon={<Activity className="w-4 h-4 text-amber-400" />}
+            glowColor="cyan"
+            className="lg:col-span-1"
+          />
+        </div>
+      )}
 
       {/* ========================================================================= */}
       {/* 3. REAL-TIME FILTER AND SLICE COMMAND BAR */}
       {/* ========================================================================= */}
-      <div className="p-4 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] shadow-xl flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-2 text-xs font-bold text-[#44403C]">
+      <div className="p-4 rounded-2xl bg-surface border border-subtle shadow-xl flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-2 text-xs font-bold text-primary">
           <Filter className="w-4 h-4 text-cyan-400" />
           <span className="uppercase tracking-wider">Telemetry Slicing Filters:</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
           {/* Time Range Selector */}
-          <div className="flex items-center gap-1.5 bg-[#EAE5DC] p-1 rounded-xl border border-[#D6D0C4] text-xs">
+          <div className="flex items-center gap-1.5 bg-surface-secondary p-1 rounded-xl border border-subtle text-xs">
             {['24H', '7D', '30D', 'Q3', 'ALL'].map((range) => (
               <button
                 key={range}
@@ -317,7 +337,7 @@ export const AnalyticsSuitePage: React.FC = () => {
                 className={`px-3 py-1 rounded-lg font-bold transition-all ${
                   selectedTimeRange === range
                     ? 'bg-cyan-400 text-slate-950 font-black shadow-[0_0_15px_rgba(6,182,212,0.4)]'
-                    : 'text-[#57534E] hover:text-[#1C1917]'
+                    : 'text-secondary hover:text-primary'
                 }`}
               >
                 {range}
@@ -326,34 +346,34 @@ export const AnalyticsSuitePage: React.FC = () => {
           </div>
 
           {/* State Filter */}
-          <div className="bg-[#EAE5DC] px-3 py-1.5 rounded-xl border border-[#D6D0C4] text-xs flex items-center gap-1">
-            <span className="text-[#57534E] font-bold">State:</span>
+          <div className="bg-surface-secondary px-3 py-1.5 rounded-xl border border-subtle text-xs flex items-center gap-1">
+            <span className="text-secondary font-bold">State:</span>
             <select
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
               className="bg-transparent text-cyan-300 font-extrabold focus:outline-none cursor-pointer"
             >
-              <option value="ALL" className="bg-[#EAE5DC] text-[#1C1917]">All Indian States</option>
-              <option value="Maharashtra" className="bg-[#EAE5DC] text-[#1C1917]">Maharashtra (MH)</option>
-              <option value="Karnataka" className="bg-[#EAE5DC] text-[#1C1917]">Karnataka (KA)</option>
-              <option value="Gujarat" className="bg-[#EAE5DC] text-[#1C1917]">Gujarat (GU)</option>
-              <option value="Tamil Nadu" className="bg-[#EAE5DC] text-[#1C1917]">Tamil Nadu (TN)</option>
-              <option value="Uttar Pradesh" className="bg-[#EAE5DC] text-[#1C1917]">Uttar Pradesh (UP)</option>
+              <option value="ALL" className="bg-surface-secondary text-primary">All Indian States</option>
+              <option value="Maharashtra" className="bg-surface-secondary text-primary">Maharashtra (MH)</option>
+              <option value="Karnataka" className="bg-surface-secondary text-primary">Karnataka (KA)</option>
+              <option value="Gujarat" className="bg-surface-secondary text-primary">Gujarat (GU)</option>
+              <option value="Tamil Nadu" className="bg-surface-secondary text-primary">Tamil Nadu (TN)</option>
+              <option value="Uttar Pradesh" className="bg-surface-secondary text-primary">Uttar Pradesh (UP)</option>
             </select>
           </div>
 
           {/* Confidence Filter */}
-          <div className="bg-[#EAE5DC] px-3 py-1.5 rounded-xl border border-[#D6D0C4] text-xs flex items-center gap-1">
-            <span className="text-[#57534E] font-bold">AI Confidence:</span>
+          <div className="bg-surface-secondary px-3 py-1.5 rounded-xl border border-subtle text-xs flex items-center gap-1">
+            <span className="text-secondary font-bold">AI Confidence:</span>
             <select
               value={selectedConfidence}
               onChange={(e) => setSelectedConfidence(e.target.value)}
               className="bg-transparent text-emerald-300 font-extrabold focus:outline-none cursor-pointer"
             >
-              <option value="ALL" className="bg-[#EAE5DC] text-[#1C1917]">All Confidence Tiers</option>
-              <option value="HIGH" className="bg-[#EAE5DC] text-[#1C1917]">&gt; 95% High Confidence</option>
-              <option value="BORDERLINE" className="bg-[#EAE5DC] text-[#1C1917]">90% - 95% Verified Pass</option>
-              <option value="FLAGGED" className="bg-[#EAE5DC] text-[#1C1917]">&lt; 90% Manual Flagged</option>
+              <option value="ALL" className="bg-surface-secondary text-primary">All Confidence Tiers</option>
+              <option value="HIGH" className="bg-surface-secondary text-primary">&gt; 95% High Confidence</option>
+              <option value="BORDERLINE" className="bg-surface-secondary text-primary">90% - 95% Verified Pass</option>
+              <option value="FLAGGED" className="bg-surface-secondary text-primary">&lt; 90% Manual Flagged</option>
             </select>
           </div>
         </div>
@@ -362,7 +382,7 @@ export const AnalyticsSuitePage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 4. MASTER INTERACTIVE TAB SELECTOR */}
       {/* ========================================================================= */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-[#F7F5F0] p-2.5 rounded-2xl border border-[#D6D0C4] shadow-xl">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-surface p-2.5 rounded-2xl border border-subtle shadow-xl">
         <div className="flex items-center gap-2 overflow-x-auto w-full no-scrollbar">
           {[
             { id: 'ai' as const, label: '🤖 AI Performance & Vision Models', badge: '99.4% ACC' },
@@ -379,12 +399,12 @@ export const AnalyticsSuitePage: React.FC = () => {
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono transition-all whitespace-nowrap select-none ${
                 activeTab === tab.id
                   ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border-2 border-cyan-400 font-extrabold shadow-[0_0_25px_rgba(6,182,212,0.35)]'
-                  : 'text-[#57534E] hover:text-[#1C1917] hover:bg-[#EAE5DC] border border-transparent'
+                  : 'text-secondary hover:text-primary hover:bg-surface-secondary border border-transparent'
               }`}
             >
               <span>{tab.label}</span>
               <span className={`px-2 py-0.5 rounded text-[10px] uppercase ${
-                activeTab === tab.id ? 'bg-cyan-400 text-slate-950 font-black' : 'bg-[#EAE5DC] text-[#44403C] font-bold'
+                activeTab === tab.id ? 'bg-cyan-400 text-slate-950 font-black' : 'bg-surface-secondary text-primary font-bold'
               }`}>
                 {tab.badge}
               </span>
@@ -408,14 +428,14 @@ export const AnalyticsSuitePage: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               
               {/* Chart 1: Model Accuracy vs Verification Speed Trend */}
-              <Card className="p-6 bg-[#F7F5F0] border border-cyan-500/40 shadow-xl space-y-6">
-                <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4">
+              <Card className="p-6 bg-surface border border-cyan-500/40 shadow-xl space-y-6">
+                <div className="flex items-center justify-between border-b border-subtle pb-4">
                   <div>
-                    <h3 className="text-base font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+                    <h3 className="text-base font-extrabold text-primary font-heading uppercase flex items-center gap-2">
                       <TrendingUp className="w-5 h-5 text-cyan-400" />
                       <span>Model Accuracy Trend vs. Inspection Velocity</span>
                     </h3>
-                    <span className="text-xs text-[#57534E] font-mono">Precision scaling upwards while inference times compress below 1.5s</span>
+                    <span className="text-xs text-secondary font-mono">Precision scaling upwards while inference times compress below 1.5s</span>
                   </div>
                   <Badge variant="cyan">99.4% PRECISION</Badge>
                 </div>
@@ -443,14 +463,14 @@ export const AnalyticsSuitePage: React.FC = () => {
               </Card>
 
               {/* Chart 2: Multi-Model Competency Radar */}
-              <Card className="p-6 bg-[#F7F5F0] border border-purple-500/40 shadow-xl space-y-6">
-                <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4">
+              <Card className="p-6 bg-surface border border-purple-500/40 shadow-xl space-y-6">
+                <div className="flex items-center justify-between border-b border-subtle pb-4">
                   <div>
-                    <h3 className="text-base font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+                    <h3 className="text-base font-extrabold text-primary font-heading uppercase flex items-center gap-2">
                       <Cpu className="w-5 h-5 text-purple-400" />
                       <span>Multi-Model AI Competency Radar</span>
                     </h3>
-                    <span className="text-xs text-[#57534E] font-mono">Evaluating LiDAR, EXIF GPS, Concrete Hydration & x402 Gas</span>
+                    <span className="text-xs text-secondary font-mono">Evaluating LiDAR, EXIF GPS, Concrete Hydration & x402 Gas</span>
                   </div>
                   <Badge variant="blue">ALL MODELS HEALTHY</Badge>
                 </div>
@@ -475,9 +495,9 @@ export const AnalyticsSuitePage: React.FC = () => {
             </div>
 
             {/* AI Confidence Distribution Breakdown Bar */}
-            <Card className="p-6 bg-[#F7F5F0] border border-[#D6D0C4] shadow-xl space-y-4">
-              <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-3 flex-wrap gap-2">
-                <h3 className="text-sm font-extrabold text-[#1C1917] font-sans uppercase tracking-wider flex items-center gap-2">
+            <Card className="p-6 bg-surface border border-subtle shadow-xl space-y-4">
+              <div className="flex items-center justify-between border-b border-subtle pb-3 flex-wrap gap-2">
+                <h3 className="text-sm font-extrabold text-primary font-heading uppercase tracking-wider flex items-center gap-2">
                   <Target className="w-4 h-4 text-emerald-400" />
                   <span>AI Structural Confidence Score Distribution (2,182 Total Analyses)</span>
                 </h3>
@@ -486,17 +506,17 @@ export const AnalyticsSuitePage: React.FC = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {confidenceDistributionData.map((d, i) => (
-                  <div key={i} className="p-4 rounded-2xl bg-[#EAE5DC] border border-[#D6D0C4] space-y-2">
+                  <div key={i} className="p-4 rounded-2xl bg-surface-secondary border border-subtle space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] text-[#57534E] font-bold">{d.range}</span>
-                      <span className="text-xs font-black px-2 py-0.5 rounded text-[#1C1917]" style={{ backgroundColor: d.color }}>
+                      <span className="text-[10px] text-secondary font-bold">{d.range}</span>
+                      <span className="text-xs font-black px-2 py-0.5 rounded text-primary" style={{ backgroundColor: d.color }}>
                         {d.percentage}
                       </span>
                     </div>
-                    <div className="text-2xl font-black text-[#1C1917] font-sans">
-                      {d.count.toLocaleString()} <span className="text-xs font-mono text-[#57534E]">Proofs</span>
+                    <div className="text-2xl font-black text-primary font-heading">
+                      {d.count.toLocaleString()} <span className="text-xs font-mono text-secondary">Proofs</span>
                     </div>
-                    <div className="w-full bg-[#EAE5DC] h-1.5 rounded-full overflow-hidden">
+                    <div className="w-full bg-surface-secondary h-1.5 rounded-full overflow-hidden">
                       <div className="h-full rounded-full transition-all" style={{ width: d.percentage, backgroundColor: d.color }} />
                     </div>
                   </div>
@@ -522,14 +542,14 @@ export const AnalyticsSuitePage: React.FC = () => {
               
               {/* Daily Escrow Disbursements Bar Chart (2 cols) */}
               <div className="lg:col-span-2">
-                <Card className="p-6 bg-[#F7F5F0] border border-emerald-500/40 shadow-xl h-full space-y-6">
-                  <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4">
+                <Card className="p-6 bg-surface border border-emerald-500/40 shadow-xl h-full space-y-6">
+                  <div className="flex items-center justify-between border-b border-subtle pb-4">
                     <div>
-                      <h3 className="text-base font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+                      <h3 className="text-base font-extrabold text-primary font-heading uppercase flex items-center gap-2">
                         <BarChart3 className="w-5 h-5 text-emerald-400" />
                         <span>Daily Escrow Disbursements & Payout Count</span>
                       </h3>
-                      <span className="text-xs text-[#57534E] font-mono">Direct autonomous payouts to contractor commercial accounts</span>
+                      <span className="text-xs text-secondary font-mono">Direct autonomous payouts to contractor commercial accounts</span>
                     </div>
                     <Badge variant="emerald">₹19.6 CR THIS WEEK</Badge>
                   </div>
@@ -553,9 +573,9 @@ export const AnalyticsSuitePage: React.FC = () => {
               </div>
 
               {/* Escrow Pool Ratio Donut Card (1 col) */}
-              <Card className="p-6 bg-[#F7F5F0] border border-cyan-500/40 shadow-xl flex flex-col justify-between space-y-6">
-                <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4">
-                  <h3 className="text-base font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+              <Card className="p-6 bg-surface border border-cyan-500/40 shadow-xl flex flex-col justify-between space-y-6">
+                <div className="flex items-center justify-between border-b border-subtle pb-4">
+                  <h3 className="text-base font-extrabold text-primary font-heading uppercase flex items-center gap-2">
                     <PieIcon className="w-5 h-5 text-cyan-400" />
                     <span>National Escrow Pool</span>
                   </h3>
@@ -588,22 +608,22 @@ export const AnalyticsSuitePage: React.FC = () => {
                   </ResponsiveContainer>
                 </div>
 
-                <div className="space-y-3 font-mono text-xs border-t border-[#D6D0C4] pt-4">
+                <div className="space-y-3 font-mono text-xs border-t border-subtle pt-4">
                   <div className="flex items-center justify-between">
                     <span className="text-emerald-400 font-bold flex items-center gap-2">
                       <span className="w-3 h-3 rounded-full bg-emerald-400 block" />
                       Released to Contractors:
                     </span>
-                    <strong className="text-[#1C1917]">₹44.18 Cr (45.7%)</strong>
+                    <strong className="text-primary">₹44.18 Cr (45.7%)</strong>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-cyan-400 font-bold flex items-center gap-2">
                       <span className="w-3 h-3 rounded-full bg-cyan-400 block" />
                       Locked in Smart Vaults:
                     </span>
-                    <strong className="text-[#1C1917]">₹52.40 Cr (54.3%)</strong>
+                    <strong className="text-primary">₹52.40 Cr (54.3%)</strong>
                   </div>
-                  <div className="p-3 rounded-xl bg-[#EAE5DC] border border-[#D6D0C4] text-[11px] text-[#57534E] leading-normal">
+                  <div className="p-3 rounded-xl bg-surface-secondary border border-subtle text-[11px] text-secondary leading-normal">
                     ⚡ All locked funds are governed entirely by autonomous smart contracts with zero human override privileges.
                   </div>
                 </div>
@@ -624,40 +644,40 @@ export const AnalyticsSuitePage: React.FC = () => {
             exit={{ opacity: 0, y: -15 }}
             className="space-y-6"
           >
-            <Card className="p-6 bg-[#F7F5F0] border border-yellow-500/40 shadow-xl space-y-6">
-              <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4 flex-wrap gap-2">
+            <Card className="p-6 bg-surface border border-yellow-500/40 shadow-xl space-y-6">
+              <div className="flex items-center justify-between border-b border-subtle pb-4 flex-wrap gap-2">
                 <div>
-                  <h3 className="text-lg font-black text-[#1C1917] font-sans uppercase flex items-center gap-2">
+                  <h3 className="text-lg font-black text-primary font-heading uppercase flex items-center gap-2">
                     <Flame className="w-5 h-5 text-yellow-400 animate-bounce" />
                     <span>x402 Micro-Gas Optimization & Etherscan Throughput</span>
                   </h3>
-                  <span className="text-xs text-[#57534E] font-mono">Consistently clearing 1,420 TPS at $0.05 USDC per validation challenge</span>
+                  <span className="text-xs text-secondary font-mono">Consistently clearing 1,420 TPS at $0.05 USDC per validation challenge</span>
                 </div>
                 <Badge variant="amber">GAS SAVINGS: 94.2%</Badge>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div className="p-5 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-2">
-                  <span className="text-[10px] text-[#57534E] uppercase font-bold">Total Smart Contract Calls</span>
-                  <div className="text-3xl font-black text-yellow-400 font-sans">14,820 <span className="text-xs font-mono text-[#44403C]">Invocations</span></div>
+                <div className="p-5 rounded-2xl bg-surface border border-subtle space-y-2">
+                  <span className="text-[10px] text-secondary uppercase font-bold">Total Smart Contract Calls</span>
+                  <div className="text-3xl font-black text-yellow-400 font-heading">14,820 <span className="text-xs font-mono text-primary">Invocations</span></div>
                   <span className="text-xs text-emerald-400 block">100% On-Chain finality rate</span>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-2">
-                  <span className="text-[10px] text-[#57534E] uppercase font-bold">Avg x402 Macaroon Gas Fee</span>
-                  <div className="text-3xl font-black text-cyan-400 font-sans">$0.05 <span className="text-xs font-mono text-[#44403C]">USDC</span></div>
+                <div className="p-5 rounded-2xl bg-surface border border-subtle space-y-2">
+                  <span className="text-[10px] text-secondary uppercase font-bold">Avg x402 Macaroon Gas Fee</span>
+                  <div className="text-3xl font-black text-cyan-400 font-heading">$0.05 <span className="text-xs font-mono text-primary">USDC</span></div>
                   <span className="text-xs text-cyan-300 block">Zero banking transaction commissions</span>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-2">
-                  <span className="text-[10px] text-[#57534E] uppercase font-bold">Immutable Receipt Stamping</span>
-                  <div className="text-3xl font-black text-emerald-400 font-sans">100% <span className="text-xs font-mono text-[#44403C]">Sync Rate</span></div>
-                  <span className="text-xs text-[#57534E] block">RSA-4096 cryptographic signatures</span>
+                <div className="p-5 rounded-2xl bg-surface border border-subtle space-y-2">
+                  <span className="text-[10px] text-secondary uppercase font-bold">Immutable Receipt Stamping</span>
+                  <div className="text-3xl font-black text-emerald-400 font-heading">100% <span className="text-xs font-mono text-primary">Sync Rate</span></div>
+                  <span className="text-xs text-secondary block">RSA-4096 cryptographic signatures</span>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#EAE5DC] border border-[#D6D0C4] flex items-center justify-between text-xs">
-                <span className="text-[#44403C] font-mono">
+              <div className="p-4 rounded-2xl bg-surface-secondary border border-subtle flex items-center justify-between text-xs">
+                <span className="text-primary font-mono">
                   ⛓️ Active Consensus Layer: <strong className="text-yellow-400">SIH Sovereign L1 (Chain ID #402)</strong>
                 </span>
                 <Button variant="outline" size="sm" onClick={() => alert('Viewing live RPC validator endpoint status...')}>
@@ -679,14 +699,14 @@ export const AnalyticsSuitePage: React.FC = () => {
             exit={{ opacity: 0, y: -15 }}
             className="space-y-6"
           >
-            <Card className="p-6 bg-[#F7F5F0] border border-purple-500/40 shadow-xl space-y-6">
-              <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4 flex-wrap gap-2">
+            <Card className="p-6 bg-surface border border-purple-500/40 shadow-xl space-y-6">
+              <div className="flex items-center justify-between border-b border-subtle pb-4 flex-wrap gap-2">
                 <div>
-                  <h3 className="text-base font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+                  <h3 className="text-base font-extrabold text-primary font-heading uppercase flex items-center gap-2">
                     <Award className="w-5 h-5 text-purple-400" />
                     <span>Contractor Performance & AI Clearance Leaderboard</span>
                   </h3>
-                  <span className="text-xs text-[#57534E] font-mono">Tracking proof quality, first-attempt verification rate, and execution speed</span>
+                  <span className="text-xs text-secondary font-mono">Tracking proof quality, first-attempt verification rate, and execution speed</span>
                 </div>
                 <Badge variant="blue">48 ONBOARDED FIRMS</Badge>
               </div>
@@ -694,7 +714,7 @@ export const AnalyticsSuitePage: React.FC = () => {
               <div className="overflow-x-auto">
                 <table className="w-full text-left font-mono text-xs">
                   <thead>
-                    <tr className="border-b border-[#D6D0C4] text-[#57534E] uppercase text-[10px]">
+                    <tr className="border-b border-subtle text-secondary uppercase text-[10px]">
                       <th className="py-3 px-3 font-bold">Contractor Firm // Wallet</th>
                       <th className="py-3 px-3 font-bold">Assigned Projects</th>
                       <th className="py-3 px-3 font-bold">AI First-Try Success Rate</th>
@@ -707,22 +727,22 @@ export const AnalyticsSuitePage: React.FC = () => {
                     {contractorAnalyticsData.map((c) => (
                       <tr key={c.id} className="hover:bg-purple-500/5 transition-colors">
                         <td className="py-4 px-3">
-                          <span className="font-sans font-extrabold text-[#1C1917] text-sm block">{c.name}</span>
+                          <span className="font-heading font-extrabold text-primary text-sm block">{c.name}</span>
                           <span className="text-[10px] text-cyan-400 font-mono block">{c.wallet}</span>
                         </td>
-                        <td className="py-4 px-3 font-bold text-[#1C1917]">
+                        <td className="py-4 px-3 font-bold text-primary">
                           {c.projects} Active Corridors
                         </td>
                         <td className="py-4 px-3">
-                          <span className={`font-black text-sm font-sans ${c.successRate > 98 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                          <span className={`font-black text-sm font-heading ${c.successRate > 98 ? 'text-emerald-400' : 'text-amber-400'}`}>
                             {c.successRate}%
                           </span>
-                          <span className="text-[10px] text-[#78716C] block">AI Confidence Pass</span>
+                          <span className="text-[10px] text-secondary block">AI Confidence Pass</span>
                         </td>
-                        <td className="py-4 px-3 font-extrabold text-[#44403C]">
+                        <td className="py-4 px-3 font-extrabold text-primary">
                           {c.avgCompletion}
                         </td>
-                        <td className="py-4 px-3 font-sans font-black text-emerald-400 text-base">
+                        <td className="py-4 px-3 font-heading font-black text-emerald-400 text-base">
                           {c.totalSettled}
                         </td>
                         <td className="py-4 px-3 text-right">
@@ -750,14 +770,14 @@ export const AnalyticsSuitePage: React.FC = () => {
             exit={{ opacity: 0, y: -15 }}
             className="space-y-6"
           >
-            <Card className="p-6 bg-[#F7F5F0] border border-cyan-500/40 shadow-xl space-y-6">
-              <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4 flex-wrap gap-2">
+            <Card className="p-6 bg-surface border border-cyan-500/40 shadow-xl space-y-6">
+              <div className="flex items-center justify-between border-b border-subtle pb-4 flex-wrap gap-2">
                 <div>
-                  <h3 className="text-base font-extrabold text-[#1C1917] font-sans uppercase flex items-center gap-2">
+                  <h3 className="text-base font-extrabold text-primary font-heading uppercase flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-cyan-400 animate-pulse" />
                     <span>Geographic Infrastructure Density & Corridor Heatmap</span>
                   </h3>
-                  <span className="text-xs text-[#57534E] font-mono">Interactive inspection of multi-crore investments across key Indian districts</span>
+                  <span className="text-xs text-secondary font-mono">Interactive inspection of multi-crore investments across key Indian districts</span>
                 </div>
                 <Badge variant="cyan">6 CRITICAL HUBS ACTIVE</Badge>
               </div>
@@ -766,26 +786,26 @@ export const AnalyticsSuitePage: React.FC = () => {
                 {projectHeatmapData.map((h) => (
                   <div 
                     key={h.id} 
-                    className="p-5 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between space-y-4 group cursor-pointer"
+                    className="p-5 rounded-2xl bg-surface border border-subtle hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between space-y-4 group cursor-pointer"
                     onClick={() => alert(`Opening deep GIS telemetry map for ${h.district} (${h.state})...`)}
                   >
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
                         <Badge variant={h.color as any} size="sm">{h.density}</Badge>
-                        <span className="text-[#57534E] text-[10px] font-bold uppercase">{h.state}</span>
+                        <span className="text-secondary text-[10px] font-bold uppercase">{h.state}</span>
                       </div>
-                      <h4 className="text-base font-sans font-extrabold text-[#1C1917] group-hover:text-cyan-300 transition-colors">
+                      <h4 className="text-base font-heading font-extrabold text-primary group-hover:text-cyan-300 transition-colors">
                         {h.district}
                       </h4>
                     </div>
 
-                    <div className="pt-3 border-t border-[#D6D0C4] flex items-center justify-between text-xs">
+                    <div className="pt-3 border-t border-subtle flex items-center justify-between text-xs">
                       <div>
-                        <span className="text-[10px] text-[#57534E] block">Allocated Vault Budget:</span>
-                        <strong className="text-emerald-400 font-black font-sans text-sm">{h.budget}</strong>
+                        <span className="text-[10px] text-secondary block">Allocated Vault Budget:</span>
+                        <strong className="text-emerald-400 font-black font-heading text-sm">{h.budget}</strong>
                       </div>
                       <div className="text-right">
-                        <span className="text-[10px] text-[#57534E] block">Operational Status:</span>
+                        <span className="text-[10px] text-secondary block">Operational Status:</span>
                         <strong className={`font-mono text-[11px] ${h.status.includes('NORMAL') ? 'text-cyan-300' : 'text-amber-400'}`}>
                           ● {h.status}
                         </strong>
@@ -811,11 +831,11 @@ export const AnalyticsSuitePage: React.FC = () => {
           >
             <div className="flex items-center justify-between px-2">
               <div>
-                <h3 className="text-xl font-black text-[#1C1917] font-sans tracking-tight flex items-center gap-2.5">
+                <h3 className="text-xl font-black text-primary font-heading tracking-tight flex items-center gap-2.5">
                   <Flame className="w-6 h-6 text-amber-400 animate-bounce" />
                   <span>AI Predictive Foresight & Risk Horizon</span>
                 </h3>
-                <p className="text-xs text-[#57534E] font-mono">
+                <p className="text-xs text-secondary font-mono">
                   Autonomous deep learning models forecasting weather disruptions, structural wear, and future escrow disbursement trajectories.
                 </p>
               </div>
@@ -849,14 +869,14 @@ export const AnalyticsSuitePage: React.FC = () => {
             exit={{ opacity: 0, y: -15 }}
             className="max-w-4xl mx-auto space-y-6"
           >
-            <Card className="p-8 bg-[#F7F5F0] border border-emerald-500/40 shadow-2xl space-y-8">
-              <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-5 flex-wrap gap-2">
+            <Card className="p-8 bg-surface border border-emerald-500/40 shadow-2xl space-y-8">
+              <div className="flex items-center justify-between border-b border-subtle pb-5 flex-wrap gap-2">
                 <div>
-                  <h3 className="text-xl font-black text-[#1C1917] font-sans uppercase flex items-center gap-2.5">
+                  <h3 className="text-xl font-black text-primary font-heading uppercase flex items-center gap-2.5">
                     <FileText className="w-6 h-6 text-emerald-400" />
                     <span>Executive Analytics Report & Export Center</span>
                   </h3>
-                  <p className="text-xs text-[#57534E] font-mono mt-1">
+                  <p className="text-xs text-secondary font-mono mt-1">
                     Generate digitally verified SIH inspection reports, raw dataset CSVs, and comprehensive PDF analytics decks.
                   </p>
                 </div>
@@ -864,13 +884,13 @@ export const AnalyticsSuitePage: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="p-6 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-4 flex flex-col justify-between">
+                <div className="p-6 rounded-2xl bg-surface border border-subtle space-y-4 flex flex-col justify-between">
                   <div className="space-y-2">
                     <div className="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-black">
                       PDF
                     </div>
-                    <h4 className="text-base font-sans font-extrabold text-[#1C1917]">Executive SIH Deck (PDF)</h4>
-                    <p className="text-xs text-[#57534E] font-mono leading-relaxed">
+                    <h4 className="text-base font-heading font-extrabold text-primary">Executive SIH Deck (PDF)</h4>
+                    <p className="text-xs text-secondary font-mono leading-relaxed">
                       Comprehensive graphical report featuring all Recharts model curves, contractor rankings, and national savings calculations.
                     </p>
                   </div>
@@ -878,20 +898,20 @@ export const AnalyticsSuitePage: React.FC = () => {
                     variant="primary"
                     disabled={isExporting}
                     onClick={() => handleExport('Executive PDF Deck')}
-                    icon={<Download className="w-4 h-4 text-[#1C1917]" />}
+                    icon={<Download className="w-4 h-4 text-primary" />}
                     className="w-full font-sans font-bold"
                   >
                     {isExporting ? 'Generating PDF...' : 'Download Executive PDF'}
                   </Button>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-[#F7F5F0] border border-[#D6D0C4] space-y-4 flex flex-col justify-between">
+                <div className="p-6 rounded-2xl bg-surface border border-subtle space-y-4 flex flex-col justify-between">
                   <div className="space-y-2">
                     <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-black">
                       CSV
                     </div>
-                    <h4 className="text-base font-sans font-extrabold text-[#1C1917]">Raw Telemetry Dataset (CSV)</h4>
-                    <p className="text-xs text-[#57534E] font-mono leading-relaxed">
+                    <h4 className="text-base font-heading font-extrabold text-primary">Raw Telemetry Dataset (CSV)</h4>
+                    <p className="text-xs text-secondary font-mono leading-relaxed">
                       Unfiltered tabular CSV feed of all 2,182 structural EXIF inspections, timestamps, gas fees, and hash signatures.
                     </p>
                   </div>
@@ -900,7 +920,7 @@ export const AnalyticsSuitePage: React.FC = () => {
                     disabled={isExporting}
                     onClick={() => handleExport('Raw Telemetry CSV')}
                     icon={<ExternalLink className="w-4 h-4 text-emerald-400" />}
-                    className="w-full font-sans font-bold text-[#44403C]"
+                    className="w-full font-sans font-bold text-primary"
                   >
                     {isExporting ? 'Exporting CSV...' : 'Export Telemetry CSV'}
                   </Button>

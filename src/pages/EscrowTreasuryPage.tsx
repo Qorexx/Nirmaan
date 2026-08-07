@@ -28,26 +28,26 @@ export const EscrowTreasuryPage: React.FC = () => {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-[#1C1917] font-sans tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-black text-primary font-heading tracking-tight leading-tight">
               Sovereign Escrow Treasury & x402 Allowance Hub
             </h1>
 
-            <p className="text-xs sm:text-sm text-[#44403C] font-mono leading-relaxed">
+            <p className="text-xs sm:text-sm text-primary font-mono leading-relaxed">
               Real-time multi-asset liquidity supervision managing cryptographic infrastructure reserves, automated HTTP 402 machine-to-machine allowances, and instantaneous yield distributions.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
-            <div className="px-5 py-3 rounded-2xl bg-[#F7F5F0] border-2 border-amber-500/40 text-center sm:text-right shadow-2xl w-full sm:w-auto">
-              <span className="text-[10px] text-[#57534E] uppercase font-bold block">Total Value Protected (TVL)</span>
-              <span className="text-3xl font-black text-amber-400 font-sans tracking-tight">₹{(totalProtectedValue / 10000000).toFixed(2)} <span className="text-xs font-mono text-[#44403C]">Cr</span></span>
+            <div className="px-5 py-3 rounded-2xl bg-surface border-2 border-amber-500/40 text-center sm:text-right shadow-2xl w-full sm:w-auto">
+              <span className="text-[10px] text-secondary uppercase font-bold block">Total Value Protected (TVL)</span>
+              <span className="text-3xl font-black text-amber-400 font-heading tracking-tight">₹{(totalProtectedValue / 10000000).toFixed(2)} <span className="text-xs font-mono text-primary">Cr</span></span>
             </div>
             <Button
               variant="x402"
               size="lg"
               onClick={() => runLiveSimulation()}
               icon={<Zap className="w-5 h-5 fill-current animate-bounce" />}
-              className="w-full sm:w-auto shadow-2xl font-sans font-black tracking-wider px-6 py-4"
+              className="w-full sm:w-auto shadow-2xl font-heading font-black tracking-wider px-6 py-4"
             >
               ▶ Test Payout Tranche
             </Button>
@@ -90,14 +90,14 @@ export const EscrowTreasuryPage: React.FC = () => {
       </div>
 
       {/* 3. MASTER SOVEREIGN VAULT REGISTRY TABLE */}
-      <Card className="p-6 bg-[#F7F5F0] border border-amber-500/40 shadow-2xl space-y-6">
-        <div className="flex items-center justify-between border-b border-[#D6D0C4] pb-4 flex-wrap gap-2">
+      <Card className="p-6 bg-surface border border-amber-500/40 shadow-2xl space-y-6">
+        <div className="flex items-center justify-between border-b border-subtle pb-4 flex-wrap gap-2">
           <div>
-            <h3 className="text-lg font-black text-[#1C1917] font-sans uppercase tracking-wider flex items-center gap-2">
+            <h3 className="text-lg font-black text-primary font-heading uppercase tracking-wider flex items-center gap-2">
               <Layers className="w-5 h-5 text-amber-400" />
               <span>National Escrow Smart Vault Register</span>
             </h3>
-            <span className="text-xs text-[#57534E] font-mono">Real-time inspection of active multi-crore project liquidity tranches</span>
+            <span className="text-xs text-secondary font-mono">Real-time inspection of active multi-crore project liquidity tranches</span>
           </div>
           <Badge variant="emerald" size="md">✔ 100% LEDGER SYNCED</Badge>
         </div>
@@ -105,7 +105,7 @@ export const EscrowTreasuryPage: React.FC = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left font-mono text-xs">
             <thead>
-              <tr className="border-b border-[#D6D0C4] text-[#57534E] uppercase text-[10px]">
+              <tr className="border-b border-subtle text-secondary uppercase text-[10px]">
                 <th className="py-3 px-3 font-bold">Project & Vault Address</th>
                 <th className="py-3 px-3 font-bold">Contractor Recipient</th>
                 <th className="py-3 px-3 font-bold">Total Budget Pool</th>
@@ -118,19 +118,19 @@ export const EscrowTreasuryPage: React.FC = () => {
               {projects.map((p, index) => (
                 <tr key={p.id} className="hover:bg-amber-500/5 transition-colors group cursor-pointer" onClick={() => setSelectedVault(p.id)}>
                   <td className="py-4 px-3">
-                    <span className="font-sans font-extrabold text-[#1C1917] text-sm block group-hover:text-amber-300 transition-colors">{p.name}</span>
+                    <span className="font-heading font-extrabold text-primary text-sm block group-hover:text-amber-300 transition-colors">{p.name}</span>
                     <span className="text-[10px] text-cyan-400 font-mono block">0x7a8...E39{index + 1} // ID: {p.id}</span>
                   </td>
                   <td className="py-4 px-3">
                     <span className="font-bold text-emerald-400 block">{p.contractor}</span>
-                    <span className="text-[10px] text-[#57534E] block">Bank verified L402 target</span>
+                    <span className="text-[10px] text-secondary block">Bank verified L402 target</span>
                   </td>
-                  <td className="py-4 px-3 font-sans font-black text-[#1C1917] text-sm">
+                  <td className="py-4 px-3 font-heading font-black text-primary text-sm">
                     ₹{(p.budget / 100000).toFixed(1)} Lakhs
                   </td>
                   <td className="py-4 px-3">
                     <span className="text-amber-400 font-extrabold block">₹{((p.lockedAmount || p.budget * 0.5) / 100000).toFixed(1)} Lakhs</span>
-                    <span className="text-[9px] text-[#78716C] uppercase">Awaiting AI Proof</span>
+                    <span className="text-[9px] text-secondary uppercase">Awaiting AI Proof</span>
                   </td>
                   <td className="py-4 px-3">
                     <span className="text-emerald-400 font-extrabold block">₹{((p.releasedAmount || p.budget * 0.5) / 100000).toFixed(1)} Lakhs</span>

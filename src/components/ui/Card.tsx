@@ -48,7 +48,7 @@ export const CardHeader: React.FC<{ children: React.ReactNode; className?: strin
 );
 
 export const CardTitle: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <h3 className={`text-lg sm:text-xl font-black font-sans text-primary tracking-tight leading-none ${className}`}>{children}</h3>
+  <h3 className={`text-lg sm:text-xl font-black font-heading text-primary tracking-tight leading-none ${className}`}>{children}</h3>
 );
 
 export const CardDescription: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (

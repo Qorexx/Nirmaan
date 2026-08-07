@@ -31,7 +31,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = ({
       case 'x402': return 'bg-amber-50 border-amber-300 hover:border-amber-400 text-amber-950';
       case 'success': return 'bg-[#EAF5F0] border-emerald-300 hover:border-emerald-400 text-emerald-950';
       case 'normal':
-      default: return 'bg-[#F7F5F0] border-[#D6D0C4] hover:border-[#818CF8] text-[#1C1917]';
+      default: return 'bg-surface border-subtle hover:border-[#818CF8] text-primary';
     }
   };
 
@@ -51,22 +51,22 @@ export const NotificationCard: React.FC<NotificationCardProps> = ({
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-[#EAE5DC] border border-[#D6D0C4] shrink-0 shadow-2xs">
+          <div className="p-2.5 rounded-xl bg-surface-secondary border border-subtle shrink-0 shadow-2xs">
             {getIcon()}
           </div>
           <div>
-            <h4 className="font-black text-[#1C1917] text-base font-sans tracking-tight flex items-center gap-2">
+            <h4 className="font-black text-primary text-base font-heading tracking-tight flex items-center gap-2">
               <span>{title}</span>
-              <span className="text-[10px] font-mono font-bold text-[#78716C]">[{timestamp}]</span>
+              <span className="text-[10px] font-mono font-bold text-secondary">[{timestamp}]</span>
             </h4>
-            <p className="text-xs text-[#57534E] font-mono mt-1 leading-relaxed font-semibold">{description}</p>
+            <p className="text-xs text-secondary font-mono mt-1 leading-relaxed font-semibold">{description}</p>
           </div>
         </div>
 
         {onDismiss && (
           <button
             onClick={onDismiss}
-            className="p-1.5 rounded-lg hover:bg-[#EAE5DC] text-[#78716C] hover:text-[#1C1917] transition-colors"
+            className="p-1.5 rounded-lg hover:bg-surface-secondary text-secondary hover:text-primary transition-colors"
             title="Dismiss Notification"
           >
             <X className="w-4 h-4" />

@@ -16,8 +16,8 @@ export const DesktopNav: React.FC = () => {
     { id: 'treasury', label: 'Treasury', icon: <Wallet className="w-3.5 h-3.5 text-amber-400" /> },
     { id: 'explorer', label: 'Trust Layer', icon: <Cpu className="w-3.5 h-3.5 text-yellow-400" />, badge: 'x402' },
     { id: 'analytics', label: 'Analytics', icon: <BarChart3 className="w-3.5 h-3.5 text-purple-400" /> },
-    { id: 'compliance', label: 'Compliance', icon: <FileText className="w-3.5 h-3.5 text-[#44403C]" /> },
-    { id: 'settings', label: 'Settings', icon: <Settings className="w-3.5 h-3.5 text-[#57534E]" /> },
+    { id: 'compliance', label: 'Compliance', icon: <FileText className="w-3.5 h-3.5 text-primary" /> },
+    { id: 'settings', label: 'Settings', icon: <Settings className="w-3.5 h-3.5 text-secondary" /> },
   ];
 
   return (
@@ -31,7 +31,7 @@ export const DesktopNav: React.FC = () => {
             className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all whitespace-nowrap ${
               isActive
                 ? 'bg-gradient-to-r from-blue-600/30 to-cyan-500/25 text-cyan-300 border border-cyan-400/50 shadow-md shadow-cyan-500/10'
-                : 'text-[#57534E] hover:text-[#1C1917] hover:bg-[#EAE5DC]'
+                : 'text-secondary hover:text-primary hover:bg-surface-secondary'
             }`}
           >
             {it.icon}

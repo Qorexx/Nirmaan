@@ -30,7 +30,7 @@ export const AnimatedBorder: React.FC<AnimatedBorderProps> = ({
       <div className={`absolute inset-0 bg-gradient-to-r ${getGradient()} animate-pulse shadow-md`} />
       
       {/* Inner Content Block */}
-      <div className={`relative z-10 w-full h-full rounded-[22px] bg-[#F7F5F0] ${className}`}>
+      <div className={`relative z-10 w-full h-full rounded-[22px] bg-surface ${className}`}>
         {children}
       </div>
     </div>

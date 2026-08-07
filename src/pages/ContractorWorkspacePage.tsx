@@ -51,6 +51,7 @@ import {
   StatCard, 
   AnimatedBorder
 } from '../components/ui';
+import { EscrowCard } from '../components/ui/EscrowCard';
 
 // ============================================================================
 // ZOD METADATA VALIDATION SCHEMA
@@ -141,7 +142,7 @@ export const ContractorWorkspacePage: React.FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<UploadFile[]>([]);
   const [activeTab, setActiveTab] = useState<'upload' | 'gallery' | 'timeline' | 'notifications'>('upload');
   const [lightboxItem, setLightboxItem] = useState<MediaItem | null>(null);
-  const [overallWorkflowState, setOverallWorkflowState] = useState<'idle' | 'uploading' | 'ai_processing' | 'approved'>('idle');
+  const [overallWorkflowState, setOverallWorkflowState] = useState<'idle' | 'uploading' | 'uploaded' | 'ai_processing' | 'approved'>('idle');
   
   // Interactive notification center items with matched severity typings
   const [notifications, setNotifications] = useState([
@@ -213,19 +214,14 @@ export const ContractorWorkspacePage: React.FC = () => {
         if (currentProgress >= 100) {
           currentProgress = 100;
           clearInterval(interval);
-          setUploadedFiles(prev => prev.map(f => f.id === file.id ? { ...f, progress: 100, status: 'uploaded' } : f));
-          
-          // Automatically shift to AI processing animation after completion!
-          setTimeout(() => {
-            setUploadedFiles(prev => prev.map(f => f.id === file.id ? { ...f, status: 'processing' } : f));
-            setOverallWorkflowState('ai_processing');
-            
-            // Finalize as verified!
-            setTimeout(() => {
-              setUploadedFiles(prev => prev.map(f => f.id === file.id ? { ...f, status: 'verified' } : f));
-              setOverallWorkflowState('approved');
-            }, 1800);
-          }, 800);
+          setUploadedFiles(prev => {
+            const updated = prev.map(f => f.id === file.id ? { ...f, progress: 100, status: 'uploaded' as const } : f);
+            // Check if all are uploaded
+            if (updated.every(f => f.progress === 100)) {
+              setOverallWorkflowState('uploaded');
+            }
+            return updated;
+          });
         } else {
           setUploadedFiles(prev => prev.map(f => f.id === file.id ? { ...f, progress: currentProgress } : f));
         }
@@ -261,24 +257,38 @@ export const ContractorWorkspacePage: React.FC = () => {
       return;
     }
 
-    setOverallWorkflowState('approved');
-    // Add a live success notification
-    setNotifications(prev => [
-      {
-        id: Date.now().toString(),
-        title: 'Proof Bundle Submitted & Verified',
-        description: `Uploaded ${uploadedFiles.length} multi-modal proof files with GPS anchor ${data.gpsCoordinates}. Initiating autonomous x402 disbursement!`,
-        type: 'success' as const,
-        time: 'Just now'
-      },
-      ...prev
-    ]);
+    if (overallWorkflowState === 'uploading') {
+      alert('Please wait for files to finish uploading before submitting.');
+      return;
+    }
 
-    // Kick off Mission Control live presentation demo!
-    const targetProj = projects[0] || undefined;
+    // 1. Enter AI Processing State
+    setOverallWorkflowState('ai_processing');
+    setUploadedFiles(prev => prev.map(f => ({ ...f, status: 'processing' })));
+
+    // 2. Simulate AI Analysis & Final Approval Delay
     setTimeout(() => {
-      runLiveSimulation(targetProj);
-    }, 1000);
+      setUploadedFiles(prev => prev.map(f => ({ ...f, status: 'verified' })));
+      setOverallWorkflowState('approved');
+      
+      // Add a live success notification
+      setNotifications(prev => [
+        {
+          id: Date.now().toString(),
+          title: 'Proof Bundle Submitted & Verified',
+          description: `Uploaded ${uploadedFiles.length} multi-modal proof files with GPS anchor ${data.gpsCoordinates}. Initiating autonomous x402 disbursement!`,
+          type: 'success' as const,
+          time: 'Just now'
+        },
+        ...prev
+      ]);
+
+      // Kick off Mission Control live presentation demo!
+      const targetProj = projects[0] || undefined;
+      setTimeout(() => {
+        runLiveSimulation(targetProj);
+      }, 1000);
+    }, 2500);
   };
 
   // Helper type for timeline status
@@ -313,7 +323,7 @@ export const ContractorWorkspacePage: React.FC = () => {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-primary font-sans tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-black text-primary font-heading tracking-tight leading-tight">
               Contractor Proof Suite & Auto-Settlement Hub
             </h1>
 
@@ -328,7 +338,7 @@ export const ContractorWorkspacePage: React.FC = () => {
               size="lg"
               onClick={() => runLiveSimulation()}
               icon={<Zap className="w-5 h-5 fill-current animate-bounce" />}
-              className="w-full sm:w-auto shadow-2xl font-sans font-black"
+              className="w-full sm:w-auto shadow-2xl font-heading font-black"
             >
               ▶ View On Mission Control
             </Button>
@@ -439,7 +449,7 @@ export const ContractorWorkspacePage: React.FC = () => {
                 <div className="p-6 bg-surface border-b border-subtle flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <UploadCloud className="w-5 h-5 text-accent-indigo animate-bounce" />
-                    <span className="text-base font-extrabold text-primary font-sans uppercase tracking-wider">
+                    <span className="text-base font-extrabold text-primary font-heading uppercase tracking-wider">
                       Step 1: Upload Multi-Modal Field Proofs
                     </span>
                   </div>
@@ -463,7 +473,7 @@ export const ContractorWorkspacePage: React.FC = () => {
                       </div>
 
                       <div className="space-y-1">
-                        <h4 className="text-lg font-black text-primary font-sans">
+                        <h4 className="text-lg font-black text-primary font-heading">
                           {isDragActive ? 'Drop files here to sync immediately...' : 'Drag & Drop field imagery, videos, or PDFs'}
                         </h4>
                         <p className="text-xs text-secondary font-mono">
@@ -581,7 +591,7 @@ export const ContractorWorkspacePage: React.FC = () => {
               <Card className="p-0 border border-subtle bg-surface shadow-xl overflow-hidden">
                 <div className="p-6 bg-surface border-b border-subtle flex items-center justify-between flex-wrap gap-2">
                   <div>
-                    <h3 className="text-base font-extrabold text-primary font-sans uppercase tracking-wider flex items-center gap-2">
+                    <h3 className="text-base font-extrabold text-primary font-heading uppercase tracking-wider flex items-center gap-2">
                       <FileCheck2 className="w-5 h-5 text-emerald-400" />
                       <span>Step 2: EXIF GPS & Engineering Metadata Form</span>
                     </h3>
@@ -697,7 +707,7 @@ export const ContractorWorkspacePage: React.FC = () => {
                       size="lg"
                       disabled={isSubmitting || uploadedFiles.length === 0}
                       icon={<Send className="w-5 h-5 fill-current animate-pulse" />}
-                      className="w-full sm:w-auto font-sans font-black tracking-wider shadow-2xl px-8"
+                      className="w-full sm:w-auto font-heading font-black tracking-wider shadow-2xl px-8"
                     >
                       🚀 Submit Proof & Trigger Auto-Settlement
                     </Button>
@@ -713,7 +723,7 @@ export const ContractorWorkspacePage: React.FC = () => {
               <Card className="p-6 bg-surface border border-subtle shadow-xl space-y-6">
                 <div className="flex items-center justify-between border-b border-subtle pb-4">
                   <div>
-                    <h3 className="text-base font-extrabold text-primary font-sans uppercase tracking-wider flex items-center gap-2">
+                    <h3 className="text-base font-extrabold text-primary font-heading uppercase tracking-wider flex items-center gap-2">
                       <Building2 className="w-5 h-5 text-accent-indigo" />
                       <span>Project Specification Hub</span>
                     </h3>
@@ -725,7 +735,7 @@ export const ContractorWorkspacePage: React.FC = () => {
                 <div className="space-y-4 font-mono text-xs">
                   <div className="space-y-1">
                     <span className="text-[10px] text-secondary uppercase font-bold block">Project Name:</span>
-                    <span className="text-sm font-black text-primary font-sans block leading-tight">
+                    <span className="text-sm font-black text-primary font-heading block leading-tight">
                       NH-44 Expressway Re-surfacing & Bridge Augmentation
                     </span>
                   </div>
@@ -751,7 +761,7 @@ export const ContractorWorkspacePage: React.FC = () => {
                   <div className="grid grid-cols-2 gap-3 pt-2 border-t border-subtle">
                     <div className="bg-surface-secondary p-3 rounded-xl border border-subtle">
                       <span className="text-[10px] text-secondary uppercase font-bold block">Active Milestone:</span>
-                      <span className="text-accent-gold font-black text-base font-sans block mt-0.5">Tranche 3 / 6</span>
+                      <span className="text-accent-gold font-black text-base font-heading block mt-0.5">Tranche 3 / 6</span>
                       <span className="text-[9px] text-secondary">Sub-grade paving</span>
                     </div>
 
@@ -763,18 +773,10 @@ export const ContractorWorkspacePage: React.FC = () => {
                   </div>
 
                   {/* PREMIUM THEME-AWARE ESCROW VAULT LOCK INDICATOR */}
-                  <div className="p-5 rounded-2xl bg-surface-secondary border border-subtle text-center space-y-2 shadow-sm relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent-indigo/5 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="text-[11px] font-bold text-accent-indigo uppercase tracking-widest block relative z-10 flex items-center justify-center gap-1.5">
-                      <Lock className="w-3.5 h-3.5" /> Escrow Amount Secured:
-                    </span>
-                    <div className="text-3xl font-black text-primary font-sans tracking-tight relative z-10">
-                      ₹14,50,000 <span className="text-xs font-mono text-secondary">USDC</span>
-                    </div>
-                    <span className="text-[10px] font-mono text-secondary block border-t border-subtle/50 pt-2 mt-2 relative z-10">
-                      Smart Vault: <strong className="text-accent-emerald select-all">0x7a89...E391</strong>
-                    </span>
-                  </div>
+                  <EscrowCard 
+                    amount="₹14,50,000" 
+                    isLocked={overallWorkflowState !== 'approved'} 
+                  />
 
                   {/* Live Verification Status Badge */}
                   <div className="flex items-center justify-between p-3.5 rounded-xl bg-surface-secondary border border-subtle">
@@ -831,7 +833,7 @@ export const ContractorWorkspacePage: React.FC = () => {
           >
             <div className="flex items-center justify-between bg-surface p-5 rounded-2xl border border-subtle flex-wrap gap-4">
               <div>
-                <h3 className="text-lg font-black text-primary font-sans uppercase tracking-tight flex items-center gap-2">
+                <h3 className="text-lg font-black text-primary font-heading uppercase tracking-tight flex items-center gap-2">
                   <ImageIcon className="w-5 h-5 text-accent-indigo" />
                   <span>Sovereign Proof Media Gallery & Digital Twins</span>
                 </h3>
@@ -877,7 +879,7 @@ export const ContractorWorkspacePage: React.FC = () => {
                   </div>
 
                   <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
-                    <h4 className="text-sm font-extrabold text-primary font-sans truncate" title={media.title}>
+                    <h4 className="text-sm font-extrabold text-primary font-heading truncate" title={media.title}>
                         {media.title}
                       </h4>
                       <div className="text-[11px] text-secondary font-mono flex items-center justify-between pt-1">
@@ -920,7 +922,7 @@ export const ContractorWorkspacePage: React.FC = () => {
               <Card className="p-8 border border-subtle bg-surface shadow-xl space-y-8">
               <div className="flex items-center justify-between border-b border-subtle pb-5 flex-wrap gap-4">
                 <div>
-                  <h3 className="text-xl font-black text-primary font-sans uppercase tracking-tight flex items-center gap-2.5">
+                  <h3 className="text-xl font-black text-primary font-heading uppercase tracking-tight flex items-center gap-2.5">
                     <Activity className="w-6 h-6 text-accent-indigo animate-pulse" />
                     <span>L402 Immutable Settlement Timeline</span>
                   </h3>
@@ -1015,7 +1017,7 @@ export const ContractorWorkspacePage: React.FC = () => {
                   <div className="w-24 h-24 mx-auto bg-purple-500/10 rounded-full flex items-center justify-center border border-purple-500/30">
                     <Play className="w-10 h-10 text-purple-500 ml-1" />
                   </div>
-                  <h4 className="text-base font-black text-primary font-sans">4K Drone LiDAR Stream Active</h4>
+                  <h4 className="text-base font-black text-primary font-heading">4K Drone LiDAR Stream Active</h4>
                   <p className="text-xs text-secondary">Streamed from decentralized IPFS node with zero loss quality.</p>
                   <Button variant="outline" icon={<Play className="w-4 h-4 text-cyan-400" />} onClick={() => alert('Playing 4K stream...')}>
                     Launch Playback Buffer
@@ -1026,7 +1028,7 @@ export const ContractorWorkspacePage: React.FC = () => {
                   <div className="w-24 h-24 mx-auto bg-amber-500/10 rounded-full flex items-center justify-center border border-amber-500/30">
                     <FileText className="w-10 h-10 text-amber-500" />
                   </div>
-                  <h4 className="text-base font-black text-primary font-sans">Engineering Lab Stress Test PDF</h4>
+                  <h4 className="text-base font-black text-primary font-heading">Engineering Lab Stress Test PDF</h4>
                   <p className="text-xs text-secondary">Cryptographically stamped with RSA-4096 signature for Ministry audit.</p>
                   <Button variant="primary" icon={<ExternalLink className="w-4 h-4" />} onClick={() => window.open(lightboxItem.url, '_blank')}>
                     Open Document in Viewer
@@ -1039,17 +1041,17 @@ export const ContractorWorkspacePage: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
               <div className="p-4 rounded-xl bg-surface border border-subtle space-y-1">
                 <span className="text-secondary block text-[10px] font-bold uppercase">AI Structural Confidence:</span>
-                <strong className="text-purple-500 font-sans text-xl">98.4%</strong>
+                <strong className="text-purple-500 font-heading text-xl">98.4%</strong>
                 <span className="text-[9px] text-secondary/70 block">Threshold &gt; 90% passed</span>
               </div>
               <div className="p-4 rounded-xl bg-surface border border-subtle space-y-1">
                 <span className="text-secondary block text-[10px] font-bold uppercase">EXIF GPS Anchor:</span>
-                <strong className="text-cyan-500 font-sans text-xl">VALID</strong>
+                <strong className="text-cyan-500 font-heading text-xl">VALID</strong>
                 <span className="text-[9px] text-secondary/70 block">Locked to NH-44 geo-fence</span>
               </div>
               <div className="p-4 rounded-xl bg-surface border border-subtle space-y-1">
                 <span className="text-secondary block text-[10px] font-bold uppercase">Settlement Receipt:</span>
-                <strong className="text-accent-emerald font-sans text-xl">84ms</strong>
+                <strong className="text-accent-emerald font-heading text-xl">84ms</strong>
                 <span className="text-[9px] text-secondary/70 block">Zero human hold latency</span>
               </div>
             </div>

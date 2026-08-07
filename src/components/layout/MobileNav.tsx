@@ -28,7 +28,7 @@ export const MobileNav: React.FC = () => {
   return (
     <>
       {/* Bottom Bar for Smartphone Thumb Reach */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[#F7F5F0]/95 backdrop-blur-xl border-t border-[#D6D0C4] py-2 px-4 flex items-center justify-around z-50 shadow-[0_-6px_25px_rgba(28,25,23,0.08)]">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-xl border-t border-subtle py-2 px-4 flex items-center justify-around z-50 shadow-[0_-6px_25px_rgba(28,25,23,0.08)]">
         {primaryItems.map((item) => {
           const isActive = currentPage === item.id;
           return (
@@ -36,7 +36,7 @@ export const MobileNav: React.FC = () => {
               key={item.id}
               onClick={() => setCurrentPage(item.id)}
               className={`flex flex-col items-center gap-1 px-3 py-1 rounded-xl transition-all select-none ${
-                isActive ? 'text-indigo-700 font-black scale-105' : 'text-[#78716C] hover:text-[#1C1917]'
+                isActive ? 'text-indigo-700 font-black scale-105' : 'text-secondary hover:text-primary'
               }`}
             >
               <span className="relative">
@@ -52,7 +52,7 @@ export const MobileNav: React.FC = () => {
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className={`flex flex-col items-center gap-1 px-3 py-1 rounded-xl transition-all ${
-            isMenuOpen ? 'text-amber-700 font-black scale-105' : 'text-[#78716C] hover:text-[#1C1917]'
+            isMenuOpen ? 'text-amber-700 font-black scale-105' : 'text-secondary hover:text-primary'
           }`}
         >
           <Menu className="w-5 h-5" />
@@ -69,7 +69,7 @@ export const MobileNav: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 bg-[#EAE5DC]/40 backdrop-blur-sm"
+              className="fixed inset-0 bg-surface-secondary/40 backdrop-blur-sm"
             />
 
             <motion.div
@@ -77,13 +77,13 @@ export const MobileNav: React.FC = () => {
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-              className="relative bg-[#F7F5F0] border-t-2 border-[#D6D0C4] rounded-t-3xl p-6 shadow-[0_0_50px_rgba(28,25,23,0.2)] z-10 space-y-4 max-h-[85vh] overflow-y-auto font-mono text-[#1C1917]"
+              className="relative bg-surface border-t-2 border-subtle rounded-t-3xl p-6 shadow-[0_0_50px_rgba(28,25,23,0.2)] z-10 space-y-4 max-h-[85vh] overflow-y-auto font-mono text-primary"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-[#D6D0C4]">
-                <span className="text-sm font-black text-[#1C1917] uppercase tracking-wider font-sans">All OS Portals</span>
+              <div className="flex items-center justify-between pb-3 border-b border-subtle">
+                <span className="text-sm font-black text-primary uppercase tracking-wider font-heading">All OS Portals</span>
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-1.5 rounded-xl bg-[#EAE5DC] border border-[#D6D0C4] text-[#57534E] hover:text-[#1C1917]"
+                  className="p-1.5 rounded-xl bg-surface-secondary border border-subtle text-secondary hover:text-primary"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -100,15 +100,15 @@ export const MobileNav: React.FC = () => {
                     className={`w-full p-3.5 rounded-2xl border flex items-center gap-4 text-left transition-colors ${
                       currentPage === sItem.id
                         ? 'bg-indigo-100 border-indigo-300 text-indigo-950 font-black'
-                        : 'bg-[#EAE5DC] border-[#D6D0C4] text-[#1C1917] hover:bg-[#DCD5C7]'
+                        : 'bg-surface-secondary border-subtle text-primary hover:bg-[#DCD5C7]'
                     }`}
                   >
-                    <span className="p-2 rounded-xl bg-[#F7F5F0] border border-[#D6D0C4] shrink-0">
+                    <span className="p-2 rounded-xl bg-surface border border-subtle shrink-0">
                       {sItem.icon}
                     </span>
                     <div>
-                      <span className="text-sm font-black block font-sans">{sItem.label}</span>
-                      <span className="text-[11px] text-[#57534E] font-mono block font-medium">{sItem.desc}</span>
+                      <span className="text-sm font-black block font-heading">{sItem.label}</span>
+                      <span className="text-[11px] text-secondary font-mono block font-medium">{sItem.desc}</span>
                     </div>
                   </button>
                 ))}
