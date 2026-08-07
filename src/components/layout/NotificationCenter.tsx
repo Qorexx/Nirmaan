@@ -33,7 +33,7 @@ export const NotificationCenter: React.FC = () => {
           setIsOpen(!isOpen);
           if (!isOpen) setUnreadCount(0);
         }}
-        className="relative p-2.5 rounded-xl bg-surface-secondary hover:bg-[#DFD9CD] border border-subtle text-secondary hover:text-primary transition-all shadow-xs group"
+        className="relative p-2.5 rounded-xl bg-surface-secondary hover:bg-surface-secondary border border-subtle text-secondary hover:text-primary transition-all shadow-xs group"
         title="View Real-Time System Telemetry & Alerts"
       >
         <Bell className="w-4 h-4 group-hover:scale-110 transition-transform text-primary" />
@@ -87,7 +87,7 @@ export const NotificationCenter: React.FC = () => {
               ))}
 
               {logs.slice(0, 4).map((lg, idx) => (
-                <div key={lg.id || idx} className="p-3 bg-[#F0EEE9] text-xs font-mono space-y-1 text-secondary border-t border-subtle">
+                <div key={lg.id || idx} className="p-3 bg-surface-secondary text-xs font-mono space-y-1 text-secondary border-t border-subtle">
                   <span className="text-indigo-700 font-extrabold uppercase">[{lg.stage}]</span> <span className="text-primary font-semibold">{lg.message}</span>
                 </div>
               ))}

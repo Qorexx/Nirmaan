@@ -74,7 +74,7 @@ export const CommandPalette: React.FC<{ isOpen: boolean; onClose: () => void }> 
                 placeholder="Type a command or search OS portals... (e.g. simulation, architecture)"
                 className="w-full bg-transparent text-primary placeholder-[#78716C] text-sm font-mono focus:outline-none"
               />
-              <span className="text-[10px] uppercase bg-[#D6D0C4] px-2 py-0.5 rounded text-primary font-extrabold font-heading">ESC</span>
+              <span className="text-[10px] uppercase bg-surface-secondary px-2 py-0.5 rounded text-primary font-extrabold font-heading">ESC</span>
             </div>
 
             {/* Results List */}

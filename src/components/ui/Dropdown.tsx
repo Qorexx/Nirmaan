@@ -57,8 +57,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
         disabled={disabled}
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full bg-surface-secondary text-primary text-left text-sm px-4 py-3 rounded-xl border transition-all duration-200 flex items-center justify-between focus:outline-none ${
-          isOpen ? 'border-[#4338CA] ring-2 ring-indigo-500/20 bg-surface' : 'border-subtle hover:border-[#A8A193]'
-        } ${disabled ? 'opacity-50 cursor-not-allowed bg-[#D6D0C4]' : 'cursor-pointer'}`}
+          isOpen ? 'border-accent-indigo ring-2 ring-indigo-500/20 bg-surface' : 'border-subtle hover:border-[#A8A193]'
+        } ${disabled ? 'opacity-50 cursor-not-allowed bg-surface-secondary' : 'cursor-pointer'}`}
       >
         <span className="flex items-center gap-2 text-primary truncate font-bold">
           {selectedOption ? (

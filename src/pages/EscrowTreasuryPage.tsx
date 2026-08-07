@@ -12,7 +12,7 @@ export const EscrowTreasuryPage: React.FC = () => {
   const totalReleased = projects.reduce((acc, p) => acc + (p.releasedAmount || p.budget * 0.5), 0);
 
   return (
-    <div className="space-y-10 font-mono pb-24 text-slate-100 selection:bg-amber-400 selection:text-slate-950 max-w-[1750px] mx-auto">
+    <div className="space-y-10 font-mono pb-24 text-primary max-w-[1750px] mx-auto">
       
       {/* 1. HERO TREASURY COMMAND DECK */}
       <GlassCard intensity="high" className="relative overflow-hidden border-2 border-amber-500/40 shadow-[0_0_80px_rgba(245,158,11,0.15)] bg-gradient-to-r from-[#141008] via-[#101420] to-[#0A0D18]">
@@ -22,7 +22,7 @@ export const EscrowTreasuryPage: React.FC = () => {
               <Badge variant="amber" icon={<Wallet className="w-3.5 h-3.5 text-amber-400" />}>
                 💰 MULTI-ASSET SOVEREIGN TREASURY // L402 PROTOCOL
               </Badge>
-              <span className="text-[11px] font-mono text-emerald-300 font-extrabold bg-emerald-500/10 px-3 py-1 rounded-md border border-emerald-500/30 flex items-center gap-1.5">
+              <span className="text-[11px] font-mono text-accent-emerald font-extrabold bg-emerald-500/10 px-3 py-1 rounded-md border border-emerald-500/30 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                 SMART CONTRACT VAULTS: ZERO HUMAN OVERRIDE
               </span>
@@ -118,7 +118,7 @@ export const EscrowTreasuryPage: React.FC = () => {
               {projects.map((p, index) => (
                 <tr key={p.id} className="hover:bg-amber-500/5 transition-colors group cursor-pointer" onClick={() => setSelectedVault(p.id)}>
                   <td className="py-4 px-3">
-                    <span className="font-heading font-extrabold text-primary text-sm block group-hover:text-amber-300 transition-colors">{p.name}</span>
+                    <span className="font-heading font-extrabold text-primary text-sm block group-hover:text-accent-gold transition-colors">{p.name}</span>
                     <span className="text-[10px] text-cyan-400 font-mono block">0x7a8...E39{index + 1} // ID: {p.id}</span>
                   </td>
                   <td className="py-4 px-3">

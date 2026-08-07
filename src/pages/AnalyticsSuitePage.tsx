@@ -178,19 +178,19 @@ export const AnalyticsSuitePage: React.FC = () => {
   }, [selectedState]);
 
   return (
-    <div className="space-y-10 font-mono pb-24 text-slate-100 selection:bg-cyan-400 selection:text-slate-950 max-w-[1750px] mx-auto">
+    <div className="space-y-10 font-mono pb-24 text-primary max-w-[1750px] mx-auto">
 
       {/* ========================================================================= */}
       {/* 1. PALANTIR GOTHAM x STRIPE x VERCEL ANALYTICS HERO DECK */}
       {/* ========================================================================= */}
-      <GlassCard intensity="high" className="relative overflow-hidden border-2 border-cyan-500/40 shadow-[0_0_80px_rgba(6,182,212,0.15)] bg-gradient-to-r from-[#07131F] via-[#0A1020] to-[#110D20]">
+      <GlassCard intensity="high" className="relative overflow-hidden border-2 border-cyan-500/40 shadow-[0_0_80px_rgba(6,182,212,0.15)] bg-surface-secondary">
         <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div className="space-y-3 max-w-4xl">
             <div className="flex flex-wrap items-center gap-2.5">
               <Badge variant="cyan" icon={<Compass className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />}>
                 🧠 PALANTIR x STRIPE INTELLIGENCE TIER // SIH GOTHAM SUITE
               </Badge>
-              <span className="text-[11px] font-mono text-emerald-300 font-extrabold bg-emerald-500/10 px-3 py-1 rounded-md border border-emerald-500/30 flex items-center gap-1.5">
+              <span className="text-[11px] font-mono text-accent-emerald font-extrabold bg-emerald-500/10 px-3 py-1 rounded-md border border-emerald-500/30 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                 AI INFERENCE: ACTIVE (99.4% PRECISION)
               </span>
@@ -351,7 +351,7 @@ export const AnalyticsSuitePage: React.FC = () => {
             <select
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
-              className="bg-transparent text-cyan-300 font-extrabold focus:outline-none cursor-pointer"
+              className="bg-transparent text-accent-cyan font-extrabold focus:outline-none cursor-pointer"
             >
               <option value="ALL" className="bg-surface-secondary text-primary">All Indian States</option>
               <option value="Maharashtra" className="bg-surface-secondary text-primary">Maharashtra (MH)</option>
@@ -368,7 +368,7 @@ export const AnalyticsSuitePage: React.FC = () => {
             <select
               value={selectedConfidence}
               onChange={(e) => setSelectedConfidence(e.target.value)}
-              className="bg-transparent text-emerald-300 font-extrabold focus:outline-none cursor-pointer"
+              className="bg-transparent text-accent-emerald font-extrabold focus:outline-none cursor-pointer"
             >
               <option value="ALL" className="bg-surface-secondary text-primary">All Confidence Tiers</option>
               <option value="HIGH" className="bg-surface-secondary text-primary">&gt; 95% High Confidence</option>
@@ -398,7 +398,7 @@ export const AnalyticsSuitePage: React.FC = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono transition-all whitespace-nowrap select-none ${
                 activeTab === tab.id
-                  ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border-2 border-cyan-400 font-extrabold shadow-[0_0_25px_rgba(6,182,212,0.35)]'
+                  ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-accent-cyan border-2 border-cyan-400 font-extrabold shadow-[0_0_25px_rgba(6,182,212,0.35)]'
                   : 'text-secondary hover:text-primary hover:bg-surface-secondary border border-transparent'
               }`}
             >
@@ -666,7 +666,7 @@ export const AnalyticsSuitePage: React.FC = () => {
                 <div className="p-5 rounded-2xl bg-surface border border-subtle space-y-2">
                   <span className="text-[10px] text-secondary uppercase font-bold">Avg x402 Macaroon Gas Fee</span>
                   <div className="text-3xl font-black text-cyan-400 font-heading">$0.05 <span className="text-xs font-mono text-primary">USDC</span></div>
-                  <span className="text-xs text-cyan-300 block">Zero banking transaction commissions</span>
+                  <span className="text-xs text-accent-cyan block">Zero banking transaction commissions</span>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-surface border border-subtle space-y-2">
@@ -794,7 +794,7 @@ export const AnalyticsSuitePage: React.FC = () => {
                         <Badge variant={h.color as any} size="sm">{h.density}</Badge>
                         <span className="text-secondary text-[10px] font-bold uppercase">{h.state}</span>
                       </div>
-                      <h4 className="text-base font-heading font-extrabold text-primary group-hover:text-cyan-300 transition-colors">
+                      <h4 className="text-base font-heading font-extrabold text-primary group-hover:text-accent-cyan transition-colors">
                         {h.district}
                       </h4>
                     </div>
@@ -806,7 +806,7 @@ export const AnalyticsSuitePage: React.FC = () => {
                       </div>
                       <div className="text-right">
                         <span className="text-[10px] text-secondary block">Operational Status:</span>
-                        <strong className={`font-mono text-[11px] ${h.status.includes('NORMAL') ? 'text-cyan-300' : 'text-amber-400'}`}>
+                        <strong className={`font-mono text-[11px] ${h.status.includes('NORMAL') ? 'text-accent-cyan' : 'text-amber-400'}`}>
                           ● {h.status}
                         </strong>
                       </div>

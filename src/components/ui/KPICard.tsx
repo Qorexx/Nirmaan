@@ -67,9 +67,9 @@ export const KPICard: React.FC<KPICardProps> = ({
 
       {/* Optional Sub-Metric or Footer Comment */}
       {subValue && (
-        <div className="pt-3 border-t border-[#E5E0D5] flex items-center justify-between text-xs text-secondary font-mono">
+        <div className="pt-3 border-t border-subtle flex items-center justify-between text-xs text-secondary font-mono">
           <span>{subValue}</span>
-          <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block ring-4 ring-emerald-100" />
+          <span className="w-2 h-2 rounded-full bg-accent-emerald inline-block ring-4 ring-accent-emerald/15" />
         </div>
       )}
 

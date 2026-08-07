@@ -68,7 +68,7 @@ export const ArchitectureShowcasePage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen py-10 px-4 sm:px-8 bg-surface text-slate-100">
+    <div className="min-h-screen py-10 px-4 sm:px-8 bg-surface text-primary">
       <div className="max-w-[1700px] mx-auto space-y-8">
         
         {/* Top Title Bar */}
@@ -189,7 +189,7 @@ export const ArchitectureShowcasePage: React.FC = () => {
                     <p className="text-sm font-mono text-primary">
                       Utilizes sophisticated Computer Vision feature extraction and satellite GIS cross-validation to analyze contractor field scans in real time (1.3s latency).
                     </p>
-                    <ul className="text-xs font-mono space-y-2 text-purple-300 pt-2 border-t border-purple-500/20">
+                    <ul className="text-xs font-mono space-y-2 text-purple-500 pt-2 border-t border-purple-500/20">
                       <li>• Neural Noise Filtering & Perspective Sync</li>
                       <li>• HTTP 402 Zero-Latency Machine Wallets</li>
                       <li>• Automated $0.05 USDC Gas Settlement</li>
@@ -202,7 +202,7 @@ export const ArchitectureShowcasePage: React.FC = () => {
                     <p className="text-sm font-mono text-primary">
                       Executes deterministic smart contracts to release multi-million dollar funds immediately upon receiving verified cryptographic proof (&gt;95% score).
                     </p>
-                    <ul className="text-xs font-mono space-y-2 text-emerald-300 pt-2 border-t border-emerald-500/20">
+                    <ul className="text-xs font-mono space-y-2 text-accent-emerald pt-2 border-t border-emerald-500/20">
                       <li>• Immutable Transaction Receipt Generation</li>
                       <li>• Zero Manual Escrow Custody Holdover</li>
                       <li>• Settlement Velocity: 4.2 Seconds</li>
@@ -213,7 +213,7 @@ export const ArchitectureShowcasePage: React.FC = () => {
                 <div className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border border-cyan-400/30 flex flex-col md:flex-row items-center justify-between gap-6">
                   <div>
                     <h5 className="font-extrabold text-primary text-lg">Want to see this architecture live in action?</h5>
-                    <p className="text-xs sm:text-sm font-mono text-cyan-300">Switch to the "Live Workflow" tab or trigger the 15-second simulation loop.</p>
+                    <p className="text-xs sm:text-sm font-mono text-accent-cyan">Switch to the "Live Workflow" tab or trigger the 15-second simulation loop.</p>
                   </div>
                   <button
                     onClick={() => setActiveTab('workflow')}
@@ -255,7 +255,7 @@ export const ArchitectureShowcasePage: React.FC = () => {
                         </span>
                       )}
                       {log.txHash && (
-                        <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold shrink-0 truncate max-w-[120px]">
+                        <span className="px-2 py-0.5 rounded bg-amber-500/20 text-accent-gold font-bold shrink-0 truncate max-w-[120px]">
                           Tx: {log.txHash}
                         </span>
                       )}
@@ -280,7 +280,7 @@ export const ArchitectureShowcasePage: React.FC = () => {
                       Demonstrates zero-latency machine-to-machine financial execution ($0.05 USDC verification fee settled in 84ms)
                     </p>
                   </div>
-                  <div className="px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold flex items-center gap-2">
+                  <div className="px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-accent-gold font-mono text-xs font-bold flex items-center gap-2">
                     <span>PROTOCOL: HTTP 402 / L402 MACAROON CHALLENGE</span>
                   </div>
                 </div>
@@ -297,7 +297,7 @@ export const ArchitectureShowcasePage: React.FC = () => {
                         <div className="flex items-center gap-3">
                           <span className="text-secondary text-xs">Latency: <strong className="text-primary">{req.time}</strong></span>
                           <span className={`px-2.5 py-1 rounded text-xs font-extrabold ${
-                            req.status.includes('402') ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                            req.status.includes('402') ? 'bg-amber-500/20 text-accent-gold border border-amber-500/40' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
                           }`}>
                             {req.status}
                           </span>
@@ -312,7 +312,7 @@ export const ArchitectureShowcasePage: React.FC = () => {
                         </div>
                         <div className="bg-surface-secondary p-3 rounded-xl border border-subtle space-y-1">
                           <span className="text-secondary uppercase font-semibold block text-[10px]">Response Telemetry:</span>
-                          <p className="text-emerald-300 font-mono overflow-x-auto">{req.response}</p>
+                          <p className="text-accent-emerald font-mono overflow-x-auto">{req.response}</p>
                         </div>
                       </div>
                     </div>
@@ -337,7 +337,7 @@ export const ArchitectureShowcasePage: React.FC = () => {
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="px-4 py-2 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-300 font-mono text-xs font-bold">
+                    <span className="px-4 py-2 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-accent-gold font-mono text-xs font-bold">
                       CHAIN ID: SOVEREIGN-402 // CONFIRMATION DEPTH: 12 BLOCKS
                     </span>
                   </div>

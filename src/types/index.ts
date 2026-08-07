@@ -11,7 +11,24 @@ export type PageRoute =
   | 'compliance'
   | 'settings';
 
-export type StageId = 'proof-submission' | 'ai-processing' | 'verification' | 'x402-payment' | 'blockchain-settlement' | 'analytics-reporting';
+export type StageId = 
+  | 'proof-submitted' 
+  | 'ai-processing' 
+  | 'vision-verify' 
+  | 'gps-validation' 
+  | 'confidence-score' 
+  | 'http-402-request' 
+  | 'wallet-auth' 
+  | 'payment-settled' 
+  | 'contract-exec' 
+  | 'escrow-release' 
+  | 'tx-confirmed' 
+  | 'audit-record'
+  | 'proof-submission'
+  | 'verification'
+  | 'x402-payment'
+  | 'blockchain-settlement'
+  | 'analytics-reporting';
 
 export interface WorkflowStage {
   id: StageId;

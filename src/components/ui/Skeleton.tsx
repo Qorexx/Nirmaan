@@ -25,7 +25,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   return (
     <div
       style={{ width, height }}
-      className={`bg-gradient-to-r from-[#EAE5DC] via-[#DFD9CD] to-[#EAE5DC] bg-[length:200%_100%] animate-pulse border border-subtle ${getVariantClasses()} ${className}`}
+      className={`bg-surface-secondary animate-pulse border border-subtle ${getVariantClasses()} ${className}`}
     />
   );
 };

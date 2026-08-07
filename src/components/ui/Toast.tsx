@@ -38,14 +38,14 @@ const ToastItem: React.FC<{ toast: ToastMessage; onDismiss: (id: string) => void
   const getStyle = () => {
     switch (toast.type) {
       case 'success':
-        return 'bg-[#EAF5F0] border-emerald-500 text-emerald-950 shadow-[0_15px_35px_rgba(4,120,87,0.15)]';
+        return 'bg-accent-emerald/10 border-accent-emerald text-primary shadow-[0_15px_35px_rgba(4,120,87,0.15)]';
       case 'error':
-        return 'bg-rose-100 border-rose-500 text-rose-950 shadow-[0_15px_35px_rgba(225,29,72,0.15)]';
+        return 'bg-rose-500/10 border-rose-500 text-primary shadow-[0_15px_35px_rgba(225,29,72,0.15)]';
       case 'x402':
-        return 'bg-amber-100 border-amber-500 text-amber-950 shadow-[0_15px_35px_rgba(180,83,9,0.15)]';
+        return 'bg-accent-gold/10 border-accent-gold text-primary shadow-[0_15px_35px_rgba(180,83,9,0.15)]';
       case 'info':
       default:
-        return 'bg-[#EEF0FA] border-indigo-500 text-indigo-950 shadow-[0_15px_35px_rgba(67,56,202,0.15)]';
+        return 'bg-accent-indigo/10 border-accent-indigo text-primary shadow-[0_15px_35px_rgba(67,56,202,0.15)]';
     }
   };
 

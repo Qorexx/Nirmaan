@@ -22,7 +22,7 @@ export const ComplianceDashboardPage: React.FC = () => {
   );
 
   return (
-    <div className="space-y-10 font-mono pb-24 text-slate-100 selection:bg-emerald-400 selection:text-slate-950 max-w-[1750px] mx-auto">
+    <div className="space-y-10 font-mono pb-24 text-primary max-w-[1750px] mx-auto">
 
       {/* 1. HERO COMPLIANCE SUITE */}
       <GlassCard intensity="high" className="relative overflow-hidden border-2 border-emerald-500/40 shadow-[0_0_80px_rgba(16,185,129,0.15)] bg-gradient-to-r from-[#061413] via-[#0A181C] to-[#0A0D18]">
@@ -32,7 +32,7 @@ export const ComplianceDashboardPage: React.FC = () => {
               <Badge variant="emerald" icon={<ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />}>
                 📜 IMMUTABLE AUDIT & COMPLIANCE TIER // NATIONAL LEDGER
               </Badge>
-              <span className="text-[11px] font-mono text-cyan-300 font-extrabold bg-cyan-500/10 px-3 py-1 rounded-md border border-cyan-500/30">
+              <span className="text-[11px] font-mono text-accent-cyan font-extrabold bg-cyan-500/10 px-3 py-1 rounded-md border border-cyan-500/30">
                 ANTI-CORRUPTION PROTOCOL: 100% SECURED
               </span>
             </div>
@@ -56,7 +56,7 @@ export const ComplianceDashboardPage: React.FC = () => {
               size="lg"
               onClick={() => alert('Downloading National SIH Regulatory Master Archive (GZIP Bundle)...')}
               icon={<Download className="w-5 h-5 text-emerald-400" />}
-              className="w-full sm:w-auto font-heading font-black px-6 py-4 border-emerald-500/50 text-emerald-300"
+              className="w-full sm:w-auto font-heading font-black px-6 py-4 border-emerald-500/50 text-accent-emerald"
             >
               Export Master Archive
             </Button>
@@ -127,12 +127,12 @@ export const ComplianceDashboardPage: React.FC = () => {
                   <span className="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-400 font-extrabold border border-emerald-500/30 text-xs">
                     #{idx + 1} // {item.id}
                   </span>
-                  <span className="font-heading font-extrabold text-primary text-base group-hover:text-emerald-300 transition-colors">
+                  <span className="font-heading font-extrabold text-primary text-base group-hover:text-accent-emerald transition-colors">
                     {item.project}
                   </span>
                 </div>
                 <div className="flex flex-wrap items-center gap-4 text-secondary text-[11px]">
-                  <span>Cryptographic Hash: <strong className="text-cyan-300 select-all">{item.hash}</strong></span>
+                  <span>Cryptographic Hash: <strong className="text-accent-cyan select-all">{item.hash}</strong></span>
                   <span>•</span>
                   <span>Inspector: <strong className="text-primary">{item.inspector}</strong> ({item.date})</span>
                 </div>

@@ -27,20 +27,20 @@ export const NotificationCard: React.FC<NotificationCardProps> = ({
 }) => {
   const getSeverityStyle = () => {
     switch (severity) {
-      case 'urgent': return 'bg-rose-50 border-rose-300 hover:border-rose-400 text-rose-950';
-      case 'x402': return 'bg-amber-50 border-amber-300 hover:border-amber-400 text-amber-950';
-      case 'success': return 'bg-[#EAF5F0] border-emerald-300 hover:border-emerald-400 text-emerald-950';
+      case 'urgent': return 'bg-rose-500/10 border-rose-500/30 hover:border-rose-500/50 text-primary';
+      case 'x402': return 'bg-accent-gold/10 border-accent-gold/30 hover:border-accent-gold/50 text-primary';
+      case 'success': return 'bg-accent-emerald/10 border-accent-emerald/30 hover:border-accent-emerald/50 text-primary';
       case 'normal':
-      default: return 'bg-surface border-subtle hover:border-[#818CF8] text-primary';
+      default: return 'bg-surface border-subtle hover:border-accent-indigo/50 text-primary';
     }
   };
 
   const getIcon = () => {
     switch (severity) {
-      case 'urgent': return <ShieldAlert className="w-5 h-5 text-rose-700 animate-pulse" />;
-      case 'x402': return <Zap className="w-5 h-5 text-amber-700 fill-current animate-bounce" />;
-      case 'success': return <CheckCircle className="w-5 h-5 text-emerald-700" />;
-      default: return <Bell className="w-5 h-5 text-indigo-700" />;
+      case 'urgent': return <ShieldAlert className="w-5 h-5 text-rose-500 animate-pulse" />;
+      case 'x402': return <Zap className="w-5 h-5 text-accent-gold fill-current animate-bounce" />;
+      case 'success': return <CheckCircle className="w-5 h-5 text-accent-emerald" />;
+      default: return <Bell className="w-5 h-5 text-accent-indigo" />;
     }
   };
 

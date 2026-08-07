@@ -19,10 +19,10 @@ export const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-10 font-mono pb-24 text-slate-100 selection:bg-cyan-400 selection:text-slate-950 max-w-4xl mx-auto">
+    <div className="space-y-10 font-mono pb-24 text-primary max-w-4xl mx-auto">
       
       {/* 1. HERO CONFIG DECK */}
-      <GlassCard intensity="high" className="p-8 border-2 border-cyan-500/40 shadow-[0_0_60px_rgba(6,182,212,0.15)] bg-gradient-to-r from-[#07131F] via-[#0A1020] to-[#110D20]">
+      <GlassCard intensity="high" className="p-8 border-2 border-cyan-500/40 shadow-[0_0_60px_rgba(6,182,212,0.15)] bg-surface-secondary">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-2 max-w-2xl">
             <Badge variant="cyan" icon={<Settings className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />}>

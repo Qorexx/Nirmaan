@@ -317,7 +317,7 @@ export const TrustExplorerPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-10 font-mono pb-24 text-slate-100 selection:bg-yellow-400 selection:text-slate-950 max-w-[1750px] mx-auto">
+    <div className="space-y-10 font-mono pb-24 text-primary max-w-[1750px] mx-auto">
 
       {/* ========================================================================= */}
       {/* 1. ETHERSCAN x STRIPE x PALANTIR HERO DECK */}
@@ -329,7 +329,7 @@ export const TrustExplorerPage: React.FC = () => {
               <Badge variant="amber" icon={<Layers className="w-3.5 h-3.5 text-yellow-400" />}>
                 ⛓️ SOVEREIGN BLOCKCHAIN EXPLORER // CHAIN ID #402
               </Badge>
-              <span className="text-[11px] font-mono text-emerald-300 font-extrabold bg-emerald-500/10 px-3 py-1 rounded-md border border-emerald-500/30 flex items-center gap-1.5">
+              <span className="text-[11px] font-mono text-accent-emerald font-extrabold bg-emerald-500/10 px-3 py-1 rounded-md border border-emerald-500/30 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                 NETWORK: SIH SOVEREIGN LAYER-1 (1,420 TPS)
               </span>
@@ -442,7 +442,7 @@ export const TrustExplorerPage: React.FC = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono transition-all whitespace-nowrap select-none ${
                 activeTab === tab.id
-                  ? 'bg-gradient-to-r from-yellow-500/20 to-amber-500/20 text-yellow-300 border-2 border-yellow-400 font-extrabold shadow-[0_0_25px_rgba(234,179,8,0.35)]'
+                  ? 'bg-gradient-to-r from-yellow-500/20 to-amber-500/20 text-accent-gold border-2 border-yellow-400 font-extrabold shadow-[0_0_25px_rgba(234,179,8,0.35)]'
                   : 'text-secondary hover:text-primary hover:bg-surface-secondary border border-transparent'
               }`}
             >
@@ -458,7 +458,7 @@ export const TrustExplorerPage: React.FC = () => {
 
         <div className="flex items-center gap-2 text-xs font-mono text-primary px-4 py-1.5 bg-surface-secondary rounded-xl border border-subtle">
           <span className="w-2 h-2 rounded-full bg-yellow-400 animate-ping" />
-          <span>Latest Mined Block: <strong className="text-yellow-300">#{liveBlocks[0].blockNumber}</strong></span>
+          <span>Latest Mined Block: <strong className="text-accent-gold">#{liveBlocks[0].blockNumber}</strong></span>
         </div>
       </div>
 
@@ -583,7 +583,7 @@ export const TrustExplorerPage: React.FC = () => {
                             </td>
 
                             <td className="py-4 px-3">
-                              <div className="text-cyan-300 font-extrabold text-xs">
+                              <div className="text-accent-cyan font-extrabold text-xs">
                                 #{tx.blockNumber}
                               </div>
                               <div className="text-[10px] text-secondary">
@@ -599,7 +599,7 @@ export const TrustExplorerPage: React.FC = () => {
                                 >
                                   {tx.status === 'SETTLED' ? '✔ SETTLED' : tx.status === 'CONFIRMED' ? '✔ CONFIRMED' : '⚙ PROCESSING'}
                                 </Badge>
-                                <span className="text-[10px] text-secondary group-hover:text-yellow-300 flex items-center gap-1 underline transition-colors">
+                                <span className="text-[10px] text-secondary group-hover:text-accent-gold flex items-center gap-1 underline transition-colors">
                                   Inspect Receipt <Eye className="w-3 h-3" />
                                 </span>
                               </div>
@@ -667,12 +667,12 @@ export const TrustExplorerPage: React.FC = () => {
                       <span>Contract Address:</span>
                       <button
                         onClick={() => handleCopy('0x7a892b1029384c5021e902b3c4f928e391aa8920', 'contract')}
-                        className="text-yellow-400 hover:text-yellow-300 flex items-center gap-1 font-bold"
+                        className="text-yellow-400 hover:text-accent-gold flex items-center gap-1 font-bold"
                       >
                         {copiedText === 'contract' ? <span className="text-emerald-400 flex items-center gap-1"><Check className="w-3 h-3" /> Copied!</span> : <><Copy className="w-3 h-3" /> Copy Address</>}
                       </button>
                     </div>
-                    <div className="text-cyan-300 text-xs font-bold font-mono select-all truncate break-all">
+                    <div className="text-accent-cyan text-xs font-bold font-mono select-all truncate break-all">
                       0x7a892b1029384c5021e902b3c4f928e391aa8920
                     </div>
                   </div>
@@ -699,7 +699,7 @@ export const TrustExplorerPage: React.FC = () => {
                       <span className="text-xs font-black text-primary font-heading block uppercase">
                         ✔ ACTIVE & AUDIT VERIFIED
                       </span>
-                      <p className="text-[10px] text-emerald-300/90 leading-tight">
+                      <p className="text-[10px] text-accent-emerald/90 leading-tight">
                         Zero admin pause backdoors. Autonomous execution rights restricted exclusively to verified Gaussian Vision AI signature.
                       </p>
                     </div>
@@ -712,7 +712,7 @@ export const TrustExplorerPage: React.FC = () => {
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-secondary">Governance Owner:</span>
-                      <span className="text-cyan-300 font-bold">NHAI Council (0xGOV...9901)</span>
+                      <span className="text-accent-cyan font-bold">NHAI Council (0xGOV...9901)</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-secondary">Security Compiler:</span>
@@ -996,7 +996,7 @@ export const TrustExplorerPage: React.FC = () => {
               </div>
               <div className="p-3.5 rounded-xl bg-surface border border-subtle space-y-1">
                 <span className="text-[10px] text-secondary uppercase font-bold block">Mined Block:</span>
-                <strong className="text-cyan-300 font-bold text-sm block font-sans">#{selectedTx.blockNumber}</strong>
+                <strong className="text-accent-cyan font-bold text-sm block font-sans">#{selectedTx.blockNumber}</strong>
               </div>
               <div className="p-3.5 rounded-xl bg-surface border border-subtle space-y-1">
                 <span className="text-[10px] text-secondary uppercase font-bold block">Confirmations:</span>
@@ -1023,7 +1023,7 @@ export const TrustExplorerPage: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <span className="text-secondary font-bold">Contractor Recipient:</span>
-                  <strong className="sm:col-span-2 text-cyan-300">{selectedTx.contractor} ({selectedTx.contractorWallet})</strong>
+                  <strong className="sm:col-span-2 text-accent-cyan">{selectedTx.contractor} ({selectedTx.contractorWallet})</strong>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -1033,7 +1033,7 @@ export const TrustExplorerPage: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <span className="text-secondary font-bold">Smart Method Invoked:</span>
-                  <span className="sm:col-span-2 text-yellow-300 bg-surface-secondary p-2 rounded border border-yellow-500/20 select-all font-bold">
+                  <span className="sm:col-span-2 text-accent-gold bg-surface-secondary p-2 rounded border border-yellow-500/20 select-all font-bold">
                     {selectedTx.method}
                   </span>
                 </div>
@@ -1047,7 +1047,7 @@ export const TrustExplorerPage: React.FC = () => {
 
                 <div className="space-y-1.5 pt-2 border-t border-subtle">
                   <span className="text-secondary font-bold block">On-Chain Event Logs (Solidity Emit):</span>
-                  <div className="p-3 rounded-xl bg-surface-secondary border border-emerald-500/30 text-emerald-300 font-mono text-[11px]">
+                  <div className="p-3 rounded-xl bg-surface-secondary border border-emerald-500/30 text-accent-emerald font-mono text-[11px]">
                     <code>{selectedTx.eventLog}</code>
                   </div>
                 </div>

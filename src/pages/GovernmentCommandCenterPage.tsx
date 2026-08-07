@@ -122,7 +122,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
   });
 
   return (
-    <div className="space-y-8 font-mono pb-12 text-slate-100">
+    <div className="space-y-8 font-mono pb-12 text-primary">
 
       {/* 1. EXECUTIVE COMMAND HEADER BANNER */}
       <GlassCard className="relative overflow-hidden border-2 border-cyan-500/50 shadow-[0_0_80px_rgba(6,182,212,0.2)]">
@@ -132,7 +132,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
               <Badge variant="pulse" icon={<ShieldCheck className="w-3.5 h-3.5" />}>
                 🏛️ GOV CHIEF ARBITER COMMAND SUITE
               </Badge>
-              <span className="text-[11px] font-mono text-cyan-300 font-extrabold bg-blue-500/10 px-2.5 py-1 rounded-md border border-blue-500/30">
+              <span className="text-[11px] font-mono text-accent-cyan font-extrabold bg-blue-500/10 px-2.5 py-1 rounded-md border border-blue-500/30">
                 SOVEREIGN-402 PROTOCOL ONLINE
               </span>
             </div>
@@ -234,7 +234,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all whitespace-nowrap select-none ${
                 activeTab === tab.id
-                  ? 'bg-cyan-500/20 text-cyan-300 border-2 border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.4)] font-extrabold scale-102'
+                  ? 'bg-cyan-500/20 text-accent-cyan border-2 border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.4)] font-extrabold scale-102'
                   : 'text-secondary hover:text-primary hover:bg-surface-secondary border border-transparent'
               }`}
             >
@@ -326,7 +326,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                         {p.name}
                       </h3>
                       <p className="text-xs text-secondary font-mono mt-1 truncate">
-                        Category: <strong className="text-cyan-300">{p.category}</strong> • Updated {p.lastUpdated}
+                        Category: <strong className="text-accent-cyan">{p.category}</strong> • Updated {p.lastUpdated}
                       </p>
                     </div>
 
@@ -334,7 +334,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                     <div className="bg-surface p-4 rounded-xl border border-subtle space-y-3">
                       <div className="flex items-center justify-between text-xs">
                         <span className="text-secondary font-mono">Contractor Lead:</span>
-                        <span className="text-cyan-300 font-bold truncate max-w-[150px]">{p.contractor}</span>
+                        <span className="text-accent-cyan font-bold truncate max-w-[150px]">{p.contractor}</span>
                       </div>
 
                       <div className="flex items-center justify-between text-xs">
@@ -425,12 +425,12 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                         <tr key={proj.id} className="hover:bg-surface-secondary transition-colors group">
                           <td className="py-4 px-6 font-bold text-primary">
                             <div className="flex flex-col">
-                              <span className="text-sm font-extrabold group-hover:text-cyan-300 transition-colors">{proj.name}</span>
+                              <span className="text-sm font-extrabold group-hover:text-accent-cyan transition-colors">{proj.name}</span>
                               <span className="text-[10px] text-secondary font-normal">{proj.location} • {proj.category}</span>
                             </div>
                           </td>
                           <td className="py-4 px-6 text-primary font-mono">
-                            <span className="bg-surface px-2 py-1 rounded text-cyan-300 border border-subtle select-all">
+                            <span className="bg-surface px-2 py-1 rounded text-accent-cyan border border-subtle select-all">
                               {proj.txHash || '0x402a...E819'}
                             </span>
                           </td>
@@ -451,7 +451,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                           <td className="py-4 px-6 text-right space-x-2">
                             <button
                               onClick={() => setSelectedProjectForModal(proj)}
-                              className="px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 transition-all"
+                              className="px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-accent-cyan font-bold border border-cyan-500/30 transition-all"
                             >
                               Inspect Twin
                             </button>
@@ -596,10 +596,10 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                   <p className="text-xs text-secondary font-mono mt-1">Comparison of total locked government capital vs. automated L402 milestone disbursements.</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="flex items-center gap-2 text-xs font-mono text-cyan-300">
+                  <span className="flex items-center gap-2 text-xs font-mono text-accent-cyan">
                     <span className="w-3 h-3 rounded bg-cyan-400" /> Total Locked capital (₹52.4M)
                   </span>
-                  <span className="flex items-center gap-2 text-xs font-mono text-emerald-300">
+                  <span className="flex items-center gap-2 text-xs font-mono text-accent-emerald">
                     <span className="w-3 h-3 rounded bg-emerald-400" /> Automated Payouts (₹49.6M)
                   </span>
                 </div>
@@ -764,7 +764,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
               </div>
               <div className="bg-surface p-4 rounded-xl border border-subtle space-y-1">
                 <span className="text-secondary block font-bold uppercase text-[10px]">GPS Geo-Fencing:</span>
-                <span className="text-cyan-300 text-lg font-black block">100% Boundary Sync</span>
+                <span className="text-accent-cyan text-lg font-black block">100% Boundary Sync</span>
                 <span className="text-[10px] text-secondary block">Lat: 18.5204° N, Long: 73.8567° E</span>
               </div>
               <div className="bg-surface p-4 rounded-xl border border-subtle space-y-1">
@@ -818,7 +818,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                     overrideDecision(targetOverrideProject.id, true);
                     setOverrideModalOpen(false);
                   }}
-                  className="p-4 rounded-xl bg-surface hover:bg-surface-secondary border border-emerald-500/50 text-emerald-300 font-extrabold text-xs text-center transition-all shadow-lg hover:scale-102"
+                  className="p-4 rounded-xl bg-surface hover:bg-surface-secondary border border-emerald-500/50 text-accent-emerald font-extrabold text-xs text-center transition-all shadow-lg hover:scale-102"
                 >
                   ✅ FORCE APPROVE & PAY OUT
                 </button>
@@ -827,7 +827,7 @@ export const GovernmentCommandCenterPage: React.FC = () => {
                     overrideDecision(targetOverrideProject.id, false);
                     setOverrideModalOpen(false);
                   }}
-                  className="p-4 rounded-xl bg-surface-secondary hover:bg-[#351420] border border-rose-500/50 text-rose-300 font-extrabold text-xs text-center transition-all shadow-lg hover:scale-102"
+                  className="p-4 rounded-xl bg-surface-secondary hover:bg-rose-500/20 border border-rose-500/50 text-rose-500 font-extrabold text-xs text-center transition-all shadow-lg hover:scale-102"
                 >
                   ⛔ REJECT EVIDENCE & HOLD
                 </button>

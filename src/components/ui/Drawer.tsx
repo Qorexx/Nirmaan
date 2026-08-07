@@ -67,7 +67,7 @@ export const Drawer: React.FC<DrawerProps> = ({
 
                 <button
                   onClick={onClose}
-                  className="p-2 rounded-xl bg-surface hover:bg-[#DCD5C7] text-secondary hover:text-primary transition-colors border border-subtle"
+                  className="p-2 rounded-xl bg-surface hover:bg-surface-secondary text-secondary hover:text-primary transition-colors border border-subtle"
                 >
                   <X className="w-5 h-5" />
                 </button>

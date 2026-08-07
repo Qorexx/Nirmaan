@@ -36,7 +36,7 @@ export const Avatar: React.FC<AvatarProps> = ({
     switch (status) {
       case 'online': return 'bg-emerald-600 shadow-xs';
       case 'busy': return 'bg-amber-600 shadow-xs';
-      case 'offline': return 'bg-[#78716C]';
+      case 'offline': return 'bg-secondary';
       default: return 'hidden';
     }
   };

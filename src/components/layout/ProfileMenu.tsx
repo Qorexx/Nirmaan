@@ -40,7 +40,7 @@ export const ProfileMenu: React.FC = () => {
         />
         <div className="hidden xl:flex flex-col">
           <div className="flex items-center gap-1.5">
-            <span className="text-xs font-heading font-black text-primary group-hover:text-[#3730A3] transition-colors leading-snug">
+            <span className="text-xs font-heading font-black text-primary group-hover:text-accent-indigo transition-colors leading-snug">
               {currentUser.name}
             </span>
             {currentUser.isAuthenticated && (
@@ -51,7 +51,7 @@ export const ProfileMenu: React.FC = () => {
             {currentUser.role}
           </span>
         </div>
-        <ChevronDown className={`w-4 h-4 text-secondary transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#3730A3]' : ''}`} />
+        <ChevronDown className={`w-4 h-4 text-secondary transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-accent-indigo' : ''}`} />
       </button>
 
       {/* Profile Switcher & Auth Dropdown Overlay */}
@@ -67,7 +67,7 @@ export const ProfileMenu: React.FC = () => {
             {/* Active Wallet Header */}
             <div className="p-4 bg-surface-secondary space-y-2.5">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#3730A3] font-heading">Active Session</span>
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-accent-indigo font-heading">Active Session</span>
                 <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[9px] font-black border border-emerald-300">
                   {currentUser.isAuthenticated ? 'L402 AUTHENTICATED' : 'GUEST MODE'}
                 </span>
@@ -79,7 +79,7 @@ export const ProfileMenu: React.FC = () => {
               </div>
               <div className="flex items-center justify-between gap-2 bg-surface px-3 py-2 rounded-xl border border-subtle text-xs mt-2 shadow-xs">
                 <span className="text-secondary">Wallet:</span>
-                <span className="text-[#3730A3] font-black select-all font-mono">{currentUser.address}</span>
+                <span className="text-accent-indigo font-black select-all font-mono">{currentUser.address}</span>
               </div>
             </div>
 
@@ -90,13 +90,13 @@ export const ProfileMenu: React.FC = () => {
                   setIsOpen(false);
                   setLoginModalOpen(true);
                 }}
-                className="w-full p-3 rounded-xl text-left flex items-center justify-between transition-colors bg-surface-secondary hover:bg-[#DCD5C7] text-primary border border-subtle font-black font-heading text-xs group shadow-2xs"
+                className="w-full p-3 rounded-xl text-left flex items-center justify-between transition-colors bg-surface-secondary hover:bg-surface-secondary text-primary border border-subtle font-black font-heading text-xs group shadow-2xs"
               >
                 <div className="flex items-center gap-2.5">
-                  <LogIn className="w-4 h-4 text-[#3730A3] group-hover:scale-110 transition-transform" />
+                  <LogIn className="w-4 h-4 text-accent-indigo group-hover:scale-110 transition-transform" />
                   <span>Switch Persona / Login Portal</span>
                 </div>
-                <span className="text-[10px] font-mono bg-surface text-[#3730A3] font-black px-2 py-0.5 rounded-full border border-subtle">
+                <span className="text-[10px] font-mono bg-surface text-accent-indigo font-black px-2 py-0.5 rounded-full border border-subtle">
                   4 ROLES
                 </span>
               </button>
@@ -128,7 +128,7 @@ export const ProfileMenu: React.FC = () => {
 
             {/* Footer Notice */}
             <div className="p-2.5 bg-surface-secondary border-t border-subtle text-center text-[10px] font-mono text-secondary flex items-center justify-center gap-1.5 font-bold">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#3730A3]" />
+              <ShieldCheck className="w-3.5 h-3.5 text-accent-indigo" />
               <span>MoRTH Infrastructure Governance Tier</span>
             </div>
           </motion.div>

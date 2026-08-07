@@ -100,7 +100,7 @@ export const MobileNav: React.FC = () => {
                     className={`w-full p-3.5 rounded-2xl border flex items-center gap-4 text-left transition-colors ${
                       currentPage === sItem.id
                         ? 'bg-indigo-100 border-indigo-300 text-indigo-950 font-black'
-                        : 'bg-surface-secondary border-subtle text-primary hover:bg-[#DCD5C7]'
+                        : 'bg-surface-secondary border-subtle text-primary hover:bg-surface-secondary'
                     }`}
                   >
                     <span className="p-2 rounded-xl bg-surface border border-subtle shrink-0">

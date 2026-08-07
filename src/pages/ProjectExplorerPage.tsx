@@ -23,17 +23,17 @@ export const ProjectExplorerPage: React.FC = () => {
   });
 
   return (
-    <div className="space-y-10 font-mono pb-24 text-slate-100 selection:bg-cyan-400 selection:text-slate-950 max-w-[1750px] mx-auto">
+    <div className="space-y-10 font-mono pb-24 text-primary max-w-[1750px] mx-auto">
 
       {/* 1. HERO DIGITAL TWIN MATRIX */}
-      <GlassCard intensity="high" className="relative overflow-hidden border-2 border-cyan-500/40 shadow-[0_0_80px_rgba(6,182,212,0.15)] bg-gradient-to-r from-[#07131F] via-[#0A1020] to-[#110D20]">
+      <GlassCard intensity="high" className="relative overflow-hidden border-2 border-cyan-500/40 shadow-[0_0_80px_rgba(6,182,212,0.15)] bg-surface-secondary">
         <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div className="space-y-3 max-w-4xl">
             <div className="flex flex-wrap items-center gap-2.5">
               <Badge variant="cyan" icon={<Layers className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />}>
                 🚧 NATIONAL DIGITAL TWIN MATRIX // SIH GOTHAM SURVEY
               </Badge>
-              <span className="text-[11px] font-mono text-emerald-300 font-extrabold bg-emerald-500/10 px-3 py-1 rounded-md border border-emerald-500/30 flex items-center gap-1.5">
+              <span className="text-[11px] font-mono text-accent-emerald font-extrabold bg-emerald-500/10 px-3 py-1 rounded-md border border-emerald-500/30 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                 LIVE BEFORE/AFTER LiDAR FEED
               </span>
@@ -124,7 +124,7 @@ export const ProjectExplorerPage: React.FC = () => {
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2.5">
-                        <span className="font-mono font-black text-xs bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 px-3 py-1 rounded-xl shadow-inner">
+                        <span className="font-mono font-black text-xs bg-cyan-500/20 text-accent-cyan border border-cyan-500/40 px-3 py-1 rounded-xl shadow-inner">
                           #{proj.id}
                         </span>
                         <span className="text-xs font-mono text-secondary flex items-center gap-1">
@@ -139,7 +139,7 @@ export const ProjectExplorerPage: React.FC = () => {
                       </Badge>
                     </div>
 
-                    <h3 className="text-xl font-heading font-extrabold text-primary group-hover:text-cyan-300 transition-colors tracking-tight">
+                    <h3 className="text-xl font-heading font-extrabold text-primary group-hover:text-accent-cyan transition-colors tracking-tight">
                       {proj.name}
                     </h3>
                   </div>

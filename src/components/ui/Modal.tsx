@@ -66,8 +66,8 @@ export const Modal: React.FC<ModalProps> = ({
             {/* Title Bar */}
             <div className="px-6 py-4 bg-surface-secondary border-b border-subtle flex items-center justify-between gap-4 shrink-0">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-[#D6D0C4]/70 text-[#3730A3] border border-subtle">
-                  <Shield className="w-5 h-5 animate-pulse text-[#3730A3]" />
+                <div className="p-2 rounded-xl bg-surface-secondary text-accent-indigo border border-subtle">
+                  <Shield className="w-5 h-5 animate-pulse text-accent-indigo" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
@@ -84,7 +84,7 @@ export const Modal: React.FC<ModalProps> = ({
 
               <button
                 onClick={onClose}
-                className="p-2 rounded-xl bg-surface hover:bg-[#D6D0C4] text-secondary hover:text-primary transition-colors border border-subtle"
+                className="p-2 rounded-xl bg-surface hover:bg-surface-secondary text-secondary hover:text-primary transition-colors border border-subtle"
               >
                 <X className="w-5 h-5" />
               </button>

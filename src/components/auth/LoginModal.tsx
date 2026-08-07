@@ -129,7 +129,7 @@ export const LoginModal: React.FC = () => {
 
             <button
               onClick={() => setLoginModalOpen(false)}
-              className="p-2 rounded-xl bg-surface hover:bg-[#DCD5C7] border border-subtle text-secondary hover:text-primary transition-colors shadow-2xs"
+              className="p-2 rounded-xl bg-surface hover:bg-surface-secondary border border-subtle text-secondary hover:text-primary transition-colors shadow-2xs"
             >
               <X className="w-5 h-5" />
             </button>
@@ -162,7 +162,7 @@ export const LoginModal: React.FC = () => {
             {/* Loading / Authenticating Overlay State */}
             {isAuthenticating ? (
               <div className="py-16 text-center space-y-4">
-                <Loader2 className="w-12 h-12 text-[#3730A3] animate-spin mx-auto" />
+                <Loader2 className="w-12 h-12 text-accent-indigo animate-spin mx-auto" />
                 <div className="text-lg font-black text-primary font-heading">{authStep}</div>
                 <p className="text-xs text-secondary font-mono max-w-sm mx-auto font-semibold">
                   Establishing RSA-4096 handshake and mounting zero-latency smart contract allowances...
@@ -175,7 +175,7 @@ export const LoginModal: React.FC = () => {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between text-xs text-secondary px-1 font-sans font-bold">
                       <span>Select a persona to immediately inspect the platform under that role:</span>
-                      <span className="text-[#3730A3] font-extrabold font-mono">4 Verified Personas Available</span>
+                      <span className="text-accent-indigo font-extrabold font-mono">4 Verified Personas Available</span>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -183,8 +183,8 @@ export const LoginModal: React.FC = () => {
                         <div
                           key={i}
                           onClick={() => handlePersonaSelect(p)}
-                          className={`p-4 rounded-2xl bg-surface-secondary hover:bg-[#E2DCCF] border border-subtle hover:border-[#4338CA] transition-all cursor-pointer shadow-2xs hover:shadow-md space-y-3 group ${
-                            currentUser.name === p.name ? 'ring-2 ring-[#4338CA] border-[#4338CA] bg-[#EFF0F8]' : ''
+                          className={`p-4 rounded-2xl bg-surface-secondary hover:bg-surface-secondary border border-subtle hover:border-accent-indigo transition-all cursor-pointer shadow-2xs hover:shadow-md space-y-3 group ${
+                            currentUser.name === p.name ? 'ring-2 ring-accent-indigo border-accent-indigo bg-accent-indigo/10' : ''
                           }`}
                         >
                           <div className="flex items-start justify-between gap-2">
@@ -193,14 +193,14 @@ export const LoginModal: React.FC = () => {
                                 {p.icon}
                               </span>
                               <div>
-                                <h4 className="text-sm font-black text-primary font-heading group-hover:text-[#3730A3] transition-colors">
+                                <h4 className="text-sm font-black text-primary font-heading group-hover:text-accent-indigo transition-colors">
                                   {p.name}
                                 </h4>
                                 <span className="text-[10px] text-secondary font-mono block font-bold">{p.role}</span>
                               </div>
                             </div>
                             {currentUser.name === p.name && (
-                              <span className="px-2 py-0.5 rounded-full bg-[#4338CA] text-primary font-black text-[9px] shadow-2xs">
+                              <span className="px-2 py-0.5 rounded-full bg-accent-indigo text-primary font-black text-[9px] shadow-2xs">
                                 ACTIVE
                               </span>
                             )}
@@ -212,7 +212,7 @@ export const LoginModal: React.FC = () => {
 
                           <div className="pt-2 border-t border-subtle flex items-center justify-between text-[10px] font-mono text-secondary">
                             <span>{p.department}</span>
-                            <span className="text-[#3730A3] font-black group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                            <span className="text-accent-indigo font-black group-hover:translate-x-1 transition-transform flex items-center gap-1">
                               Login <ArrowRight className="w-3 h-3" />
                             </span>
                           </div>

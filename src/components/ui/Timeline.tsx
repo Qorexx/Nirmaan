@@ -22,20 +22,20 @@ export const Timeline: React.FC<TimelineProps> = ({ items, className = '' }) => 
       case 'completed':
         return <Check className="w-4 h-4 text-emerald-950 stroke-[3]" />;
       case 'active':
-        return <Clock className="w-4 h-4 text-indigo-700 animate-spin" />;
+        return <Clock className="w-4 h-4 text-accent-indigo animate-spin" />;
       case 'error':
-        return <AlertTriangle className="w-4 h-4 text-rose-700" />;
+        return <AlertTriangle className="w-4 h-4 text-rose-500" />;
       case 'pending':
       default:
-        return <span className="w-2.5 h-2.5 rounded-full bg-[#78716C]" />;
+        return <span className="w-2.5 h-2.5 rounded-full bg-secondary" />;
     }
   };
 
   const getStatusBg = (status: string) => {
     switch (status) {
-      case 'completed': return 'bg-emerald-200 border-emerald-400 shadow-2xs';
-      case 'active': return 'bg-indigo-100 border-indigo-500 shadow-xs';
-      case 'error': return 'bg-rose-100 border-rose-500 shadow-2xs';
+      case 'completed': return 'bg-accent-emerald/20 border-accent-emerald/50 shadow-2xs';
+      case 'active': return 'bg-accent-indigo/15 border-accent-indigo shadow-xs';
+      case 'error': return 'bg-rose-500/15 border-rose-500 shadow-2xs';
       case 'pending':
       default: return 'bg-surface-secondary border-subtle';
     }
@@ -44,7 +44,7 @@ export const Timeline: React.FC<TimelineProps> = ({ items, className = '' }) => 
   return (
     <div className={`relative pl-6 font-mono space-y-8 text-primary ${className}`}>
       {/* Vertical Connection Guideline */}
-      <div className="absolute left-3.5 top-2 bottom-2 w-[2px] bg-[#D6D0C4]" />
+      <div className="absolute left-3.5 top-2 bottom-2 w-[2px] bg-surface-secondary" />
 
       {items.map((item, idx) => (
         <motion.div

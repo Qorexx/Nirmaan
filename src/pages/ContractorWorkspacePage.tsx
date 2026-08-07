@@ -23,6 +23,7 @@ import {
   CloudSun, 
   Building2, 
   Clock, 
+  Activity,
   ShieldCheck, 
   Sparkles, 
   Zap, 
@@ -305,7 +306,7 @@ export const ContractorWorkspacePage: React.FC = () => {
   ];
 
   return (
-    <div ref={dashboardRef} className="space-y-10 font-mono pb-20 text-slate-100 selection:bg-cyan-500 selection:text-obsidian max-w-[1700px] mx-auto">
+    <div ref={dashboardRef} className="space-y-10 font-mono pb-20 text-primary max-w-[1700px] mx-auto">
 
       {/* ========================================================================= */}
       {/* 1. STRIPE & ARC BROWSER INSPIRED WELCOME DASHBOARD HERO */}
@@ -453,7 +454,7 @@ export const ContractorWorkspacePage: React.FC = () => {
                       Step 1: Upload Multi-Modal Field Proofs
                     </span>
                   </div>
-                  <Badge variant="indigo" size="sm">DRAG & DROP HUB // UP TO 100MB</Badge>
+                  <Badge variant="blue" size="sm">DRAG & DROP HUB // UP TO 100MB</Badge>
                 </div>
 
                 <div className="p-6 sm:p-8 space-y-6 bg-surface">
@@ -781,7 +782,7 @@ export const ContractorWorkspacePage: React.FC = () => {
                   {/* Live Verification Status Badge */}
                   <div className="flex items-center justify-between p-3.5 rounded-xl bg-surface-secondary border border-subtle">
                     <span className="text-secondary font-bold">Verification Status:</span>
-                    <Badge variant={overallWorkflowState === 'approved' ? 'emerald' : overallWorkflowState === 'ai_processing' ? 'indigo' : 'amber'}>
+                    <Badge variant={overallWorkflowState === 'approved' ? 'emerald' : overallWorkflowState === 'ai_processing' ? 'blue' : 'amber'}>
                       {overallWorkflowState === 'approved' ? '✔ SETTLED & PAID' : overallWorkflowState === 'ai_processing' ? '⚙ AI EVALUATING (1.4s)' : 'AWAITING PROOF BUNDLE'}
                     </Badge>
                   </div>
@@ -872,7 +873,7 @@ export const ContractorWorkspacePage: React.FC = () => {
 
                     {/* Hover zoom trigger overlay */}
                     <div className="absolute inset-0 bg-cyan-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
-                      <span className="p-3 rounded-2xl bg-cyan-500/20 text-cyan-300 border border-cyan-400 shadow-xl font-bold text-xs flex items-center gap-2">
+                      <span className="p-3 rounded-2xl bg-cyan-500/20 text-accent-cyan border border-cyan-400 shadow-xl font-bold text-xs flex items-center gap-2">
                         <Maximize2 className="w-4 h-4" /> Fullscreen Preview
                       </span>
                     </div>

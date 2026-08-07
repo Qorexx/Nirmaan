@@ -26,17 +26,17 @@ export const AnimatedSidebar: React.FC = () => {
   const isCollapsed = isManualCollapsed || isPresentationMode;
 
   const navItems: { id: PageRoute; label: string; icon: React.ReactNode; badge?: string }[] = [
-    { id: 'landing', label: 'Home Engine', icon: <Home className="w-5 h-5 text-indigo-700" /> },
-    { id: 'architecture', label: 'Architecture Demo', icon: <Cpu className="w-5 h-5 text-blue-700 animate-pulse" />, badge: 'NEW' },
-    { id: 'command-center', label: 'Command Suite', icon: <ShieldCheck className="w-5 h-5 text-indigo-700" />, badge: 'Gov' },
-    { id: 'projects', label: 'Project Deck', icon: <Layers className="w-5 h-5 text-indigo-700" /> },
-    { id: 'workspace', label: 'Contractor Hub', icon: <HardHat className="w-5 h-5 text-emerald-700" /> },
-    { id: 'mission-control', label: 'Mission Control', icon: <Activity className="w-5 h-5 text-rose-700 animate-pulse" />, badge: 'LIVE' },
-    { id: 'treasury', label: 'Vault Treasury', icon: <Wallet className="w-5 h-5 text-amber-700" /> },
-    { id: 'explorer', label: 'Trust Ledger', icon: <Cpu className="w-5 h-5 text-purple-700" />, badge: 'x402' },
-    { id: 'analytics', label: 'AI Analytics', icon: <BarChart3 className="w-5 h-5 text-violet-700" /> },
-    { id: 'compliance', label: 'Regulatory Audit', icon: <FileText className="w-5 h-5 text-slate-700" /> },
-    { id: 'settings', label: 'System Config', icon: <Settings className="w-5 h-5 text-stone-600" /> },
+    { id: 'landing', label: 'Home Engine', icon: <Home className="w-5 h-5 text-accent-indigo" /> },
+    { id: 'architecture', label: 'Architecture Demo', icon: <Cpu className="w-5 h-5 text-blue-500 animate-pulse" />, badge: 'NEW' },
+    { id: 'command-center', label: 'Command Suite', icon: <ShieldCheck className="w-5 h-5 text-accent-indigo" />, badge: 'Gov' },
+    { id: 'projects', label: 'Project Deck', icon: <Layers className="w-5 h-5 text-accent-indigo" /> },
+    { id: 'workspace', label: 'Contractor Hub', icon: <HardHat className="w-5 h-5 text-accent-emerald" /> },
+    { id: 'mission-control', label: 'Mission Control', icon: <Activity className="w-5 h-5 text-rose-500 animate-pulse" />, badge: 'LIVE' },
+    { id: 'treasury', label: 'Vault Treasury', icon: <Wallet className="w-5 h-5 text-accent-gold" /> },
+    { id: 'explorer', label: 'Trust Ledger', icon: <Cpu className="w-5 h-5 text-purple-500" />, badge: 'x402' },
+    { id: 'analytics', label: 'AI Analytics', icon: <BarChart3 className="w-5 h-5 text-violet-500" /> },
+    { id: 'compliance', label: 'Regulatory Audit', icon: <FileText className="w-5 h-5 text-secondary" /> },
+    { id: 'settings', label: 'System Config', icon: <Settings className="w-5 h-5 text-secondary" /> },
   ];
 
   return (
@@ -104,9 +104,9 @@ export const AnimatedSidebar: React.FC = () => {
                   <span className="truncate flex-1 text-left text-xs font-sans tracking-tight">{item.label}</span>
                   {item.badge && (
                     <span className={`text-[9px] uppercase font-mono font-black px-2 py-0.5 rounded-full shrink-0 shadow-2xs ${
-                      item.badge === 'LIVE' ? 'bg-rose-100 text-rose-800 border border-rose-300 animate-pulse' :
-                      item.badge === 'Gov' ? 'bg-indigo-100 text-indigo-900 border border-indigo-300' :
-                      'bg-amber-100 text-amber-900 border border-amber-300'
+                      item.badge === 'LIVE' ? 'bg-rose-500/15 text-rose-500 border border-rose-500/30 animate-pulse' :
+                      item.badge === 'Gov' ? 'bg-accent-indigo/15 text-accent-indigo border border-accent-indigo/30' :
+                      'bg-accent-gold/15 text-accent-gold border border-accent-gold/30'
                     }`}>
                       {item.badge}
                     </span>

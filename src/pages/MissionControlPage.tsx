@@ -73,7 +73,7 @@ export const MissionControlPage: React.FC = () => {
   const isAiStage = currentStageIdx >= 1 && currentStageIdx <= 4;
 
   return (
-    <div className="space-y-8 font-mono pb-16 text-slate-100 selection:bg-cyan-500 selection:text-obsidian">
+    <div className="space-y-8 font-mono pb-16 text-primary">
 
       {/* ========================================================================= */}
       {/* 1. NASA MISSION CONTROL x PALANTIR GOTHAM HERO DECK */}
@@ -168,7 +168,7 @@ export const MissionControlPage: React.FC = () => {
           </div>
           <div className="flex items-center gap-2 text-xs font-mono">
             <span className="text-secondary">Target Digital Twin:</span>
-            <span className="bg-blue-500/20 text-cyan-300 px-3 py-1 rounded-lg border border-blue-500/30 font-extrabold">
+            <span className="bg-blue-500/20 text-accent-cyan px-3 py-1 rounded-lg border border-blue-500/30 font-extrabold">
               {activeProject.name} ({activeProject.location})
             </span>
           </div>
@@ -192,7 +192,7 @@ export const MissionControlPage: React.FC = () => {
               <TerminalIcon className="w-4 h-4 text-emerald-400 animate-pulse" />
               <span className="text-xs font-extrabold text-primary uppercase tracking-wider">Autonomous Execution Stream</span>
             </div>
-            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 animate-pulse">
+            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-accent-emerald border border-emerald-500/30 animate-pulse">
               LIVE TTY // 0x402A
             </span>
           </div>
