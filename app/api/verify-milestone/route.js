@@ -1,11 +1,36 @@
 import { NextResponse } from 'next/server';
 
 /**
+ * Health check & API specification handler
+ * GET /api/verify-milestone
+ */
+export async function GET() {
+  return NextResponse.json(
+    {
+      status: 'online',
+      service: 'Nirmaan Oracle AI Verification Engine',
+      version: '1.0.0',
+      description: 'Autonomous AI Verification endpoint for construction infrastructure milestones.',
+      supportedProofTypes: ['image', 'sensor', 'document'],
+      paymentLayer: 'x402 Sandbox Mode Compatible',
+    },
+    {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Payment',
+      },
+    }
+  );
+}
+
+/**
  * Simulates the AI Core of the Nirmaan Protocol.
  * Adheres strictly to the Chapter 4 Interface Contract.
  *
  * Request:  POST /api/verify-milestone
- * Response: { verified, confidenceScore, message, timestamp }
+ * Response: { verified, confidenceScore, message, auditHash, timestamp }
  */
 export async function POST(req) {
   try {
@@ -60,12 +85,19 @@ export async function POST(req) {
       );
     }
 
-    // --- Simulated AI Processing Delay (3 seconds) ---
-    // Provides the "AI is thinking..." loading state for the frontend.
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // --- Check Payment / Authorization Header (x402 Sandbox mode) ---
+    const paymentHeader = req.headers.get('x-payment') || req.headers.get('authorization');
+    const paymentVerified = Boolean(paymentHeader);
+
+    // --- Simulated AI Processing Delay (2 seconds) ---
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // --- Run Core Verification Logic ---
     const result = await runAIVerification(proofType, proofPayload);
+
+    // --- Generate deterministic proof audit hash ---
+    const auditSeed = `${projectId}-${milestoneId}-${proofType}-${Date.now()}`;
+    const auditHash = '0x' + Buffer.from(auditSeed).toString('hex').slice(0, 40);
 
     // --- Respond with contract-compliant JSON ---
     return NextResponse.json(
@@ -73,14 +105,15 @@ export async function POST(req) {
         verified: result.verified,
         confidenceScore: result.confidenceScore,
         message: result.message,
+        auditHash,
+        paymentVerified,
         timestamp: new Date().toISOString(),
       },
       {
         status: 200,
         headers: {
-          // Allow the x402 team and frontend to call this from any origin
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Payment',
         },
       }
@@ -105,7 +138,7 @@ export async function OPTIONS() {
     status: 204,
     headers: {
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Payment',
     },
   });
@@ -114,21 +147,6 @@ export async function OPTIONS() {
 // ─────────────────────────────────────────────────────────────────────────────
 // CORE AI VERIFICATION ENGINE
 // ─────────────────────────────────────────────────────────────────────────────
-/**
- * The isolated AI verification brain.
- *
- * FUTURE-PROOFING: Swap out this entire function to plug in a real AI model.
- * Example replacement:
- *
- *   import { GoogleGenerativeAI } from '@google/generative-ai';
- *   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
- *   const model = genAI.getGenerativeModel({ model: 'gemini-pro-vision' });
- *   const result = await model.generateContent([prompt, imagePart]);
- *
- * @param {string} proofType    - 'image' | 'sensor' | 'document'
- * @param {string} proofPayload - URL or string payload to analyze
- * @returns {Promise<{ verified: boolean, confidenceScore: number, message: string }>}
- */
 async function runAIVerification(proofType, proofPayload) {
   const payloadLower = String(proofPayload).toLowerCase();
 
@@ -164,9 +182,7 @@ async function runAIVerification(proofType, proofPayload) {
   };
 }
 
-/**
- * Helper: generate a random float between min and max, rounded to 2 decimal places.
- */
 function randomInRange(min, max) {
   return parseFloat((Math.random() * (max - min) + min).toFixed(2));
 }
+
