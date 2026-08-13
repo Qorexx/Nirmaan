@@ -185,6 +185,39 @@ POST /api/simulator/scenario
 
 ---
 
+Simulator Backend Completed ✅
+
+API Endpoints
+
+GET /api/simulator
+Returns:
+- simulator state
+- fleet
+- tick count
+- live telemetry
+
+POST /api/simulator
+
+{
+  "action": "START"
+}
+
+Supported actions:
+- START
+- STOP
+- PAUSE
+- RESUME
+
+Future Features:
+
+✅ Real route generation
+✅ Multi-stage construction projects
+✅ Multiple vehicles
+✅ Anomaly injection (overheating, delay, route deviation)
+✅ Weather effects
+✅ IoT integration
+
+
 # Shared Components
 
 All reusable UI components should be created here.
