@@ -1,4 +1,7 @@
 import { NextResponse } from 'next/server';
+import { withX402, x402ResourceServer } from "@x402/next";
+import { HTTPFacilitatorClient } from "@x402/core/server";
+import { ExactEvmScheme } from "@x402/evm/exact/server";
 
 /**
  * Health check & API specification handler
@@ -32,7 +35,7 @@ export async function GET() {
  * Request:  POST /api/verify-milestone
  * Response: { verified, confidenceScore, message, auditHash, timestamp }
  */
-export async function POST(req) {
+async function verifyMilestoneHandler(req) {
   try {
     // --- Parse body safely ---
     let body;
@@ -147,42 +150,143 @@ export async function OPTIONS() {
 // ─────────────────────────────────────────────────────────────────────────────
 // CORE AI VERIFICATION ENGINE
 // ─────────────────────────────────────────────────────────────────────────────
-async function runAIVerification(proofType, proofPayload) {
-  const payloadLower = String(proofPayload).toLowerCase();
+import { GoogleGenAI } from "@google/genai";
 
-  // Failure detection keywords (easily extensible list)
-  const FAILURE_KEYWORDS = [
-    'pothole',
-    'crack',
-    'defect',
-    'substandard',
-    'bribe',
-    'fail',
-    'damage',
-    'corrupt',
-    'incomplete',
-    'missing',
-  ];
+// Initialize Gemini SDK
+const ai = process.env.GEMINI_API_KEY 
+  ? new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
+  : null;
 
-  const foundKeyword = FAILURE_KEYWORDS.find((kw) => payloadLower.includes(kw));
-
-  if (foundKeyword) {
+/**
+ * Executes the AI verification model against the provided proof
+ */
+async function runAIVerification(projectId, milestoneId, proofType, proofPayload) {
+  // If Gemini isn't configured, fallback to the old keyword simulation
+  if (!ai) {
+    console.warn("⚠️ GEMINI_API_KEY is missing. Falling back to simulated verification.");
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const payloadLower = String(proofPayload).toLowerCase();
+    const isImage = proofType === 'image';
+    const hasAnomaly = isImage 
+      ? (payloadLower.includes('pothole') || payloadLower.includes('crack') || payloadLower.includes('defect'))
+      : false;
+    
     return {
-      verified: false,
-      confidenceScore: randomInRange(0.88, 0.97),
-      message: `AI ${proofType} analysis complete. Structural anomaly detected: keyword '${foundKeyword}' identified in proof payload. Milestone rejected. Smart contract escrow WILL NOT release funds.`,
+      verified: !hasAnomaly,
+      confidenceScore: hasAnomaly ? 0.98 : 0.95,
+      message: hasAnomaly 
+        ? "AI simulation complete. Structural anomaly detected. Milestone rejected." 
+        : "AI simulation complete. No defects detected. Milestone approved.",
+      defects: hasAnomaly ? ["Simulated anomaly found based on keyword"] : []
     };
   }
 
-  // Passed verification
-  return {
-    verified: true,
-    confidenceScore: randomInRange(0.95, 0.99),
-    message: `AI ${proofType} analysis complete. No structural defects or anomalies detected. Milestone approved. Smart contract escrow is authorized to release funds.`,
-  };
+  try {
+    let contents;
+    
+    if (proofType === 'image' && String(proofPayload).startsWith('data:image')) {
+      // It's a base64 image uploaded by the frontend
+      // Strip the data:image/jpeg;base64, prefix
+      const mimeType = String(proofPayload).match(/data:(.*?);base64,/)[1] || "image/jpeg";
+      const base64Data = String(proofPayload).replace(/^data:image\/\w+;base64,/, "");
+      
+      contents = [
+        {
+          text: `You are an expert infrastructure quality inspector and civil engineer for a public works project.
+          Analyze this construction image for defects, structural integrity, and compliance.
+          Look closely for potholes, cracks, water damage, or poor materials.
+          
+          Respond ONLY with a raw JSON object containing these EXACT keys:
+          {
+            "verified": boolean (true if it looks like safe/completed construction, false if there are serious defects),
+            "confidenceScore": number (between 0.00 and 1.00),
+            "defects": array of strings (list any specific issues found, empty array if none),
+            "message": string (a short 1-2 sentence explanation of your decision)
+          }`
+        },
+        {
+          inlineData: {
+            mimeType: mimeType,
+            data: base64Data
+          }
+        }
+      ];
+    } else {
+      // It's a text-based proof or URL
+      contents = [
+        {
+          text: `You are an expert infrastructure quality inspector.
+          Analyze this text proof submitted by a contractor: "${proofPayload}" (Type: ${proofType}).
+          
+          Respond ONLY with a raw JSON object containing these EXACT keys:
+          {
+            "verified": boolean (true if the text seems to legitimately claim the milestone is complete),
+            "confidenceScore": number (between 0.00 and 1.00),
+            "defects": array of strings (list any issues found, empty array if none),
+            "message": string (a short 1-2 sentence explanation of your decision)
+          }`
+        }
+      ];
+    }
+
+    // Call Gemini 3.1 Pro for maximum reasoning capability
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.1-pro',
+      contents: contents,
+      config: {
+        responseMimeType: "application/json",
+      }
+    });
+
+    const aiResult = JSON.parse(response.text);
+    
+    return {
+      verified: aiResult.verified,
+      confidenceScore: aiResult.confidenceScore || 0.9,
+      message: aiResult.message || (aiResult.verified ? "AI Vision analysis complete. Approved." : "AI Vision analysis complete. Rejected."),
+      defects: aiResult.defects || []
+    };
+
+  } catch (error) {
+    console.error("Gemini AI Error:", error);
+    // Fallback on error
+    return {
+      verified: false,
+      confidenceScore: 0.0,
+      message: "AI Vision analysis failed due to server error.",
+      defects: [error.message]
+    };
+  }
 }
 
 function randomInRange(min, max) {
   return parseFloat((Math.random() * (max - min) + min).toFixed(2));
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// x402 PAYMENT LAYER CONFIGURATION
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Initialize the facilitator (service that verifies payments on-chain)
+const facilitatorClient = new HTTPFacilitatorClient({ 
+  url: "https://facilitator.x402.org" 
+});
+
+// Setup the resource server for Base Sepolia testnet
+const resourceServer = new x402ResourceServer(facilitatorClient)
+  .register("eip155:84532", new ExactEvmScheme());
+
+// Export the protected POST route
+export const POST = withX402(
+  verifyMilestoneHandler,
+  {
+    accepts: {
+      scheme: "exact",
+      price: "0.001", // Tiny fee for testnet demo
+      network: "eip155:84532", // Base Sepolia
+      payTo: process.env.NEXT_PUBLIC_X402_WALLET_ADDRESS || "0x1111111111111111111111111111111111111111",
+    },
+    description: "AI Oracle verification compute fee",
+  },
+  resourceServer
+);

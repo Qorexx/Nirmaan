@@ -91,6 +91,7 @@ export async function executeX402VerificationWorkflow({
   proofPayload,
   onStepChange,
   onLogMessage,
+  fetchClient = fetch, // Default to standard fetch, but can be overridden by useX402
 }) {
   const log = (step, msg, type = 'info', extra = null) => {
     if (onLogMessage) {
@@ -122,8 +123,8 @@ export async function executeX402VerificationWorkflow({
     log(2, `[HTTP 402] AI Oracle responded with HTTP 402 Payment Required!`, 'warning', {
       status: 402,
       statusText: 'Payment Required',
-      invoice: '0.05 USDC Compute Fee',
-      oracleWallet: '0x402_ORACLE_AI_NODE_07',
+      invoice: '0.001 ETH Compute Fee',
+      oracleWallet: '0x1111111111111111111111111111111111111111',
     });
     await sleep(1200);
 
@@ -131,22 +132,23 @@ export async function executeX402VerificationWorkflow({
     setStep(3);
     const txHash = '0x402' + Array.from({ length: 32 }, () => Math.floor(Math.random() * 16).toString(16)).join('');
     log(3, `[WALLETSIGN] Programmatic Wallet signing x402 micro-transaction...`, 'payment');
-    log(3, `[x402 HEADER] Attached X-Payment Auth Header: ${txHash.slice(0, 18)}...`, 'payment');
+    log(3, `[x402 HEADER] Attached X-Payment Auth Header...`, 'payment');
     await sleep(1000);
 
     // --- STEP 4: AI ORACLE VISION & STRUCTURAL ANALYSIS ---
     setStep(4);
     log(4, `[ORACLE AI] Payment verified. AI Neural Model analyzing proof for structural integrity...`, 'oracle');
 
-    // Call the actual Chapter 4 Next.js API endpoint!
+    // Call the actual Next.js API endpoint! 
+    // fetchClient will automatically handle the 402 loop if using x402-fetch wrapper
     let apiData;
     try {
-      const response = await fetch('/api/verify-milestone', {
+      const response = await fetchClient('/api/verify-milestone', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          // Note: with actual x402 fetch wrapper, X-Payment headers are injected automatically
           'X-Payment': txHash,
-          'Authorization': `Bearer ${txHash}`,
         },
         body: JSON.stringify({
           projectId,
