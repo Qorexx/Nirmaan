@@ -96,7 +96,7 @@ async function verifyMilestoneHandler(req) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // --- Run Core Verification Logic ---
-    const result = await runAIVerification(proofType, proofPayload);
+    const result = await runAIVerification(projectId, milestoneId, proofType, proofPayload);
 
     // --- Generate deterministic proof audit hash ---
     const auditSeed = `${projectId}-${milestoneId}-${proofType}-${Date.now()}`;
@@ -229,9 +229,9 @@ async function runAIVerification(projectId, milestoneId, proofType, proofPayload
       ];
     }
 
-    // Call Gemini 3.1 Pro for maximum reasoning capability
+    // Reverting to Gemini 3.6 Flash because 3.1 Pro requires a paid AI Studio billing account
     const response = await ai.models.generateContent({
-      model: 'gemini-3.1-pro',
+      model: 'gemini-3.6-flash',
       contents: contents,
       config: {
         responseMimeType: "application/json",
@@ -239,6 +239,7 @@ async function runAIVerification(projectId, milestoneId, proofType, proofPayload
     });
 
     const aiResult = JSON.parse(response.text);
+    console.log("Gemini AI Decision:", aiResult);
     
     return {
       verified: aiResult.verified,
@@ -268,25 +269,19 @@ function randomInRange(min, max) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Initialize the facilitator (service that verifies payments on-chain)
-const facilitatorClient = new HTTPFacilitatorClient({ 
-  url: "https://facilitator.x402.org" 
-});
+// const facilitatorClient = new HTTPFacilitatorClient({ 
+//   url: "https://facilitator.x402.org" 
+// });
 
 // Setup the resource server for Base Sepolia testnet
-const resourceServer = new x402ResourceServer(facilitatorClient)
-  .register("eip155:84532", new ExactEvmScheme());
+// const resourceServer = new x402ResourceServer(facilitatorClient)
+//   .register("eip155:84532", new ExactEvmScheme());
 
-// Export the protected POST route
-export const POST = withX402(
-  verifyMilestoneHandler,
-  {
-    accepts: {
-      scheme: "exact",
-      price: "0.001", // Tiny fee for testnet demo
-      network: "eip155:84532", // Base Sepolia
-      payTo: process.env.NEXT_PUBLIC_X402_WALLET_ADDRESS || "0x1111111111111111111111111111111111111111",
-    },
-    description: "AI Oracle verification compute fee",
-  },
-  resourceServer
-);
+// Bypass x402 Gateway for the local hackathon demo
+// export const POST = withX402(
+//   verifyMilestoneHandler,
+//   { ... },
+//   resourceServer
+// );
+
+export const POST = verifyMilestoneHandler;

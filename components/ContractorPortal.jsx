@@ -52,11 +52,25 @@ export default function ContractorPortal({ projects, onSubmitProof }) {
     e.preventDefault();
     if (!proofPayload.trim() || isSubmitting) return;
     setIsSubmitting(true);
+    
+    let finalPayload = proofPayload;
+    if (customFile) {
+      // Read the file as base64 so Gemini can actually see the pixels!
+      finalPayload = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(customFile);
+      });
+    } else if (customFile === null && proofType === 'image' && proofPayload.startsWith('http')) {
+       // If it's a dummy preset URL, just let it fail or the backend will handle it.
+       finalPayload = proofPayload;
+    }
+
     await onSubmitProof({
       projectId,
       milestoneId: Number(milestoneId),
       proofType,
-      proofPayload: customFile ? `https://nirmaan.gov/uploads/${customFile.name}` : proofPayload,
+      proofPayload: finalPayload,
     });
     setIsSubmitting(false);
   };

@@ -1,18 +1,18 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import GlassNavbar from '../Frontend/components/GlassNavbar';
-import HeroSection from '../Frontend/components/HeroSection';
-import GovernmentDashboard from '../Frontend/components/GovernmentDashboard';
-import ContractorPortal from '../Frontend/components/ContractorPortal';
-import AutonomousActionLog from '../Frontend/components/AutonomousActionLog';
-import AnalyticsSection from '../Frontend/components/AnalyticsSection';
+import GlassNavbar from '@/components/GlassNavbar';
+import HeroSection from '@/components/HeroSection';
+import GovernmentDashboard from '@/components/GovernmentDashboard';
+import ContractorPortal from '@/components/ContractorPortal';
+import AutonomousActionLog from '@/components/AutonomousActionLog';
+import AnalyticsSection from '@/components/AnalyticsSection';
 
 import {
   INITIAL_PROJECTS,
   INITIAL_LEDGER,
   executeX402VerificationWorkflow,
-} from '../Frontend/lib/nirmaanState';
+} from '@/lib/nirmaanState';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'dashboard' | 'contractor' | 'autonomous' | 'analytics'

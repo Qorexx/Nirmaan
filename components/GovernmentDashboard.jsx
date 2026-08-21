@@ -1,5 +1,7 @@
 'use client';
 import React from 'react';
+import ProjectMap from './ProjectMap';
+import { generateAuditCertificate } from '../lib/pdfGenerator';
 
 export default function GovernmentDashboard({ projects, ledger, onVerifyClick }) {
   const totalBudget   = projects.reduce((s, p) => s + p.totalBudget, 0);
@@ -39,6 +41,9 @@ export default function GovernmentDashboard({ projects, ledger, onVerifyClick })
           accent="violet"
         />
       </div>
+
+      {/* Interactive Map */}
+      <ProjectMap projects={projects} />
 
       {/* Projects */}
       <div className="section-header-row mb-6">
@@ -200,7 +205,17 @@ function ProjectCard({ project, onVerifyClick }) {
                 </div>
               </div>
               {m.status === 'VERIFIED' ? (
-                <span className="badge badge-verified">{Math.round((m.score || 0.97) * 100)}% ✓</span>
+                <div className="flex items-center gap-2">
+                  <span className="badge badge-verified">{Math.round((m.score || 0.97) * 100)}% ✓</span>
+                  <button 
+                    onClick={() => generateAuditCertificate(project, m)}
+                    className="btn-ghost" 
+                    style={{ padding: '2px 8px', fontSize: 10, borderRadius: 4 }}
+                    title="Download Audit PDF"
+                  >
+                    📄 PDF
+                  </button>
+                </div>
               ) : m.status === 'PENDING' ? (
                 <button className="btn-verify-sm" onClick={() => onVerifyClick(project.id, m.id)}>
                   Verify ⚡

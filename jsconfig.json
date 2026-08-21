@@ -3,8 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@/components/*": ["./Frontend/components/*"],
-      "@/lib/*": ["./Frontend/lib/*"]
+      "@/components/*": ["./components/*"],
+      "@/lib/*": ["./lib/*"]
     }
   },
   "include": ["**/*.js", "**/*.jsx"],
