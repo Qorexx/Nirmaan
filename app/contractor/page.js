@@ -21,6 +21,7 @@ export default function ContractorPortal() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPipeline, setShowPipeline] = useState(false);
   const [verificationResult, setVerificationResult] = useState(null);
+  const [pipelineLogs, setPipelineLogs] = useState([]);
 
   // Helper to handle image file to base64
   const handleFileChange = (e) => {
@@ -51,6 +52,7 @@ export default function ContractorPortal() {
     e.preventDefault();
     if (!selectedProject || !selectedMilestone || !proofFile) return alert("Missing required visual proof.");
     
+    setPipelineLogs([]);
     setIsSubmitting(true);
     setShowPipeline(true); // Trigger the Step 4 UI
     
@@ -62,7 +64,9 @@ export default function ContractorPortal() {
       iotData,
       eWayBill,
       exifData,
-      (log) => { console.log("Pipeline Log:", log); } // Logs can be passed to the Pipeline UI
+      (log) => { 
+        setPipelineLogs(prev => [...prev, log]);
+      }
     );
     
     setVerificationResult(result);
@@ -72,22 +76,17 @@ export default function ContractorPortal() {
   const currentProject = projects.find(p => p.id === selectedProject);
 
   if (showPipeline) {
-    // The visual showstopper (Step 4) goes here, but we'll import it. 
-    // If it's not built yet, we show a placeholder.
     return (
       <div className="min-h-screen bg-slate-900 text-white">
         <GlassNavbar />
-        <div className="pt-24 px-6 max-w-5xl mx-auto">
-          {verificationResult ? (
-            <div className="p-8 rounded-2xl bg-slate-800/50 backdrop-blur-md border border-slate-700">
-               <h2 className="text-3xl font-bold mb-4">{verificationResult.success ? '✅ Verified & Time-Locked' : '❌ Verification Failed'}</h2>
-               <p className="text-slate-300">{verificationResult.apiData?.message || verificationResult.error}</p>
-               <button onClick={() => { setShowPipeline(false); setVerificationResult(null); }} className="mt-6 px-4 py-2 bg-blue-600 rounded-lg">Back to Portal</button>
-            </div>
-          ) : (
-            <div className="p-8 rounded-2xl bg-slate-800/50 backdrop-blur-md text-center">
-               <h2 className="text-2xl animate-pulse">Running Autonomous Verification Pipeline...</h2>
-               <p className="text-slate-400 mt-2">Checking GAN, BoQ, IoT, and Multi-Model Consensus</p>
+        <div className="pt-24 px-6 max-w-5xl mx-auto pb-12">
+          <VerificationPipeline logs={pipelineLogs} isComplete={!isSubmitting} result={verificationResult} />
+          
+          {!isSubmitting && (
+            <div className="mt-8 text-center">
+              <button onClick={() => { setShowPipeline(false); setVerificationResult(null); setPipelineLogs([]); }} className="px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition border border-slate-600">
+                Return to Contractor Portal
+              </button>
             </div>
           )}
         </div>
