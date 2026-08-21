@@ -1,33 +1,53 @@
 import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
 import { INITIAL_PROJECTS } from '@/lib/nirmaanState';
 
-// Global memory for the Node.js server to act as our real-time datastore across 3 devices
-if (!global.nirmaanProjects) {
-  global.nirmaanProjects = INITIAL_PROJECTS;
-}
+// Create a direct Supabase client for this API route
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
-// GET: Polled by all 3 devices every 1000ms to stay in sync
 export async function GET() {
-  return NextResponse.json(
-    { projects: global.nirmaanProjects },
-    {
-      status: 200,
-      headers: {
-        'Cache-Control': 'no-store, max-age=0',
-      },
+  try {
+    const { data, error } = await supabase
+      .from('hackathon_state')
+      .select('state_data')
+      .eq('id', 1)
+      .single();
+
+    if (error || !data) {
+      console.warn("Supabase fetch failed, sending initial state", error);
+      return NextResponse.json({ projects: INITIAL_PROJECTS }, { status: 200, headers: { 'Cache-Control': 'no-store, max-age=0' } });
     }
-  );
+
+    // If the database is completely empty (e.g., right after creation), send initial state
+    if (Object.keys(data.state_data).length === 0) {
+      return NextResponse.json({ projects: INITIAL_PROJECTS }, { status: 200, headers: { 'Cache-Control': 'no-store, max-age=0' } });
+    }
+
+    return NextResponse.json({ projects: data.state_data }, { status: 200, headers: { 'Cache-Control': 'no-store, max-age=0' } });
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to sync state' }, { status: 500 });
+  }
 }
 
-// POST: Called by any device when they mutate the state (e.g., Contractor submits, Citizen stakes)
 export async function POST(req) {
   try {
     const body = await req.json();
     if (body.projects) {
-      global.nirmaanProjects = body.projects;
+      const { error } = await supabase
+        .from('hackathon_state')
+        .update({ state_data: body.projects })
+        .eq('id', 1);
+
+      if (error) {
+        console.error("Supabase update failed:", error);
+        return NextResponse.json({ error: 'Failed to update database' }, { status: 500 });
+      }
     }
-    return NextResponse.json({ success: true, projects: global.nirmaanProjects });
+    return NextResponse.json({ success: true });
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to sync state' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
   }
 }
