@@ -6,106 +6,68 @@ import { Building2, HardHat, Smartphone } from 'lucide-react';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#e8eef3] text-[#2c3e50] font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-[#F5F5F7] text-[#1d1d1f] font-sans relative overflow-hidden selection:bg-blue-200">
       
-      {/* Sweeping Contour Wave Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-        <svg 
-          viewBox="0 0 1440 800" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-          className="absolute top-1/2 left-0 w-full h-full -translate-y-1/2 object-cover min-w-[1440px]"
-        >
-          <path d="M-100,500 C200,500 400,200 700,400 C1000,600 1200,300 1500,300" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,510 C200,510 400,210 700,410 C1000,610 1200,310 1500,310" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,520 C200,520 400,220 700,420 C1000,620 1200,320 1500,320" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,530 C200,530 400,230 700,430 C1000,630 1200,330 1500,330" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,540 C200,540 400,240 700,440 C1000,640 1200,340 1500,340" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,550 C200,550 400,250 700,450 C1000,650 1200,350 1500,350" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,560 C200,560 400,260 700,460 C1000,660 1200,360 1500,360" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,570 C200,570 400,270 700,470 C1000,670 1200,370 1500,370" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,580 C200,580 400,280 700,480 C1000,680 1200,380 1500,380" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,590 C200,590 400,290 700,490 C1000,690 1200,390 1500,390" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,600 C200,600 400,300 700,500 C1000,700 1200,400 1500,400" stroke="#7892ab" strokeWidth="0.5" />
-          <path d="M-100,610 C200,610 400,310 700,510 C1000,710 1200,410 1500,410" stroke="#7892ab" strokeWidth="0.5" />
-          
-          {/* Second overlapping wave block */}
-          <path d="M-100,600 C300,700 500,200 800,300 C1100,400 1300,100 1500,200" stroke="#7892ab" strokeWidth="0.5" opacity="0.6" />
-          <path d="M-100,610 C300,710 500,210 800,310 C1100,410 1300,110 1500,210" stroke="#7892ab" strokeWidth="0.5" opacity="0.6" />
-          <path d="M-100,620 C300,720 500,220 800,320 C1100,420 1300,120 1500,220" stroke="#7892ab" strokeWidth="0.5" opacity="0.6" />
-          <path d="M-100,630 C300,730 500,230 800,330 C1100,430 1300,130 1500,230" stroke="#7892ab" strokeWidth="0.5" opacity="0.6" />
-          <path d="M-100,640 C300,740 500,240 800,340 C1100,440 1300,140 1500,240" stroke="#7892ab" strokeWidth="0.5" opacity="0.6" />
-        </svg>
+      {/* Ultra-subtle Apple-style background gradient */}
+      <div className="absolute inset-0 z-0 pointer-events-none flex justify-center">
+        <div className="w-[140%] h-[800px] absolute -top-[200px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-[#F5F5F7] to-[#F5F5F7] opacity-100 rounded-[100%]" />
       </div>
 
-      {/* Top Header */}
-      <header className="relative z-10 w-full px-12 py-8 flex justify-between items-center max-w-7xl mx-auto">
-        <div className="flex items-center gap-3 cursor-pointer">
-          <div className="flex flex-col">
-            <span className="text-2xl font-black tracking-tight text-[#2c3e50] uppercase leading-none">Nirmaan</span>
-          </div>
+      {/* Minimal Header */}
+      <header className="relative z-10 w-full px-8 py-8 flex justify-between items-center max-w-7xl mx-auto">
+        <div className="flex items-center gap-2 cursor-pointer">
+          <span className="text-xl font-bold tracking-tight text-[#1d1d1f] leading-none">Nirmaan</span>
+          <span className="text-xs font-semibold text-[#86868b] tracking-wide bg-[#e8e8ed] px-2 py-0.5 rounded-md">x402</span>
         </div>
-
-        <nav className="hidden md:flex items-center gap-10">
-          <a href="#" className="text-sm font-bold text-[#475f77] hover:text-[#2c3e50] uppercase tracking-wide">Home</a>
-          <a href="#" className="text-sm font-bold text-[#475f77] hover:text-[#2c3e50] uppercase tracking-wide">Services</a>
-          <a href="#" className="text-sm font-bold text-[#475f77] hover:text-[#2c3e50] uppercase tracking-wide">About</a>
-          <a href="#" className="text-sm font-bold text-[#475f77] hover:text-[#2c3e50] uppercase tracking-wide">Contact</a>
-          <button className="ml-4 flex flex-col gap-1.5 p-2">
-            <span className="w-8 h-1 bg-[#2c3e50] block rounded-full"></span>
-            <span className="w-8 h-1 bg-[#2c3e50] block rounded-full"></span>
-            <span className="w-8 h-1 bg-[#2c3e50] block rounded-full"></span>
-          </button>
-        </nav>
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 pt-12 pb-24">
-        <div className="max-w-5xl w-full text-center space-y-12">
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 pt-16 pb-24">
+        <div className="max-w-[1000px] w-full text-center space-y-10">
           
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-[#1a252f] leading-[1.1]">
-              Eradicating Corruption <br/>
-              <span className="text-[#34495e]">
-                with Mathematical Certainty
+          <div className="space-y-6">
+            <h1 className="text-[3.5rem] md:text-[5rem] font-semibold tracking-tighter text-[#1d1d1f] leading-[1.05]">
+              Eradicating Corruption. <br/>
+              <span className="text-[#86868b]">
+                Mathematical Certainty.
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-[#5b738b] max-w-2xl mx-auto font-medium mt-6">
-              An autonomous escrow protocol that leverages Gemini AI, IoT telemetry, and smart contracts to ensure public funds are only released when verified.
+            <p className="text-xl md:text-2xl text-[#86868b] max-w-3xl mx-auto font-medium leading-relaxed tracking-tight">
+              An autonomous escrow protocol leveraging Gemini AI and IoT telemetry to ensure public funds are only released when infrastructure is physically verified.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 text-left max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 text-left max-w-[1000px] mx-auto pt-8">
             
             {/* Government Card */}
-            <Link href="/government" className="group rounded-2xl bg-white/70 backdrop-blur-md p-8 hover:bg-white border border-white/40 hover:border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all block">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#e8eef3] text-[#2c3e50] group-hover:bg-[#2c3e50] group-hover:text-white transition-colors">
-                <Building2 className="h-6 w-6" />
+            <Link href="/government" className="group rounded-[2rem] bg-white p-8 hover:scale-[1.02] border border-[#e8e8ed] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-300 block">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f5f5f7] text-[#1d1d1f] group-hover:bg-[#1d1d1f] group-hover:text-white transition-colors duration-300">
+                <Building2 className="h-6 w-6" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-bold text-[#1a252f] mb-3">Government Portal</h3>
-              <p className="text-sm text-[#5b738b] font-medium leading-relaxed">
+              <h3 className="text-2xl font-semibold tracking-tight text-[#1d1d1f] mb-3">Government</h3>
+              <p className="text-[15px] text-[#86868b] font-medium leading-relaxed">
                 Oversee projects, manage citizen disputes, and authorize Twin-Ledger fiat payouts via PFMS integration.
               </p>
             </Link>
 
             {/* Contractor Card */}
-            <Link href="/contractor" className="group rounded-2xl bg-white/70 backdrop-blur-md p-8 hover:bg-white border border-white/40 hover:border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all block">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#e8eef3] text-[#2c3e50] group-hover:bg-[#2c3e50] group-hover:text-white transition-colors">
-                <HardHat className="h-6 w-6" />
+            <Link href="/contractor" className="group rounded-[2rem] bg-white p-8 hover:scale-[1.02] border border-[#e8e8ed] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-300 block">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f5f5f7] text-[#1d1d1f] group-hover:bg-[#1d1d1f] group-hover:text-white transition-colors duration-300">
+                <HardHat className="h-6 w-6" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-bold text-[#1a252f] mb-3">Contractor Portal</h3>
-              <p className="text-sm text-[#5b738b] font-medium leading-relaxed">
+              <h3 className="text-2xl font-semibold tracking-tight text-[#1d1d1f] mb-3">Contractor</h3>
+              <p className="text-[15px] text-[#86868b] font-medium leading-relaxed">
                 Submit cryptographic proofs, hardware-signed telemetry, and e-Way bills to unlock milestone payouts.
               </p>
             </Link>
 
             {/* Citizen Card */}
-            <Link href="/citizen" className="group rounded-2xl bg-white/70 backdrop-blur-md p-8 hover:bg-white border border-white/40 hover:border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all block">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#e8eef3] text-[#2c3e50] group-hover:bg-[#2c3e50] group-hover:text-white transition-colors">
-                <Smartphone className="h-6 w-6" />
+            <Link href="/citizen" className="group rounded-[2rem] bg-white p-8 hover:scale-[1.02] border border-[#e8e8ed] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-300 block">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f5f5f7] text-[#1d1d1f] group-hover:bg-[#1d1d1f] group-hover:text-white transition-colors duration-300">
+                <Smartphone className="h-6 w-6" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-bold text-[#1a252f] mb-3">Citizen Portal</h3>
-              <p className="text-sm text-[#5b738b] font-medium leading-relaxed">
+              <h3 className="text-2xl font-semibold tracking-tight text-[#1d1d1f] mb-3">Citizen</h3>
+              <p className="text-[15px] text-[#86868b] font-medium leading-relaxed">
                 Decentralized whistleblower app. Stake ₹500 via UPI to freeze payouts and submit immutable IPFS evidence.
               </p>
             </Link>
