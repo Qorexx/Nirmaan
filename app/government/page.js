@@ -25,40 +25,133 @@ export default function GovernmentPortal() {
     setPfmsAnimation({ active: false, projectId: null, step: 0 });
   };
 
+  // ── Shared Styles ──
+  const columnCard = {
+    background: 'rgba(255,255,255,0.7)',
+    backdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255,255,255,0.9)',
+    borderRadius: '1.5rem',
+    padding: '28px',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '500px',
+  };
+
+  const projectCard = {
+    background: '#fff',
+    border: '1px solid #f1f5f9',
+    borderRadius: '1rem',
+    padding: '20px',
+    boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+    transition: 'box-shadow 0.2s',
+  };
+
+  const badge = (bg, color, border) => ({
+    display: 'inline-block',
+    fontSize: '10px',
+    fontWeight: 800,
+    textTransform: 'uppercase',
+    letterSpacing: '0.08em',
+    padding: '4px 10px',
+    borderRadius: '999px',
+    background: bg,
+    color: color,
+    border: `1px solid ${border}`,
+    whiteSpace: 'nowrap',
+  });
+
+  const countBadge = (bg, color) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: '28px',
+    height: '28px',
+    borderRadius: '999px',
+    background: bg,
+    color: color,
+    fontSize: '13px',
+    fontWeight: 800,
+    flexShrink: 0,
+  });
+
+  const sectionHeader = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: '20px',
+    paddingBottom: '16px',
+    borderBottom: '1px solid #f1f5f9',
+  };
+
+  const sectionTitle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    fontSize: '16px',
+    fontWeight: 700,
+    color: '#0f172a',
+    letterSpacing: '-0.01em',
+  };
+
+  const emptyState = {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    border: '2px dashed #e2e8f0',
+    borderRadius: '1rem',
+    padding: '32px 20px',
+  };
+
+  const btnAction = (bg, hoverBg) => ({
+    flex: 1,
+    padding: '12px 16px',
+    borderRadius: '12px',
+    border: 'none',
+    background: bg,
+    color: '#fff',
+    fontSize: '13px',
+    fontWeight: 700,
+    cursor: 'pointer',
+    transition: 'background 0.2s',
+  });
+
   return (
-    <div className="min-h-screen bg-[#eaf0f6] text-[#1e293b] font-sans relative overflow-x-hidden">
+    <div style={{ minHeight: '100vh', background: '#f4f7f9', position: 'relative', overflowX: 'hidden' }}>
       
       {/* Background Waves */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-80 fixed">
-        <svg viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-1/2 left-0 w-full h-[120%] -translate-y-1/2 object-cover">
-          <path d="M-100,600 C200,400 400,300 700,500 C1000,700 1200,500 1500,400" stroke="#b0c4de" strokeWidth="1" opacity="0.6" />
-          <path d="M-100,620 C200,420 400,320 700,520 C1000,720 1200,520 1500,420" stroke="#b0c4de" strokeWidth="1" opacity="0.5" />
-          <path d="M-100,640 C200,440 400,340 700,540 C1000,740 1200,540 1500,440" stroke="#b0c4de" strokeWidth="1" opacity="0.4" />
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.5 }}>
+        <svg viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', top: '50%', left: 0, width: '100%', height: '120%', transform: 'translateY(-50%)' }}>
+          <path d="M-100,600 C200,400 400,300 700,500 C1000,700 1200,500 1500,400" stroke="#cbd5e1" strokeWidth="1" opacity="0.6" />
+          <path d="M-100,620 C200,420 400,320 700,520 C1000,720 1200,520 1500,420" stroke="#cbd5e1" strokeWidth="1" opacity="0.5" />
+          <path d="M-100,640 C200,440 400,340 700,540 C1000,740 1200,540 1500,440" stroke="#cbd5e1" strokeWidth="1" opacity="0.4" />
           <path d="M-100,300 C300,500 600,600 800,400 C1100,100 1300,300 1500,500" stroke="#94a3b8" strokeWidth="1.5" opacity="0.4" />
-          <path d="M-100,320 C300,520 600,620 800,420 C1100,120 1300,320 1500,520" stroke="#94a3b8" strokeWidth="1" opacity="0.3" />
         </svg>
       </div>
 
-      {/* PFMS Twin-Ledger Mock Animation Modal */}
+      {/* PFMS Twin-Ledger Animation Modal */}
       {pfmsAnimation.active && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0f172a]/40 backdrop-blur-md px-4">
-          <div className="bg-white/95 backdrop-blur-xl border border-white p-10 rounded-[2rem] shadow-2xl max-w-lg w-full text-center">
-            <h3 className="text-[1.7rem] font-bold text-[#0f172a] mb-8 tracking-tight">Twin-Ledger Settlement</h3>
-            <div className="space-y-4 font-mono text-[13px] text-left">
-              <div className={`p-4 rounded-xl border transition-all duration-500 ${pfmsAnimation.step >= 1 ? 'border-emerald-200 bg-emerald-50 text-emerald-700 shadow-sm' : 'border-slate-200 bg-slate-50 text-slate-500'}`}>
-                {pfmsAnimation.step >= 1 ? '✅ Smart Contract Veto Expired. State: APPROVED' : '⏳ Waiting for blockchain consensus...'}
-              </div>
-              <div className={`p-4 rounded-xl border transition-all duration-500 ${pfmsAnimation.step >= 2 ? 'border-blue-200 bg-blue-50 text-blue-700 shadow-sm' : 'border-slate-200 bg-slate-50 text-slate-500'}`}>
-                {pfmsAnimation.step >= 2 ? '✅ Firing Secure Webhook to RBI/PFMS API Gateway...' : '⏳ Waiting for PFMS webhook...'}
-              </div>
-              <div className={`p-4 rounded-xl border transition-all duration-500 ${pfmsAnimation.step >= 3 ? 'border-indigo-200 bg-indigo-50 text-indigo-700 shadow-sm' : 'border-slate-200 bg-slate-50 text-slate-500'}`}>
-                {pfmsAnimation.step >= 3 ? '✅ NEFT Transfer Initiated. INR settled to Contractor.' : '⏳ Awaiting NEFT generation...'}
-              </div>
+        <div style={{ position: 'fixed', inset: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(15,23,42,0.4)', backdropFilter: 'blur(12px)', padding: '16px' }}>
+          <div style={{ background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(20px)', border: '1px solid #fff', padding: '40px', borderRadius: '2rem', boxShadow: '0 25px 60px rgba(0,0,0,0.15)', maxWidth: '480px', width: '100%', textAlign: 'center' }}>
+            <h3 style={{ fontSize: '24px', fontWeight: 700, color: '#0f172a', marginBottom: '28px', letterSpacing: '-0.02em' }}>Twin-Ledger Settlement</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontFamily: 'ui-monospace, monospace', fontSize: '13px', textAlign: 'left' }}>
+              {[
+                { step: 1, done: '✅ Smart Contract Veto Expired. State: APPROVED', wait: '⏳ Waiting for blockchain consensus...', bg: '#ecfdf5', border: '#a7f3d0', color: '#065f46' },
+                { step: 2, done: '✅ Firing Secure Webhook to RBI/PFMS Gateway...', wait: '⏳ Waiting for PFMS webhook...', bg: '#eff6ff', border: '#bfdbfe', color: '#1e40af' },
+                { step: 3, done: '✅ NEFT Transfer Initiated. INR settled.', wait: '⏳ Awaiting NEFT generation...', bg: '#eef2ff', border: '#c7d2fe', color: '#3730a3' },
+              ].map(s => (
+                <div key={s.step} style={{ padding: '14px', borderRadius: '12px', border: `1px solid ${pfmsAnimation.step >= s.step ? s.border : '#e2e8f0'}`, background: pfmsAnimation.step >= s.step ? s.bg : '#fafbfc', color: pfmsAnimation.step >= s.step ? s.color : '#94a3b8', transition: 'all 0.5s' }}>
+                  {pfmsAnimation.step >= s.step ? s.done : s.wait}
+                </div>
+              ))}
             </div>
             {pfmsAnimation.step >= 3 && (
-              <div className="mt-8 p-5 border border-slate-200 bg-slate-50 rounded-xl text-xs text-slate-500 font-medium">
-                <p className="mb-1">Transaction ID: NIRM-{Math.floor(Math.random() * 10000000)}</p>
-                <p className="mb-1 text-indigo-600 font-bold">Settlement: ₹400,000.00 INR</p>
+              <div style={{ marginTop: '24px', padding: '16px', border: '1px solid #e2e8f0', background: '#fafbfc', borderRadius: '12px', fontSize: '12px', color: '#64748b' }}>
+                <p>Transaction ID: NIRM-{Math.floor(Math.random() * 10000000)}</p>
+                <p style={{ color: '#4f46e5', fontWeight: 700 }}>Settlement: ₹400,000.00 INR</p>
                 <p>Note: No crypto assets transferred.</p>
               </div>
             )}
@@ -66,192 +159,188 @@ export default function GovernmentPortal() {
         </div>
       )}
 
-      {/* Main App Dashboard */}
-      <div className="relative z-10 pt-16 px-6 max-w-[1600px] mx-auto pb-24">
+      {/* Main Dashboard */}
+      <div style={{ position: 'relative', zIndex: 10, maxWidth: '1200px', margin: '0 auto', padding: '64px 32px 96px' }}>
         
-        {/* Massive Premium App Header Banner */}
-        <div className="bg-white/80 backdrop-blur-2xl border border-white rounded-[2rem] p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)] mb-10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-6">
-            <div className="flex h-20 w-20 items-center justify-center rounded-[1.5rem] bg-gradient-to-br from-blue-600 to-indigo-700 shadow-xl shadow-blue-600/20 shrink-0">
-              <Building2 className="h-10 w-10 text-white" strokeWidth={2} />
-            </div>
-            <div>
-              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#0f172a] mb-2">
-                Government Dashboard
-              </h1>
-              <p className="text-lg text-[#475569] font-medium max-w-2xl">
-                Global oversight of autonomous infrastructure escrow. Manage whistleblower reports and fiat settlements.
-              </p>
-            </div>
+        {/* Header */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '48px' }}>
+          <div style={{ height: '72px', width: '72px', borderRadius: '1.25rem', background: '#fff', boxShadow: '0 8px 30px rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
+            <Building2 style={{ height: '36px', width: '36px', color: '#2563eb' }} strokeWidth={2} />
           </div>
-          <div className="flex gap-4">
-             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col items-center min-w-[120px]">
-               <span className="text-3xl font-black text-blue-600">{projects.length}</span>
-               <span className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Total Projects</span>
-             </div>
-             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col items-center min-w-[120px]">
-               <span className="text-3xl font-black text-red-500">{disputedProjects.length}</span>
-               <span className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Disputes</span>
-             </div>
+          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', margin: '0 0 12px' }}>
+            Government Dashboard
+          </h1>
+          <p style={{ fontSize: '17px', color: '#475569', fontWeight: 500, maxWidth: '560px', lineHeight: 1.6, margin: '0 0 28px' }}>
+            Global oversight of autonomous infrastructure escrow. Manage whistleblower reports and fiat settlements.
+          </p>
+          
+          {/* Stats Row */}
+          <div style={{ display: 'flex', gap: '16px' }}>
+            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '1rem', padding: '16px 28px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.03)' }}>
+              <div style={{ fontSize: '28px', fontWeight: 800, color: '#2563eb' }}>{projects.length}</div>
+              <div style={{ fontSize: '10px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '2px' }}>Total Projects</div>
+            </div>
+            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '1rem', padding: '16px 28px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.03)' }}>
+              <div style={{ fontSize: '28px', fontWeight: 800, color: '#dc2626' }}>{disputedProjects.length}</div>
+              <div style={{ fontSize: '10px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '2px' }}>Disputes</div>
+            </div>
+            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '1rem', padding: '16px 28px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.03)' }}>
+              <div style={{ fontSize: '28px', fontWeight: 800, color: '#059669' }}>{settledProjects.length}</div>
+              <div style={{ fontSize: '10px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '2px' }}>Settled</div>
+            </div>
           </div>
         </div>
 
-        {/* 3-Column Kanban Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* 3 Column Kanban */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
           
-          {/* COLUMN 1: DISPUTED */}
-          <div className="bg-white/60 backdrop-blur-xl border border-white rounded-[2.5rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col min-h-[600px]">
-            <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-200/50">
-              <h2 className="text-[1.35rem] font-bold text-[#0f172a] flex items-center tracking-tight">
-                <AlertTriangle className="w-6 h-6 text-red-500 mr-3" strokeWidth={2.5} />
-                Human Audits Required
-              </h2>
-              <span className="bg-red-100 text-red-700 text-xs px-3 py-1.5 rounded-full font-bold">{disputedProjects.length}</span>
+          {/* COL 1: Disputed */}
+          <div style={columnCard}>
+            <div style={sectionHeader}>
+              <div style={sectionTitle}>
+                <AlertTriangle style={{ width: '20px', height: '20px', color: '#ef4444' }} strokeWidth={2.5} />
+                Human Audits
+              </div>
+              <div style={countBadge('#fef2f2', '#dc2626')}>{disputedProjects.length}</div>
             </div>
             
-            <div className="flex-1 flex flex-col gap-5">
-              {disputedProjects.length === 0 ? (
-                <div className="flex-1 flex flex-col items-center justify-center bg-white/40 border-2 border-dashed border-slate-200 rounded-[1.5rem] p-10 text-center">
-                  <div className="h-16 w-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
-                    <Inbox className="h-8 w-8 text-slate-300" strokeWidth={2} />
-                  </div>
-                  <p className="text-[#64748b] font-medium text-lg">No active disputes</p>
-                  <p className="text-slate-400 text-sm mt-1">All projects are running autonomously.</p>
-                </div>
-              ) : (
-                disputedProjects.map(p => {
-                  const disputedMilestone = p.milestones.find(m => m.status === 'DISPUTED');
+            {disputedProjects.length === 0 ? (
+              <div style={emptyState}>
+                <Inbox style={{ width: '36px', height: '36px', color: '#cbd5e1', marginBottom: '12px' }} strokeWidth={1.5} />
+                <p style={{ fontSize: '15px', fontWeight: 600, color: '#64748b', margin: '0 0 4px' }}>No active disputes</p>
+                <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>All projects running autonomously.</p>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {disputedProjects.map(p => {
+                  const dm = p.milestones.find(m => m.status === 'DISPUTED');
                   return (
-                    <div key={p.id} className="bg-white border border-white rounded-[1.5rem] p-6 shadow-[0_4px_20px_rgb(0,0,0,0.06)] hover:shadow-xl transition-shadow">
-                      <div className="flex justify-between items-start mb-4">
-                        <h3 className="font-bold text-[#0f172a] text-[1.1rem] tracking-tight">{p.name}</h3>
-                        <span className="bg-red-50 text-red-600 text-[10px] px-3 py-1 rounded-full font-black uppercase tracking-widest border border-red-100">Frozen</span>
+                    <div key={p.id} style={projectCard}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+                        <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#0f172a', margin: 0 }}>{p.name}</h3>
+                        <span style={badge('#fef2f2', '#dc2626', '#fecaca')}>Frozen</span>
                       </div>
-                      <p className="text-[14px] text-[#475569] mb-4 font-medium leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">{disputedMilestone?.title}</p>
+                      <p style={{ fontSize: '13px', color: '#475569', margin: '0 0 12px', lineHeight: 1.5, background: '#fafbfc', padding: '10px', borderRadius: '8px', border: '1px solid #f1f5f9' }}>{dm?.title}</p>
                       
-                      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-4 text-[11px] font-mono break-all text-slate-500 shadow-inner">
-                        <p className="text-red-500 font-bold mb-1 tracking-wider uppercase text-[10px]">Citizen IPFS Evidence:</p>
-                        <p>{disputedMilestone?.ipfsCID}</p>
+                      <div style={{ background: '#fafbfc', border: '1px solid #f1f5f9', borderRadius: '8px', padding: '12px', marginBottom: '12px', fontSize: '11px', fontFamily: 'ui-monospace, monospace', wordBreak: 'break-all', color: '#64748b' }}>
+                        <p style={{ color: '#ef4444', fontWeight: 700, marginBottom: '4px', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Citizen IPFS Evidence:</p>
+                        <p style={{ margin: 0 }}>{dm?.ipfsCID}</p>
                       </div>
 
-                      <div className="bg-red-50/50 border border-red-100 rounded-xl p-4 text-[12px] text-red-800 mb-6 font-medium leading-relaxed">
-                        <strong className="block text-red-600 mb-1">⚠️ Override Warning:</strong> 
-                        Forcing a payout ties your cryptographic signature to the public defect evidence.
+                      <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '12px', marginBottom: '16px', fontSize: '12px', color: '#991b1b', lineHeight: 1.5 }}>
+                        <strong style={{ color: '#dc2626' }}>⚠️ Override Warning:</strong> Forcing a payout ties your signature to the public defect evidence.
                       </div>
                       
-                      <div className="flex flex-col xl:flex-row gap-3">
-                        <button className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors shadow-sm">
-                          Slash Contractor
-                        </button>
-                        <button onClick={() => handlePFMSRelease(p.id)} className="flex-1 bg-[#0f172a] hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors shadow-sm">
-                          Force Payout
-                        </button>
+                      <div style={{ display: 'flex', gap: '10px' }}>
+                        <button style={btnAction('#dc2626')}>Slash Contractor</button>
+                        <button onClick={() => handlePFMSRelease(p.id)} style={btnAction('#0f172a')}>Force Payout</button>
                       </div>
                     </div>
                   );
-                })
-              )}
-            </div>
+                })}
+              </div>
+            )}
           </div>
 
-          {/* COLUMN 2: TIME_LOCKED */}
-          <div className="bg-white/60 backdrop-blur-xl border border-white rounded-[2.5rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col min-h-[600px]">
-            <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-200/50">
-              <h2 className="text-[1.35rem] font-bold text-[#0f172a] flex items-center tracking-tight">
-                <Clock className="w-6 h-6 text-amber-500 mr-3" strokeWidth={2.5} />
+          {/* COL 2: Time-Locked */}
+          <div style={columnCard}>
+            <div style={sectionHeader}>
+              <div style={sectionTitle}>
+                <Clock style={{ width: '20px', height: '20px', color: '#f59e0b' }} strokeWidth={2.5} />
                 Time-Locked Escrows
-              </h2>
-              <span className="bg-amber-100 text-amber-700 text-xs px-3 py-1.5 rounded-full font-bold">{timeLockedProjects.length}</span>
+              </div>
+              <div style={countBadge('#fffbeb', '#d97706')}>{timeLockedProjects.length}</div>
             </div>
             
-            <div className="flex-1 flex flex-col gap-5">
-              {timeLockedProjects.length === 0 ? (
-                <div className="flex-1 flex flex-col items-center justify-center bg-white/40 border-2 border-dashed border-slate-200 rounded-[1.5rem] p-10 text-center">
-                  <div className="h-16 w-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
-                    <Inbox className="h-8 w-8 text-slate-300" strokeWidth={2} />
-                  </div>
-                  <p className="text-[#64748b] font-medium text-lg">No locked escrows</p>
-                  <p className="text-slate-400 text-sm mt-1">Pending AI verification triggers.</p>
-                </div>
-              ) : (
-                timeLockedProjects.map(p => {
-                  const lockedMilestone = p.milestones.find(m => m.status === 'TIME_LOCKED');
+            {timeLockedProjects.length === 0 ? (
+              <div style={emptyState}>
+                <Inbox style={{ width: '36px', height: '36px', color: '#cbd5e1', marginBottom: '12px' }} strokeWidth={1.5} />
+                <p style={{ fontSize: '15px', fontWeight: 600, color: '#64748b', margin: '0 0 4px' }}>No locked escrows</p>
+                <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>Pending AI verification triggers.</p>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {timeLockedProjects.map(p => {
+                  const lm = p.milestones.find(m => m.status === 'TIME_LOCKED');
                   return (
-                    <div key={p.id} className="bg-white border border-white rounded-[1.5rem] p-6 shadow-[0_4px_20px_rgb(0,0,0,0.06)] hover:shadow-xl transition-shadow">
-                      <div className="flex justify-between items-start mb-4">
-                        <h3 className="font-bold text-[#0f172a] text-[1.1rem] tracking-tight">{p.name}</h3>
-                        <span className="bg-amber-50 text-amber-600 text-[10px] px-3 py-1 rounded-full font-black uppercase tracking-widest border border-amber-100">Locked</span>
+                    <div key={p.id} style={projectCard}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+                        <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#0f172a', margin: 0 }}>{p.name}</h3>
+                        <span style={badge('#fffbeb', '#d97706', '#fde68a')}>Locked</span>
                       </div>
-                      <p className="text-[14px] text-[#475569] mb-4 font-medium leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">{lockedMilestone?.title}</p>
+                      <p style={{ fontSize: '13px', color: '#475569', margin: '0 0 12px', lineHeight: 1.5, background: '#fafbfc', padding: '10px', borderRadius: '8px', border: '1px solid #f1f5f9' }}>{lm?.title}</p>
                       
-                      <div className="bg-amber-50/30 border border-amber-100 rounded-xl p-4 mb-6">
-                        <p className="text-[10px] text-amber-600 font-bold uppercase tracking-wider mb-1">Unlocks Automatically At:</p>
-                        <p className="text-[13px] text-amber-800 font-mono font-bold">
-                          {new Date(lockedMilestone?.timeLockExpiry).toLocaleString()}
+                      <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '8px', padding: '12px', marginBottom: '16px' }}>
+                        <p style={{ fontSize: '10px', color: '#d97706', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Unlocks At:</p>
+                        <p style={{ fontSize: '13px', color: '#92400e', fontFamily: 'ui-monospace, monospace', fontWeight: 600, margin: 0 }}>
+                          {new Date(lm?.timeLockExpiry).toLocaleString()}
                         </p>
                       </div>
                       
-                      <button onClick={() => handlePFMSRelease(p.id)} className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 px-4 rounded-xl text-sm transition-all shadow-[0_5px_15px_rgba(245,158,11,0.2)] hover:-translate-y-0.5">
+                      <button 
+                        onClick={() => handlePFMSRelease(p.id)} 
+                        style={{ width: '100%', padding: '12px', borderRadius: '12px', border: 'none', background: '#f59e0b', color: '#fff', fontSize: '13px', fontWeight: 700, cursor: 'pointer', transition: 'background 0.2s' }}
+                      >
                         Simulate 7-Day Expiry Payout
                       </button>
                     </div>
                   );
-                })
-              )}
-            </div>
+                })}
+              </div>
+            )}
           </div>
 
-          {/* COLUMN 3: SETTLED & ACTIVE (Split vertically) */}
-          <div className="flex flex-col gap-8 min-h-[600px]">
+          {/* COL 3: Active + Settled */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', minHeight: '500px' }}>
             
-            {/* Active Projects Block */}
-            <div className="bg-white/60 backdrop-blur-xl border border-white rounded-[2.5rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col flex-1">
-              <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-200/50">
-                <h2 className="text-[1.35rem] font-bold text-[#0f172a] flex items-center tracking-tight">
-                  <ShieldCheck className="w-6 h-6 text-blue-500 mr-3" strokeWidth={2.5} />
+            {/* Active Projects */}
+            <div style={{ ...columnCard, minHeight: 0, flex: 1 }}>
+              <div style={sectionHeader}>
+                <div style={sectionTitle}>
+                  <ShieldCheck style={{ width: '20px', height: '20px', color: '#2563eb' }} strokeWidth={2.5} />
                   Active Projects
-                </h2>
-                <span className="bg-blue-100 text-blue-700 text-xs px-3 py-1.5 rounded-full font-bold">{activeProjects.length}</span>
+                </div>
+                <div style={countBadge('#eff6ff', '#2563eb')}>{activeProjects.length}</div>
               </div>
               
-              <div className="flex-1 flex flex-col gap-4 overflow-y-auto pr-2">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {activeProjects.map(p => (
-                  <div key={p.id} className="bg-white border border-slate-100 rounded-[1.2rem] p-5 shadow-sm hover:shadow-md transition-shadow">
-                    <div className="flex justify-between mb-3 items-center">
-                      <h3 className="font-bold text-[#0f172a] text-[15px] tracking-tight truncate pr-4">{p.name}</h3>
-                      <span className="text-[12px] font-black text-blue-600 bg-blue-50 px-2 py-1 rounded-md">{p.progress}%</span>
+                  <div key={p.id} style={projectCard}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                      <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', paddingRight: '12px' }}>{p.name}</h3>
+                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#2563eb', background: '#eff6ff', padding: '2px 8px', borderRadius: '6px', flexShrink: 0 }}>{p.progress}%</span>
                     </div>
-                    <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden shadow-inner">
-                      <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-full rounded-full transition-all duration-1000" style={{ width: `${p.progress}%` }}></div>
+                    <div style={{ width: '100%', background: '#f1f5f9', height: '6px', borderRadius: '999px', overflow: 'hidden' }}>
+                      <div style={{ width: `${p.progress}%`, height: '100%', borderRadius: '999px', background: 'linear-gradient(90deg, #3b82f6, #6366f1)', transition: 'width 1s' }} />
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* PFMS Settled Block */}
-            <div className="bg-white/60 backdrop-blur-xl border border-white rounded-[2.5rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col h-[280px]">
-              <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-200/50">
-                <h2 className="text-[1.35rem] font-bold text-[#0f172a] flex items-center tracking-tight">
-                  <CheckCircle2 className="w-6 h-6 text-emerald-500 mr-3" strokeWidth={2.5} />
+            {/* Settled */}
+            <div style={{ ...columnCard, minHeight: 0 }}>
+              <div style={sectionHeader}>
+                <div style={sectionTitle}>
+                  <CheckCircle2 style={{ width: '20px', height: '20px', color: '#059669' }} strokeWidth={2.5} />
                   PFMS Settled
-                </h2>
+                </div>
               </div>
               
-              <div className="flex-1 flex flex-col gap-3 overflow-y-auto pr-2">
-                {settledProjects.length === 0 ? (
-                  <div className="flex-1 flex flex-col items-center justify-center bg-white/40 border-2 border-dashed border-slate-200 rounded-[1.5rem] text-center p-4">
-                    <p className="text-[#64748b] font-medium text-sm">No settlements yet.</p>
-                  </div>
-                ) : (
-                  settledProjects.map(p => (
-                    <div key={p.id} className="bg-white border border-emerald-100 rounded-xl p-4 shadow-sm flex items-center justify-between">
-                      <h3 className="font-bold text-[#0f172a] text-[13px] tracking-tight truncate pr-2">{p.name}</h3>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full border border-emerald-100 shrink-0">✓ Settled</span>
+              {settledProjects.length === 0 ? (
+                <div style={{ ...emptyState, padding: '20px' }}>
+                  <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>No settlements yet.</p>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {settledProjects.map(p => (
+                    <div key={p.id} style={{ ...projectCard, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 16px' }}>
+                      <h3 style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', paddingRight: '12px' }}>{p.name}</h3>
+                      <span style={badge('#ecfdf5', '#059669', '#a7f3d0')}>✓ Settled</span>
                     </div>
-                  ))
-                )}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
 
           </div>
