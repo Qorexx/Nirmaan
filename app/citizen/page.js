@@ -6,7 +6,7 @@ import { Building2 } from 'lucide-react';
 import { useNirmaan } from '@/lib/NirmaanContext';
 
 export default function CitizenPortal() {
-  const { projects, disputeMilestone } = useNirmaan();
+  const { projects, stakeCitizenDispute } = useNirmaan();
   
   const [step, setStep] = useState(1);
   const [selectedProject, setSelectedProject] = useState('');
@@ -34,7 +34,7 @@ export default function CitizenPortal() {
   const handleUPIPayment = async () => {
     setStep('processing');
     await new Promise(r => setTimeout(r, 2000)); 
-    const cid = await disputeMilestone(selectedProject);
+    const cid = await stakeCitizenDispute(selectedProject, photo);
     setIpfsHash(cid);
     setStep(4);
   };
