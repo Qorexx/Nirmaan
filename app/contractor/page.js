@@ -212,8 +212,8 @@ export default function ContractorPortal() {
                 <select style={{ ...selectStyle, opacity: selectedProject ? 1 : 0.5 }} value={selectedMilestone} onChange={e => setSelectedMilestone(e.target.value)} disabled={!selectedProject} required>
                   <option value="">— Select Milestone —</option>
                   {currentProject?.milestones.filter(m => m.status === 'PENDING').map(m => (
-                    <option key={m.id} value={m.id}>{m.title} (₹{m.payout.toLocaleString()})</option>
-                  ))}
+                  <option key={m.id} value={m.id}>{m.title} (₹{m.payout ? m.payout.toLocaleString() : '0'})</option>
+                ))}
                 </select>
               </div>
             </div>

@@ -37,10 +37,8 @@ export default function GovernmentPortal() {
     
     launchProject({
       name: newProjectForm.name,
-      milestones: [
-        { id: 'm1', title: `Phase 1: ${newProjectForm.name} Foundation`, status: 'PENDING' },
-        { id: 'm2', title: `Phase 2: Superstructure & Safety`, status: 'PENDING' }
-      ]
+      budget: newProjectForm.budget,
+      location: newProjectForm.location
     });
     
     setIsSubmitting(false);
