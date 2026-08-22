@@ -56,42 +56,42 @@ export default function LandingPage() {
                 Mathematical Certainty.
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-[#475569] max-w-3xl mx-auto font-medium leading-relaxed mt-8">
+            <p className="text-xl md:text-[1.35rem] text-[#475569] max-w-3xl mx-auto font-medium leading-relaxed mt-12 text-center text-balance">
               An autonomous escrow protocol leveraging Gemini AI, IoT telemetry, and smart contracts to ensure public funds are only released when infrastructure is physically verified.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20 text-left max-w-5xl mx-auto pt-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 text-left max-w-5xl mx-auto pt-4">
             
             {/* Government Card */}
-            <Link href="/government" className="group rounded-[1.5rem] bg-white/80 backdrop-blur-xl p-8 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:bg-white hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 block">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+            <Link href="/government" className="group rounded-[1.5rem] bg-white/80 backdrop-blur-xl p-8 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:bg-white hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 shrink-0">
                 <Building2 className="h-7 w-7" strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold tracking-tight text-[#0f172a] mb-3">Government</h3>
-              <p className="text-base text-[#475569] font-medium leading-relaxed">
+              <p className="text-[15px] text-[#475569] font-medium leading-[1.6] break-words text-pretty">
                 Oversee projects, manage citizen disputes, and authorize Twin-Ledger fiat payouts via PFMS integration.
               </p>
             </Link>
 
             {/* Contractor Card */}
-            <Link href="/contractor" className="group rounded-[1.5rem] bg-white/80 backdrop-blur-xl p-8 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:bg-white hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 block">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
+            <Link href="/contractor" className="group rounded-[1.5rem] bg-white/80 backdrop-blur-xl p-8 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:bg-white hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shrink-0">
                 <HardHat className="h-7 w-7" strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold tracking-tight text-[#0f172a] mb-3">Contractor</h3>
-              <p className="text-base text-[#475569] font-medium leading-relaxed">
+              <p className="text-[15px] text-[#475569] font-medium leading-[1.6] break-words text-pretty">
                 Submit cryptographic proofs, hardware-signed telemetry, and e-Way bills to unlock milestone payouts.
               </p>
             </Link>
 
             {/* Citizen Card */}
-            <Link href="/citizen" className="group rounded-[1.5rem] bg-white/80 backdrop-blur-xl p-8 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:bg-white hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 block">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
+            <Link href="/citizen" className="group rounded-[1.5rem] bg-white/80 backdrop-blur-xl p-8 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:bg-white hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 shrink-0">
                 <Smartphone className="h-7 w-7" strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold tracking-tight text-[#0f172a] mb-3">Citizen</h3>
-              <p className="text-base text-[#475569] font-medium leading-relaxed">
+              <p className="text-[15px] text-[#475569] font-medium leading-[1.6] break-words text-pretty">
                 Decentralized whistleblower app. Stake ₹500 via UPI to freeze payouts and submit immutable IPFS evidence.
               </p>
             </Link>
