@@ -48,7 +48,7 @@ export default function ContractorPortal() {
     setIsSubmitting(true);
     setShowPipeline(true); 
     const result = await processContractorSubmission(
-      selectedProject, parseInt(selectedMilestone), proofFile, iotData, eWayBill, exifData,
+      selectedProject, selectedMilestone, proofFile, iotData, eWayBill, exifData,
       (log) => setPipelineLogs(prev => [...prev, log])
     );
     setVerificationResult(result);
