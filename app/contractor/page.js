@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { useNirmaan } from '@/lib/NirmaanContext';
-import GlassNavbar from '@/components/GlassNavbar';
 import VerificationPipeline from '@/components/VerificationPipeline';
 
 export default function ContractorPortal() {
@@ -78,7 +77,6 @@ export default function ContractorPortal() {
   if (showPipeline) {
     return (
       <div className="min-h-screen bg-slate-900 text-white">
-        <GlassNavbar />
         <div className="pt-24 px-6 max-w-5xl mx-auto pb-12">
           <VerificationPipeline logs={pipelineLogs} isComplete={!isSubmitting} result={verificationResult} />
           
@@ -96,7 +94,6 @@ export default function ContractorPortal() {
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">
-      <GlassNavbar />
       
       <div className="pt-24 px-6 max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 mb-2">

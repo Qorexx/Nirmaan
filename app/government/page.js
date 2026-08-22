@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { useNirmaan } from '@/lib/NirmaanContext';
-import GlassNavbar from '@/components/GlassNavbar';
 
 export default function GovernmentPortal() {
   const { projects, settleViaPFMS } = useNirmaan();
@@ -30,7 +29,6 @@ export default function GovernmentPortal() {
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">
-      <GlassNavbar />
       
       <div className="pt-24 px-6 max-w-7xl mx-auto pb-12">
         <header className="mb-10">

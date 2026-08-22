@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { useNirmaan } from '@/lib/NirmaanContext';
-import GlassNavbar from '@/components/GlassNavbar';
 
 export default function CitizenPortal() {
   const { projects, stakeCitizenDispute } = useNirmaan();
@@ -47,7 +46,6 @@ export default function CitizenPortal() {
 
   return (
     <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center">
-      <GlassNavbar />
       
       {/* Mobile Phone Mockup Container */}
       <div className="pt-24 px-4 w-full max-w-md mx-auto">
