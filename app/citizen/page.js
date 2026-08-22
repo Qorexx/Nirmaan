@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { Building2 } from 'lucide-react';
 import { useNirmaan } from '@/lib/NirmaanContext';
 
 export default function CitizenPortal() {
@@ -40,6 +42,19 @@ export default function CitizenPortal() {
   return (
     <div className="min-h-screen bg-[#eaf0f6] text-[#1e293b] font-sans relative overflow-hidden flex flex-col items-center">
       
+      {/* Nirmaan Branding Bar */}
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 40, padding: '16px 32px', background: 'rgba(234,240,246,0.85)', backdropFilter: 'blur(12px)' }}>
+        <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none', cursor: 'pointer' }}>
+          <div style={{ height: '36px', width: '36px', borderRadius: '10px', background: 'linear-gradient(135deg, #3b82f6, #4f46e5)', boxShadow: '0 4px 12px rgba(59,130,246,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Building2 style={{ height: '18px', width: '18px', color: '#fff' }} strokeWidth={2.5} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <span style={{ fontSize: '18px', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em', lineHeight: 1 }}>NIRMAAN</span>
+            <span style={{ fontSize: '10px', fontWeight: 700, color: '#3b82f6', letterSpacing: '0.1em', marginTop: '2px' }}>x402 PROTOCOL</span>
+          </div>
+        </Link>
+      </div>
+
       {/* Background Waves */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-80 fixed">
         <svg viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-1/2 left-0 w-full h-[120%] -translate-y-1/2 object-cover">

@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useNirmaan } from '@/lib/NirmaanContext';
 import VerificationPipeline from '@/components/VerificationPipeline';
-import { HardHat, Target, Database, UploadCloud, Truck, MapPin, Cpu, ShieldAlert, ShieldCheck } from 'lucide-react';
+import { HardHat, Building2, Target, Database, UploadCloud, Truck, MapPin, Cpu, ShieldAlert, ShieldCheck } from 'lucide-react';
 
 export default function ContractorPortal() {
   const { projects, processContractorSubmission } = useNirmaan();
@@ -148,6 +149,19 @@ export default function ContractorPortal() {
   return (
     <div style={{ minHeight: '100vh', background: '#f4f7f9', position: 'relative', overflowX: 'hidden' }}>
       
+      {/* Nirmaan Branding Bar */}
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 40, padding: '16px 32px', background: 'rgba(244,247,249,0.85)', backdropFilter: 'blur(12px)' }}>
+        <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none', cursor: 'pointer' }}>
+          <div style={{ height: '36px', width: '36px', borderRadius: '10px', background: 'linear-gradient(135deg, #3b82f6, #4f46e5)', boxShadow: '0 4px 12px rgba(59,130,246,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Building2 style={{ height: '18px', width: '18px', color: '#fff' }} strokeWidth={2.5} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <span style={{ fontSize: '18px', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em', lineHeight: 1 }}>NIRMAAN</span>
+            <span style={{ fontSize: '10px', fontWeight: 700, color: '#3b82f6', letterSpacing: '0.1em', marginTop: '2px' }}>x402 PROTOCOL</span>
+          </div>
+        </Link>
+      </div>
+
       {/* Background Waves */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.5 }}>
         <svg viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', top: '50%', left: 0, width: '100%', height: '120%', transform: 'translateY(-50%)' }}>
