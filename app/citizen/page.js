@@ -32,11 +32,16 @@ export default function CitizenPortal() {
   };
 
   const handleUPIPayment = async () => {
-    setStep('processing');
-    await new Promise(r => setTimeout(r, 2000)); 
-    const cid = await stakeCitizenDispute(selectedProject, photo);
-    setIpfsHash(cid);
-    setStep(4);
+    try {
+      setStep('processing');
+      await new Promise(r => setTimeout(r, 2000)); 
+      const cid = stakeCitizenDispute(selectedProject, photo); // removed await since it's synchronous
+      setIpfsHash(cid);
+      setStep(4);
+    } catch (e) {
+      alert("Error in Dispute: " + e.message);
+      setStep(3); // Go back to payment step
+    }
   };
 
   return (
