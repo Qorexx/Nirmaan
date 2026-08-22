@@ -3,12 +3,15 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useNirmaan } from '@/lib/NirmaanContext';
-import { Building2, AlertTriangle, ShieldCheck, Clock, CheckCircle2, Inbox } from 'lucide-react';
+import { Building2, AlertTriangle, ShieldCheck, Clock, CheckCircle2, Inbox, Plus, FileText, Upload, Check } from 'lucide-react';
 
 export default function GovernmentPortal() {
-  const { projects, settleViaPFMS } = useNirmaan();
+  const { projects, settleViaPFMS, launchProject } = useNirmaan();
   
   const [pfmsAnimation, setPfmsAnimation] = useState({ active: false, projectId: null, step: 0 });
+  const [showLaunchModal, setShowLaunchModal] = useState(false);
+  const [newProjectForm, setNewProjectForm] = useState({ name: '', budget: '', location: '', document: null });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const activeProjects = projects.filter(p => p.status === 'ACTIVE');
   const timeLockedProjects = projects.filter(p => p.status === 'TIME_LOCKED');
@@ -24,6 +27,25 @@ export default function GovernmentPortal() {
     await new Promise(r => setTimeout(r, 2000));
     settleViaPFMS(projectId);
     setPfmsAnimation({ active: false, projectId: null, step: 0 });
+  };
+
+  const handleLaunchProject = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate transaction delay
+    await new Promise(r => setTimeout(r, 1500));
+    
+    launchProject({
+      name: newProjectForm.name,
+      milestones: [
+        { id: 'm1', title: `Phase 1: ${newProjectForm.name} Foundation`, status: 'PENDING' },
+        { id: 'm2', title: `Phase 2: Superstructure & Safety`, status: 'PENDING' }
+      ]
+    });
+    
+    setIsSubmitting(false);
+    setShowLaunchModal(false);
+    setNewProjectForm({ name: '', budget: '', location: '', document: null });
   };
 
   // ── Shared Styles ──
@@ -120,6 +142,26 @@ export default function GovernmentPortal() {
     transition: 'background 0.2s',
   });
 
+  const inputStyle = {
+    width: '100%',
+    padding: '14px 16px',
+    borderRadius: '12px',
+    border: '1px solid #e2e8f0',
+    background: '#f8fafc',
+    fontSize: '14px',
+    color: '#0f172a',
+    outline: 'none',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
+  };
+
+  const labelStyle = {
+    display: 'block',
+    fontSize: '13px',
+    fontWeight: 700,
+    color: '#475569',
+    marginBottom: '8px',
+  };
+
   return (
     <div style={{ minHeight: '100vh', background: '#f4f7f9', position: 'relative', overflowX: 'hidden' }}>
       
@@ -173,6 +215,115 @@ export default function GovernmentPortal() {
         </div>
       )}
 
+      {/* Launch Project Modal */}
+      {showLaunchModal && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(15,23,42,0.4)', backdropFilter: 'blur(12px)', padding: '16px' }}>
+          <div style={{ background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(20px)', border: '1px solid #fff', padding: '40px', borderRadius: '2rem', boxShadow: '0 25px 60px rgba(0,0,0,0.15)', maxWidth: '520px', width: '100%' }}>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
+              <div style={{ height: '48px', width: '48px', borderRadius: '14px', background: '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Plus style={{ height: '24px', width: '24px', color: '#4f46e5' }} strokeWidth={2.5} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '24px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.02em' }}>Launch Project</h3>
+                <p style={{ fontSize: '14px', color: '#64748b', margin: '4px 0 0' }}>Upload BOQ & initialize escrow contract.</p>
+              </div>
+            </div>
+
+            <form onSubmit={handleLaunchProject} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div>
+                <label style={labelStyle}>Project Name</label>
+                <input 
+                  type="text" 
+                  required
+                  placeholder="e.g. NH-44 Highway Extension"
+                  value={newProjectForm.name}
+                  onChange={e => setNewProjectForm({...newProjectForm, name: e.target.value})}
+                  style={inputStyle}
+                  onFocus={e => { e.target.style.borderColor = '#3b82f6'; e.target.style.boxShadow = '0 0 0 4px rgba(59,130,246,0.1)'; }}
+                  onBlur={e => { e.target.style.borderColor = '#e2e8f0'; e.target.style.boxShadow = 'none'; }}
+                />
+              </div>
+
+              <div style={{ display: 'flex', gap: '16px' }}>
+                <div style={{ flex: 1 }}>
+                  <label style={labelStyle}>Budget (INR)</label>
+                  <input 
+                    type="number" 
+                    required
+                    placeholder="₹4,000,000"
+                    value={newProjectForm.budget}
+                    onChange={e => setNewProjectForm({...newProjectForm, budget: e.target.value})}
+                    style={inputStyle}
+                    onFocus={e => { e.target.style.borderColor = '#3b82f6'; e.target.style.boxShadow = '0 0 0 4px rgba(59,130,246,0.1)'; }}
+                    onBlur={e => { e.target.style.borderColor = '#e2e8f0'; e.target.style.boxShadow = 'none'; }}
+                  />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label style={labelStyle}>Location</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="e.g. Maharashtra"
+                    value={newProjectForm.location}
+                    onChange={e => setNewProjectForm({...newProjectForm, location: e.target.value})}
+                    style={inputStyle}
+                    onFocus={e => { e.target.style.borderColor = '#3b82f6'; e.target.style.boxShadow = '0 0 0 4px rgba(59,130,246,0.1)'; }}
+                    onBlur={e => { e.target.style.borderColor = '#e2e8f0'; e.target.style.boxShadow = 'none'; }}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label style={labelStyle}>Bill of Quantities (BOQ)</label>
+                <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', width: '100%', padding: '24px', border: '2px dashed #cbd5e1', borderRadius: '12px', background: '#f8fafc', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={e => e.currentTarget.style.borderColor = '#3b82f6'} onMouseLeave={e => e.currentTarget.style.borderColor = '#cbd5e1'}>
+                  <input 
+                    type="file" 
+                    style={{ display: 'none' }}
+                    onChange={e => setNewProjectForm({...newProjectForm, document: e.target.files[0]})}
+                    required
+                  />
+                  {newProjectForm.document ? (
+                    <>
+                      <FileText style={{ color: '#059669', width: '24px', height: '24px' }} />
+                      <span style={{ fontSize: '14px', fontWeight: 600, color: '#059669' }}>{newProjectForm.document.name}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Upload style={{ color: '#94a3b8', width: '24px', height: '24px' }} />
+                      <span style={{ fontSize: '14px', fontWeight: 600, color: '#64748b' }}>Upload PDF or Excel</span>
+                    </>
+                  )}
+                </label>
+              </div>
+
+              <div style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
+                <button 
+                  type="button" 
+                  onClick={() => setShowLaunchModal(false)}
+                  style={{ flex: 1, padding: '14px', borderRadius: '12px', border: '1px solid #e2e8f0', background: '#fff', color: '#475569', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  style={{ flex: 2, padding: '14px', borderRadius: '12px', border: 'none', background: isSubmitting ? '#94a3b8' : '#0f172a', color: '#fff', fontSize: '14px', fontWeight: 700, cursor: isSubmitting ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                >
+                  {isSubmitting ? (
+                    'Deploying Smart Contract...'
+                  ) : (
+                    <>
+                      <Plus size={18} strokeWidth={3} /> Launch Project
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Main Dashboard */}
       <div style={{ position: 'relative', zIndex: 10, maxWidth: '1200px', margin: '0 auto', padding: '64px 32px 96px' }}>
         
@@ -188,20 +339,34 @@ export default function GovernmentPortal() {
             Global oversight of autonomous infrastructure escrow. Manage whistleblower reports and fiat settlements.
           </p>
           
-          {/* Stats Row */}
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '1rem', padding: '16px 28px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.03)' }}>
-              <div style={{ fontSize: '28px', fontWeight: 800, color: '#2563eb' }}>{projects.length}</div>
-              <div style={{ fontSize: '10px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '2px' }}>Total Projects</div>
+          {/* Stats Row & Actions */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '1rem', padding: '16px 28px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.03)' }}>
+                <div style={{ fontSize: '28px', fontWeight: 800, color: '#2563eb' }}>{projects.length}</div>
+                <div style={{ fontSize: '10px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '2px' }}>Total Projects</div>
+              </div>
+              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '1rem', padding: '16px 28px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.03)' }}>
+                <div style={{ fontSize: '28px', fontWeight: 800, color: '#dc2626' }}>{disputedProjects.length}</div>
+                <div style={{ fontSize: '10px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '2px' }}>Disputes</div>
+              </div>
+              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '1rem', padding: '16px 28px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.03)' }}>
+                <div style={{ fontSize: '28px', fontWeight: 800, color: '#059669' }}>{settledProjects.length}</div>
+                <div style={{ fontSize: '10px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '2px' }}>Settled</div>
+              </div>
             </div>
-            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '1rem', padding: '16px 28px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.03)' }}>
-              <div style={{ fontSize: '28px', fontWeight: 800, color: '#dc2626' }}>{disputedProjects.length}</div>
-              <div style={{ fontSize: '10px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '2px' }}>Disputes</div>
-            </div>
-            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '1rem', padding: '16px 28px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.03)' }}>
-              <div style={{ fontSize: '28px', fontWeight: 800, color: '#059669' }}>{settledProjects.length}</div>
-              <div style={{ fontSize: '10px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '2px' }}>Settled</div>
-            </div>
+            
+            <div style={{ width: '1px', height: '60px', background: '#e2e8f0' }} />
+            
+            <button 
+              onClick={() => setShowLaunchModal(true)}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '16px 24px', borderRadius: '1rem', border: 'none', background: '#0f172a', color: '#fff', fontSize: '15px', fontWeight: 700, cursor: 'pointer', boxShadow: '0 8px 20px rgba(15,23,42,0.15)', transition: 'transform 0.2s, box-shadow 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 25px rgba(15,23,42,0.2)'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(15,23,42,0.15)'; }}
+            >
+              <Plus size={20} strokeWidth={2.5} />
+              Launch Project
+            </button>
           </div>
         </div>
 
